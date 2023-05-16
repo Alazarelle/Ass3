@@ -1,19 +1,18 @@
 //
-//  ViewController.swift
+//  RecipeViewController.swift
 //  Digital Pantry
 //
-//  Created by Federico Amor on 9/5/2023.
+//  Created by Lucas Agustin Infantino on 16/5/2023.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class RecipeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
+    
 
 }
-
