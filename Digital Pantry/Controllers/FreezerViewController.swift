@@ -8,6 +8,7 @@
 import UIKit
 
 class FreezerViewController: UIViewController { //Freezer, Fridge and Pantry could be united in one InventoryControler
+    //Buttons do not work in this view
 
     override func viewDidLoad() {
         super.viewDidLoad()
