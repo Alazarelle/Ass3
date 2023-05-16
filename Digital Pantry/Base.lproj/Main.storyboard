@@ -329,10 +329,10 @@
             </objects>
             <point key="canvasLocation" x="1050" y="2015"/>
         </scene>
-        <!--Add Item View Controller-->
+        <!--Pantry View Controller-->
         <scene sceneID="N5U-91-UG6">
             <objects>
-                <viewController storyboardIdentifier="AddItemViewController" id="trD-Gq-rUx" customClass="AddItemViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PantryViewController" id="trD-Gq-rUx" customClass="PantryViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ETX-Pg-cnF">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -378,10 +378,10 @@
             </objects>
             <point key="canvasLocation" x="233" y="-114"/>
         </scene>
-        <!--Add Item View Controller-->
+        <!--Fridge View Controller-->
         <scene sceneID="0gR-p2-VQf">
             <objects>
-                <viewController storyboardIdentifier="AddItemViewController" id="6Nu-w7-C7b" customClass="AddItemViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FridgeViewController" id="6Nu-w7-C7b" customClass="FridgeViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4eO-RG-foo">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -404,9 +404,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Freezer"/>
-                                <connections>
-                                    <segue destination="vXM-pY-xWW" kind="show" id="IFu-r1-tQH"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJs-XA-PlK">
                                 <rect key="frame" x="17" y="156" width="74" height="35"/>
@@ -424,10 +421,10 @@
             </objects>
             <point key="canvasLocation" x="1050" y="-114"/>
         </scene>
-        <!--Add Item View Controller-->
+        <!--Freezer View Controller-->
         <scene sceneID="aST-e9-eUC">
             <objects>
-                <viewController storyboardIdentifier="AddItemViewController" id="vXM-pY-xWW" customClass="AddItemViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FreezerViewController" id="vXM-pY-xWW" customClass="FreezerViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vJE-8a-8Ss">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -444,9 +441,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Fridge"/>
-                                <connections>
-                                    <segue destination="6Nu-w7-C7b" kind="show" id="HlJ-hg-E2n"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0U2-il-i2j">
                                 <rect key="frame" x="299" y="156" width="82" height="35"/>
@@ -471,8 +465,4 @@
             <point key="canvasLocation" x="1865" y="-114"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="IFu-r1-tQH"/>
-        <segue reference="QyT-Gn-FJv"/>
-    </inferredMetricsTieBreakers>
 </document>
