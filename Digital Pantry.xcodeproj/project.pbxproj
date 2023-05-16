@@ -56,14 +56,6 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		65500B392A1361B10007F7C9 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				65D5B9FD2A0A2C0100307B35 /* Main.storyboard */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		65D5B9EB2A0A2C0100307B35 = {
 			isa = PBXGroup;
 			children = (
@@ -86,7 +78,7 @@
 				65D5B9F72A0A2C0100307B35 /* AppDelegate.swift */,
 				65D5B9F92A0A2C0100307B35 /* SceneDelegate.swift */,
 				65500B362A1361610007F7C9 /* Controllers */,
-				65500B392A1361B10007F7C9 /* Views */,
+				65D5B9FD2A0A2C0100307B35 /* Main.storyboard */,
 				65D5BA002A0A2C0300307B35 /* Assets.xcassets */,
 				65D5BA022A0A2C0300307B35 /* LaunchScreen.storyboard */,
 				65D5BA052A0A2C0300307B35 /* Info.plist */,
