@@ -13,6 +13,17 @@
 		65D5B9FF2A0A2C0100307B35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D5B9FD2A0A2C0100307B35 /* Main.storyboard */; };
 		65D5BA012A0A2C0300307B35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D5BA002A0A2C0300307B35 /* Assets.xcassets */; };
 		65D5BA042A0A2C0300307B35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D5BA022A0A2C0300307B35 /* LaunchScreen.storyboard */; };
+		78BCF40E2A136D8F00FA93C9 /* RecipeAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4042A136D8E00FA93C9 /* RecipeAddViewController.swift */; };
+		78BCF40F2A136D8F00FA93C9 /* FreezerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4052A136D8E00FA93C9 /* FreezerViewController.swift */; };
+		78BCF4102A136D8F00FA93C9 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4062A136D8E00FA93C9 /* AddItemViewController.swift */; };
+		78BCF4112A136D8F00FA93C9 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4072A136D8E00FA93C9 /* FridgeViewController.swift */; };
+		78BCF4122A136D8F00FA93C9 /* PantryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4082A136D8E00FA93C9 /* PantryViewController.swift */; };
+		78BCF4132A136D8F00FA93C9 /* RecipeChatGPTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4092A136D8E00FA93C9 /* RecipeChatGPTViewController.swift */; };
+		78BCF4142A136D8F00FA93C9 /* RecipePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF40A2A136D8F00FA93C9 /* RecipePreferencesViewController.swift */; };
+		78BCF4152A136D8F00FA93C9 /* RecipeRecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF40B2A136D8F00FA93C9 /* RecipeRecentViewController.swift */; };
+		78BCF4162A136D8F00FA93C9 /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */; };
+		78BCF4172A136D8F00FA93C9 /* RecipeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF40D2A136D8F00FA93C9 /* RecipeSearchViewController.swift */; };
+		78DE3A712A136A320024BA10 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DE3A702A136A320024BA10 /* RecipeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +35,17 @@
 		65D5BA002A0A2C0300307B35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65D5BA032A0A2C0300307B35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		65D5BA052A0A2C0300307B35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78BCF4042A136D8E00FA93C9 /* RecipeAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeAddViewController.swift; sourceTree = "<group>"; };
+		78BCF4052A136D8E00FA93C9 /* FreezerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreezerViewController.swift; sourceTree = "<group>"; };
+		78BCF4062A136D8E00FA93C9 /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		78BCF4072A136D8E00FA93C9 /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
+		78BCF4082A136D8E00FA93C9 /* PantryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PantryViewController.swift; sourceTree = "<group>"; };
+		78BCF4092A136D8E00FA93C9 /* RecipeChatGPTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeChatGPTViewController.swift; sourceTree = "<group>"; };
+		78BCF40A2A136D8F00FA93C9 /* RecipePreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipePreferencesViewController.swift; sourceTree = "<group>"; };
+		78BCF40B2A136D8F00FA93C9 /* RecipeRecentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeRecentViewController.swift; sourceTree = "<group>"; };
+		78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
+		78BCF40D2A136D8F00FA93C9 /* RecipeSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSearchViewController.swift; sourceTree = "<group>"; };
+		78DE3A702A136A320024BA10 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +80,32 @@
 			children = (
 				65D5B9F72A0A2C0100307B35 /* AppDelegate.swift */,
 				65D5B9F92A0A2C0100307B35 /* SceneDelegate.swift */,
-				65D5B9FB2A0A2C0100307B35 /* ViewController.swift */,
+				78DE3A6F2A136A060024BA10 /* Controllers */,
 				65D5B9FD2A0A2C0100307B35 /* Main.storyboard */,
 				65D5BA002A0A2C0300307B35 /* Assets.xcassets */,
 				65D5BA022A0A2C0300307B35 /* LaunchScreen.storyboard */,
 				65D5BA052A0A2C0300307B35 /* Info.plist */,
 			);
 			path = "Digital Pantry";
+			sourceTree = "<group>";
+		};
+		78DE3A6F2A136A060024BA10 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				65D5B9FB2A0A2C0100307B35 /* ViewController.swift */,
+				78DE3A702A136A320024BA10 /* RecipeViewController.swift */,
+				78BCF4062A136D8E00FA93C9 /* AddItemViewController.swift */,
+				78BCF4052A136D8E00FA93C9 /* FreezerViewController.swift */,
+				78BCF4072A136D8E00FA93C9 /* FridgeViewController.swift */,
+				78BCF4082A136D8E00FA93C9 /* PantryViewController.swift */,
+				78BCF4042A136D8E00FA93C9 /* RecipeAddViewController.swift */,
+				78BCF4092A136D8E00FA93C9 /* RecipeChatGPTViewController.swift */,
+				78BCF40A2A136D8F00FA93C9 /* RecipePreferencesViewController.swift */,
+				78BCF40B2A136D8F00FA93C9 /* RecipeRecentViewController.swift */,
+				78BCF40D2A136D8F00FA93C9 /* RecipeSearchViewController.swift */,
+				78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +179,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78DE3A712A136A320024BA10 /* RecipeViewController.swift in Sources */,
+				78BCF40E2A136D8F00FA93C9 /* RecipeAddViewController.swift in Sources */,
+				78BCF4172A136D8F00FA93C9 /* RecipeSearchViewController.swift in Sources */,
+				78BCF4152A136D8F00FA93C9 /* RecipeRecentViewController.swift in Sources */,
 				65D5B9FC2A0A2C0100307B35 /* ViewController.swift in Sources */,
+				78BCF4122A136D8F00FA93C9 /* PantryViewController.swift in Sources */,
+				78BCF4132A136D8F00FA93C9 /* RecipeChatGPTViewController.swift in Sources */,
 				65D5B9F82A0A2C0100307B35 /* AppDelegate.swift in Sources */,
+				78BCF4102A136D8F00FA93C9 /* AddItemViewController.swift in Sources */,
+				78BCF4142A136D8F00FA93C9 /* RecipePreferencesViewController.swift in Sources */,
+				78BCF4112A136D8F00FA93C9 /* FridgeViewController.swift in Sources */,
+				78BCF4162A136D8F00FA93C9 /* ShoppingListViewController.swift in Sources */,
+				78BCF40F2A136D8F00FA93C9 /* FreezerViewController.swift in Sources */,
 				65D5B9FA2A0A2C0100307B35 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

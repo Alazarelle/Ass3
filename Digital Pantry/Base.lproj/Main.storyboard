@@ -59,10 +59,10 @@
             </objects>
             <point key="canvasLocation" x="-558" y="582"/>
         </scene>
-        <!--View Controller-->
+        <!--Shopping List View Controller-->
         <scene sceneID="S05-FV-uSQ">
             <objects>
-                <viewController id="7HC-Tw-Jm7" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShoppingListViewController" id="7HC-Tw-Jm7" customClass="ShoppingListViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Ln-C5-Eob">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -93,10 +93,10 @@
             </objects>
             <point key="canvasLocation" x="233" y="582"/>
         </scene>
-        <!--View Controller-->
+        <!--Pantry View Controller-->
         <scene sceneID="OQ9-ae-qg5">
             <objects>
-                <viewController id="O2W-fS-wbK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PantryViewController" id="O2W-fS-wbK" customClass="PantryViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0eF-sw-GNt">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,10 +142,10 @@
             </objects>
             <point key="canvasLocation" x="233" y="-86"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Item View Controller-->
         <scene sceneID="MQU-zI-nHL">
             <objects>
-                <viewController id="HMU-Sv-stY" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddItemViewController" id="HMU-Sv-stY" customClass="AddItemViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lgr-4b-Rbr">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -183,10 +183,10 @@
             </objects>
             <point key="canvasLocation" x="-1419" y="582"/>
         </scene>
-        <!--View Controller-->
+        <!--Fridge View Controller-->
         <scene sceneID="78d-kM-qTk">
             <objects>
-                <viewController id="WHZ-Oc-MG5" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FridgeViewController" id="WHZ-Oc-MG5" customClass="FridgeViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TAw-1l-VZv">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -232,10 +232,10 @@
             </objects>
             <point key="canvasLocation" x="1050" y="-87"/>
         </scene>
-        <!--View Controller-->
+        <!--Freezer View Controller-->
         <scene sceneID="t11-tu-y7u">
             <objects>
-                <viewController id="owQ-uc-uQ3" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FreezerViewController" id="owQ-uc-uQ3" customClass="FreezerViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rGx-Hf-GeI">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -281,10 +281,10 @@
             </objects>
             <point key="canvasLocation" x="1865" y="-87"/>
         </scene>
-        <!--View Controller-->
+        <!--Recipe View Controller-->
         <scene sceneID="x49-OR-aE3">
             <objects>
-                <viewController id="7vd-JR-JDK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipeViewController" id="7vd-JR-JDK" customClass="RecipeViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kxP-YX-Tdu">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -342,10 +342,10 @@
             </objects>
             <point key="canvasLocation" x="233" y="1318"/>
         </scene>
-        <!--View Controller-->
+        <!--Recipe Recent View Controller-->
         <scene sceneID="YqX-yE-KJh">
             <objects>
-                <viewController id="VCk-Dk-dDA" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipeRecentViewController" id="VCk-Dk-dDA" customClass="RecipeRecentViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VjI-Na-CNo">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -367,10 +367,10 @@
             </objects>
             <point key="canvasLocation" x="1865" y="1318"/>
         </scene>
-        <!--View Controller-->
+        <!--Recipe Add View Controller-->
         <scene sceneID="biq-gL-4Eg">
             <objects>
-                <viewController id="LMf-1Z-rJo" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipeAddViewController" id="LMf-1Z-rJo" customClass="RecipeAddViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vAv-SB-kOC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -392,10 +392,10 @@
             </objects>
             <point key="canvasLocation" x="3532" y="1318"/>
         </scene>
-        <!--View Controller-->
+        <!--Recipe Preferences View Controller-->
         <scene sceneID="tIR-ut-hzA">
             <objects>
-                <viewController id="eTH-1w-CL7" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipePreferencesViewController" id="eTH-1w-CL7" customClass="RecipePreferencesViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Oj-e8-zd8">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -417,10 +417,10 @@
             </objects>
             <point key="canvasLocation" x="2735" y="1318"/>
         </scene>
-        <!--View Controller-->
+        <!--Recipe Search View Controller-->
         <scene sceneID="0uz-mU-x2V">
             <objects>
-                <viewController id="dU7-bM-Cqd" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipeSearchViewController" id="dU7-bM-Cqd" customClass="RecipeSearchViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="khG-EM-GWk">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -451,10 +451,10 @@
             </objects>
             <point key="canvasLocation" x="1050" y="1318"/>
         </scene>
-        <!--View Controller-->
+        <!--Recipe ChatGPT View Controller-->
         <scene sceneID="foz-vz-wD8">
             <objects>
-                <viewController id="2if-w7-2Tu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipeChatGPTViewController" id="2if-w7-2Tu" customClass="RecipeChatGPTViewController" customModule="Digital_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OI5-yu-ayT">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
