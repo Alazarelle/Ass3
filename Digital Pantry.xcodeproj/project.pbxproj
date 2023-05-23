@@ -36,6 +36,7 @@
 		C2FD43892A1C8E3F006F864C /* Ingred_Allergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD43882A1C8E3F006F864C /* Ingred_Allergy.swift */; };
 		C2FD438B2A1C9338006F864C /* Recipe_Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD438A2A1C9338006F864C /* Recipe_Ingredient.swift */; };
 		C2FD438D2A1C97DF006F864C /* RecipeDiet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD438C2A1C97DF006F864C /* RecipeDiet.swift */; };
+		C2FD438F2A1C9DE1006F864C /* SectionOfPantry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD438E2A1C9DE1006F864C /* SectionOfPantry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		C2FD43882A1C8E3F006F864C /* Ingred_Allergy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingred_Allergy.swift; sourceTree = "<group>"; };
 		C2FD438A2A1C9338006F864C /* Recipe_Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe_Ingredient.swift; sourceTree = "<group>"; };
 		C2FD438C2A1C97DF006F864C /* RecipeDiet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDiet.swift; sourceTree = "<group>"; };
+		C2FD438E2A1C9DE1006F864C /* SectionOfPantry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfPantry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				C2FD43882A1C8E3F006F864C /* Ingred_Allergy.swift */,
 				C2FD438A2A1C9338006F864C /* Recipe_Ingredient.swift */,
 				C2FD438C2A1C97DF006F864C /* RecipeDiet.swift */,
+				C2FD438E2A1C9DE1006F864C /* SectionOfPantry.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				C28A9D262A17B00F004AA244 /* AppPantry.swift in Sources */,
 				C2FD43832A1C8520006F864C /* AllergyCategory.swift in Sources */,
 				78BCF4142A136D8F00FA93C9 /* RecipePreferencesViewController.swift in Sources */,
+				C2FD438F2A1C9DE1006F864C /* SectionOfPantry.swift in Sources */,
 				78BCF4112A136D8F00FA93C9 /* FridgeViewController.swift in Sources */,
 				78BCF4162A136D8F00FA93C9 /* ShoppingListViewController.swift in Sources */,
 				C2FD437D2A1C7C81006F864C /* Recipe.swift in Sources */,

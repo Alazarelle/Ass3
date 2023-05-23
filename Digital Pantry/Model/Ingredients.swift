@@ -15,7 +15,7 @@ struct Ingredient {
     var ingredDescripion: String
     
     //initialised where we have not obtained a UniqueIdentifier (ingredientID) as yet
-    init?(ingredName: String, foodCategoryID: Int, ingredDescripion: String) {
+    init?(ingredName: String, foodCategoryID: Int, ingredDescripion: String) { 
         self.ingredientID = -1
         self.foodCategoryID = foodCategoryID
         self.ingredName = ingredName
@@ -23,12 +23,11 @@ struct Ingredient {
     }
     
     //use case: calling data back from DB/table
-    init?(ingredientID: Int, foodCategoryID: Int, ingredName: String, ingredDescripion: String) {
+    init?(ingredientID: Int, foodCategoryID: Int, ingredName: String, ingredDescripion: String) { //, sectionID: Int) {
         self.ingredientID = ingredientID
         self.foodCategoryID = foodCategoryID
         self.ingredName = ingredName
         self.ingredDescripion = ingredDescripion
-        
     }
     
     mutating func setIngredientID(ingredientID: Int) { //once the DB has a ingredientID, use this to set it

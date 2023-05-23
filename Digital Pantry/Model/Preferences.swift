@@ -5,6 +5,7 @@
 //  Created by Alexander Korabelnikoff on 23/5/2023.
 //
 
+//to store a person's allergies and diets and your pantry items about to expire
 import Foundation
 
 struct Preference {
