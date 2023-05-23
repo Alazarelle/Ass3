@@ -16,16 +16,17 @@ var dateFormatter = DateFormatter()
 
 
 struct AppPantryItem {
-    //properties/members of AppUser
+    //properties/members of appPantryID
     var appPantryID: Int
     //var appUserID: Int
     var ingredientID: Int
     var quantity: Double
     var expiryDate: Date
-    
+    //var sectionID: Int
 
-    //initialised where we have not obtained a UniqueIdentifier (appUserID) as yet
-    init?(appUserID: Int, ingredientID: Int, quantity: Double, expiryDate: Date) {
+
+    //initialised where we have not obtained a UniqueIdentifier (appPantryID) as yet
+    init?(appUserID: Int, ingredientID: Int, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
         self.appPantryID = -1
         if quantity.isZero { //if mandatory fields/properties are empty
             print("Pantry quantity not set")
@@ -35,15 +36,17 @@ struct AppPantryItem {
         self.ingredientID = ingredientID
         self.quantity = quantity
         self.expiryDate = expiryDate
+        //self.sectionID = sectionID //if we decide to have Pantry, Fridge, Freezer
     }
     
     //use case: calling data back from DB/table
-    init?(appPantryID: Int, appUserID: Int, ingredientID: Int, quantity: Double, expiryDate: Date) {
+    init?(appPantryID: Int, appUserID: Int, ingredientID: Int, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
         self.appPantryID = appPantryID
         //self.appUserID = appUserID
         self.ingredientID = ingredientID
         self.quantity = quantity
         self.expiryDate = expiryDate
+        //self.sectionID = sectionID //if we decide to have Pantry, Fridge, Freezer
     }
     
     mutating func setAppPantryID(appPantryID: Int) { //once the DB has a UserID, use this to set it
@@ -124,5 +127,13 @@ struct AppPantryItem {
         return formatter.string(from: expiryDate)
     }
 
+    //the below is there in case we want to have Pantry broked down between sections: Pantry, Fridge, Freezer
+    //mutating func setSectionID(sectionID: Int) { //set foodCategoryID
+    //    self.sectionID = sectionID
+    //}
+    
+    //func getSectionID() -> Int { //retrieve sectionID
+    //    return sectionID
+    //}
 }
 

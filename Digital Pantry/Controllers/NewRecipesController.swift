@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import OpenAIKit
 
-class RecipeChatGPTViewController: UIViewController {
+class NewRecipesController: UIViewController {
     
     
     @IBOutlet weak var inputTextField: UITextField!
