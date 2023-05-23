@@ -26,6 +26,16 @@
 		78DE3A712A136A320024BA10 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DE3A702A136A320024BA10 /* RecipeViewController.swift */; };
 		C28A9D242A17AFD0004AA244 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A9D232A17AFD0004AA244 /* AppUser.swift */; };
 		C28A9D262A17B00F004AA244 /* AppPantry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A9D252A17B00F004AA244 /* AppPantry.swift */; };
+		C2FD437B2A1C72E0006F864C /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD437A2A1C72E0006F864C /* Ingredients.swift */; };
+		C2FD437D2A1C7C81006F864C /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD437C2A1C7C81006F864C /* Recipe.swift */; };
+		C2FD437F2A1C80D5006F864C /* RecipeLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD437E2A1C80D5006F864C /* RecipeLog.swift */; };
+		C2FD43812A1C8375006F864C /* FoodCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD43802A1C8375006F864C /* FoodCategory.swift */; };
+		C2FD43832A1C8520006F864C /* AllergyCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD43822A1C8520006F864C /* AllergyCategory.swift */; };
+		C2FD43852A1C87C5006F864C /* DietCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD43842A1C87C5006F864C /* DietCategory.swift */; };
+		C2FD43872A1C89A3006F864C /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD43862A1C89A3006F864C /* Preferences.swift */; };
+		C2FD43892A1C8E3F006F864C /* Ingred_Allergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD43882A1C8E3F006F864C /* Ingred_Allergy.swift */; };
+		C2FD438B2A1C9338006F864C /* Recipe_Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD438A2A1C9338006F864C /* Recipe_Ingredient.swift */; };
+		C2FD438D2A1C97DF006F864C /* RecipeDiet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD438C2A1C97DF006F864C /* RecipeDiet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +61,16 @@
 		C28A9D232A17AFD0004AA244 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		C28A9D252A17B00F004AA244 /* AppPantry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPantry.swift; sourceTree = "<group>"; };
 		C28B2CB92A1C28F600AC4A46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		C2FD437A2A1C72E0006F864C /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
+		C2FD437C2A1C7C81006F864C /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		C2FD437E2A1C80D5006F864C /* RecipeLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeLog.swift; sourceTree = "<group>"; };
+		C2FD43802A1C8375006F864C /* FoodCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategory.swift; sourceTree = "<group>"; };
+		C2FD43822A1C8520006F864C /* AllergyCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergyCategory.swift; sourceTree = "<group>"; };
+		C2FD43842A1C87C5006F864C /* DietCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietCategory.swift; sourceTree = "<group>"; };
+		C2FD43862A1C89A3006F864C /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		C2FD43882A1C8E3F006F864C /* Ingred_Allergy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingred_Allergy.swift; sourceTree = "<group>"; };
+		C2FD438A2A1C9338006F864C /* Recipe_Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe_Ingredient.swift; sourceTree = "<group>"; };
+		C2FD438C2A1C97DF006F864C /* RecipeDiet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDiet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +139,16 @@
 			children = (
 				C28A9D232A17AFD0004AA244 /* AppUser.swift */,
 				C28A9D252A17B00F004AA244 /* AppPantry.swift */,
+				C2FD437A2A1C72E0006F864C /* Ingredients.swift */,
+				C2FD437C2A1C7C81006F864C /* Recipe.swift */,
+				C2FD437E2A1C80D5006F864C /* RecipeLog.swift */,
+				C2FD43802A1C8375006F864C /* FoodCategory.swift */,
+				C2FD43822A1C8520006F864C /* AllergyCategory.swift */,
+				C2FD43842A1C87C5006F864C /* DietCategory.swift */,
+				C2FD43862A1C89A3006F864C /* Preferences.swift */,
+				C2FD43882A1C8E3F006F864C /* Ingred_Allergy.swift */,
+				C2FD438A2A1C9338006F864C /* Recipe_Ingredient.swift */,
+				C2FD438C2A1C97DF006F864C /* RecipeDiet.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -195,19 +225,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				78DE3A712A136A320024BA10 /* RecipeViewController.swift in Sources */,
+				C2FD43852A1C87C5006F864C /* DietCategory.swift in Sources */,
 				78BCF40E2A136D8F00FA93C9 /* RecipeAddViewController.swift in Sources */,
 				78BCF4172A136D8F00FA93C9 /* RecipeSearchViewController.swift in Sources */,
+				C2FD43812A1C8375006F864C /* FoodCategory.swift in Sources */,
 				78BCF4152A136D8F00FA93C9 /* RecipeRecentViewController.swift in Sources */,
+				C2FD438B2A1C9338006F864C /* Recipe_Ingredient.swift in Sources */,
+				C2FD438D2A1C97DF006F864C /* RecipeDiet.swift in Sources */,
 				65D5B9FC2A0A2C0100307B35 /* ViewController.swift in Sources */,
+				C2FD437F2A1C80D5006F864C /* RecipeLog.swift in Sources */,
+				C2FD437B2A1C72E0006F864C /* Ingredients.swift in Sources */,
 				78BCF4122A136D8F00FA93C9 /* PantryViewController.swift in Sources */,
+				C2FD43872A1C89A3006F864C /* Preferences.swift in Sources */,
 				78BCF4132A136D8F00FA93C9 /* RecipeChatGPTViewController.swift in Sources */,
 				65D5B9F82A0A2C0100307B35 /* AppDelegate.swift in Sources */,
 				C28A9D242A17AFD0004AA244 /* AppUser.swift in Sources */,
 				78BCF4102A136D8F00FA93C9 /* AddItemViewController.swift in Sources */,
+				C2FD43892A1C8E3F006F864C /* Ingred_Allergy.swift in Sources */,
 				C28A9D262A17B00F004AA244 /* AppPantry.swift in Sources */,
+				C2FD43832A1C8520006F864C /* AllergyCategory.swift in Sources */,
 				78BCF4142A136D8F00FA93C9 /* RecipePreferencesViewController.swift in Sources */,
 				78BCF4112A136D8F00FA93C9 /* FridgeViewController.swift in Sources */,
 				78BCF4162A136D8F00FA93C9 /* ShoppingListViewController.swift in Sources */,
+				C2FD437D2A1C7C81006F864C /* Recipe.swift in Sources */,
 				78BCF40F2A136D8F00FA93C9 /* FreezerViewController.swift in Sources */,
 				65D5B9FA2A0A2C0100307B35 /* SceneDelegate.swift in Sources */,
 			);
