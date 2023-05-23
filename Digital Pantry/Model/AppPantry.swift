@@ -18,7 +18,7 @@ var dateFormatter = DateFormatter()
 struct AppPantryItem {
     //properties/members of AppUser
     var appPantryID: Int
-    var appUserID: Int
+    //var appUserID: Int
     var ingredientID: Int
     var quantity: Double
     var expiryDate: Date
@@ -31,7 +31,7 @@ struct AppPantryItem {
             print("Pantry quantity not set")
             return nil
         }
-        self.appUserID = appUserID
+        //self.appUserID = appUserID
         self.ingredientID = ingredientID
         self.quantity = quantity
         self.expiryDate = expiryDate
@@ -40,7 +40,7 @@ struct AppPantryItem {
     //use case: calling data back from DB/table
     init?(appPantryID: Int, appUserID: Int, ingredientID: Int, quantity: Double, expiryDate: Date) {
         self.appPantryID = appPantryID
-        self.appUserID = appUserID
+        //self.appUserID = appUserID
         self.ingredientID = ingredientID
         self.quantity = quantity
         self.expiryDate = expiryDate
@@ -54,9 +54,9 @@ struct AppPantryItem {
         return appPantryID
     }
     
-    func getAppUserId() -> Int { //retrieve AppUserID
-        return appUserID
-    }
+    //func getAppUserId() -> Int { //retrieve AppUserID
+    //    return appUserID
+    //}
     
     func getIngredientId() -> Int { //retrieve IngredientID
         return ingredientID

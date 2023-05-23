@@ -24,6 +24,8 @@
 		78BCF4162A136D8F00FA93C9 /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */; };
 		78BCF4172A136D8F00FA93C9 /* RecipeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF40D2A136D8F00FA93C9 /* RecipeSearchViewController.swift */; };
 		78DE3A712A136A320024BA10 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DE3A702A136A320024BA10 /* RecipeViewController.swift */; };
+		C28A9D242A17AFD0004AA244 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A9D232A17AFD0004AA244 /* AppUser.swift */; };
+		C28A9D262A17B00F004AA244 /* AppPantry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A9D252A17B00F004AA244 /* AppPantry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,9 @@
 		78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		78BCF40D2A136D8F00FA93C9 /* RecipeSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSearchViewController.swift; sourceTree = "<group>"; };
 		78DE3A702A136A320024BA10 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		C28A9D232A17AFD0004AA244 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
+		C28A9D252A17B00F004AA244 /* AppPantry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPantry.swift; sourceTree = "<group>"; };
+		C28B2CB92A1C28F600AC4A46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +83,7 @@
 		65D5B9F62A0A2C0100307B35 /* Digital Pantry */ = {
 			isa = PBXGroup;
 			children = (
+				C2E123962A138A4900A97CC1 /* Model */,
 				65D5B9F72A0A2C0100307B35 /* AppDelegate.swift */,
 				65D5B9F92A0A2C0100307B35 /* SceneDelegate.swift */,
 				78DE3A6F2A136A060024BA10 /* Controllers */,
@@ -106,6 +112,15 @@
 				78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C2E123962A138A4900A97CC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C28A9D232A17AFD0004AA244 /* AppUser.swift */,
+				C28A9D252A17B00F004AA244 /* AppPantry.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,7 +202,9 @@
 				78BCF4122A136D8F00FA93C9 /* PantryViewController.swift in Sources */,
 				78BCF4132A136D8F00FA93C9 /* RecipeChatGPTViewController.swift in Sources */,
 				65D5B9F82A0A2C0100307B35 /* AppDelegate.swift in Sources */,
+				C28A9D242A17AFD0004AA244 /* AppUser.swift in Sources */,
 				78BCF4102A136D8F00FA93C9 /* AddItemViewController.swift in Sources */,
+				C28A9D262A17B00F004AA244 /* AppPantry.swift in Sources */,
 				78BCF4142A136D8F00FA93C9 /* RecipePreferencesViewController.swift in Sources */,
 				78BCF4112A136D8F00FA93C9 /* FridgeViewController.swift in Sources */,
 				78BCF4162A136D8F00FA93C9 /* ShoppingListViewController.swift in Sources */,
@@ -203,6 +220,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				65D5B9FE2A0A2C0100307B35 /* Base */,
+				C28B2CB92A1C28F600AC4A46 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
