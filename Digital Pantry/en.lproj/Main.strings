@@ -1,0 +1,207 @@
+
+/* Class = "UIButton"; configuration.title = "Freezer"; ObjectID = "0U2-il-i2j"; */
+"0U2-il-i2j.configuration.title" = "Freezer";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "0U2-il-i2j"; */
+"0U2-il-i2j.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Create New Account"; ObjectID = "3lV-IE-B1p"; */
+"3lV-IE-B1p.configuration.title" = "Create New Account";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "3lV-IE-B1p"; */
+"3lV-IE-B1p.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Pantry"; ObjectID = "82l-9r-QfS"; */
+"82l-9r-QfS.configuration.title" = "Pantry";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "82l-9r-QfS"; */
+"82l-9r-QfS.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Register Account"; ObjectID = "8fP-jG-FH5"; */
+"8fP-jG-FH5.configuration.title" = "Register Account";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "8fP-jG-FH5"; */
+"8fP-jG-FH5.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Pantry"; ObjectID = "CcP-vb-qyy"; */
+"CcP-vb-qyy.configuration.title" = "Pantry";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "CcP-vb-qyy"; */
+"CcP-vb-qyy.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Pantry Cooker"; ObjectID = "DDF-Gj-0s3"; */
+"DDF-Gj-0s3.text" = "Pantry Cooker";
+
+/* Class = "UILabel"; text = "Insert email (login)."; ObjectID = "FKn-Pv-rhY"; */
+"FKn-Pv-rhY.text" = "Insert email (login).";
+
+/* Class = "UIButton"; configuration.title = "Recipes"; ObjectID = "FM8-wo-Ztg"; */
+"FM8-wo-Ztg.configuration.title" = "Recipes";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "FM8-wo-Ztg"; */
+"FM8-wo-Ztg.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Pantry Cooker"; ObjectID = "HGi-jt-EEu"; */
+"HGi-jt-EEu.text" = "Pantry Cooker";
+
+/* Class = "UILabel"; text = "Enter email (login)."; ObjectID = "IRp-th-f78"; */
+"IRp-th-f78.text" = "Enter email (login).";
+
+/* Class = "UILabel"; text = "Enter preferred name"; ObjectID = "K9z-EN-Xu5"; */
+"K9z-EN-Xu5.text" = "Enter preferred name";
+
+/* Class = "UILabel"; text = "Add new item"; ObjectID = "Lsf-Ev-hy3"; */
+"Lsf-Ev-hy3.text" = "Add new item";
+
+/* Class = "UILabel"; text = "Enter password."; ObjectID = "P9o-sv-i0K"; */
+"P9o-sv-i0K.text" = "Enter password.";
+
+/* Class = "UILabel"; text = "Pantry Cooker"; ObjectID = "RCE-Ya-Y5o"; */
+"RCE-Ya-Y5o.text" = "Pantry Cooker";
+
+/* Class = "UIButton"; configuration.title = "Pantry"; ObjectID = "RJs-XA-PlK"; */
+"RJs-XA-PlK.configuration.title" = "Pantry";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "RJs-XA-PlK"; */
+"RJs-XA-PlK.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Freezer"; ObjectID = "RLl-kA-Zs4"; */
+"RLl-kA-Zs4.configuration.title" = "Freezer";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "RLl-kA-Zs4"; */
+"RLl-kA-Zs4.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Pantry Cooker"; ObjectID = "Rdu-0j-Lmc"; */
+"Rdu-0j-Lmc.text" = "Pantry Cooker";
+
+/* Class = "UIButton"; configuration.title = "Pantry"; ObjectID = "WdI-DX-O5K"; */
+"WdI-DX-O5K.configuration.title" = "Pantry";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "WdI-DX-O5K"; */
+"WdI-DX-O5K.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Recent Recipes"; ObjectID = "X4W-hp-dsE"; */
+"X4W-hp-dsE.text" = "Recent Recipes";
+
+/* Class = "UIButton"; configuration.title = "Login"; ObjectID = "XWY-6J-ufx"; */
+"XWY-6J-ufx.configuration.title" = "Login";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "XWY-6J-ufx"; */
+"XWY-6J-ufx.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Freezer"; ObjectID = "Yur-Pi-hcg"; */
+"Yur-Pi-hcg.text" = "Freezer";
+
+/* Class = "UIButton"; configuration.title = "ChatGPT"; ObjectID = "Zal-oU-uo7"; */
+"Zal-oU-uo7.configuration.title" = "ChatGPT";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Zal-oU-uo7"; */
+"Zal-oU-uo7.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Add new recipe"; ObjectID = "Zge-Ws-x63"; */
+"Zge-Ws-x63.text" = "Add new recipe";
+
+/* Class = "UIButton"; configuration.title = "Alwx"; ObjectID = "ZnO-XR-d18"; */
+"ZnO-XR-d18.configuration.title" = "Alwx";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ZnO-XR-d18"; */
+"ZnO-XR-d18.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Confirm new password."; ObjectID = "aru-0N-03Z"; */
+"aru-0N-03Z.text" = "Confirm new password.";
+
+/* Class = "UILabel"; text = "ChatGPT recommendation"; ObjectID = "bFc-Pk-DB9"; */
+"bFc-Pk-DB9.text" = "ChatGPT recommendation";
+
+/* Class = "UILabel"; text = "Fridge"; ObjectID = "bb1-h8-gTN"; */
+"bb1-h8-gTN.text" = "Fridge";
+
+/* Class = "UIButton"; configuration.title = "Add"; ObjectID = "ca3-jg-icC"; */
+"ca3-jg-icC.configuration.title" = "Add";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ca3-jg-icC"; */
+"ca3-jg-icC.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Recipes Preferences"; ObjectID = "dnu-Jl-0iW"; */
+"dnu-Jl-0iW.text" = "Recipes Preferences";
+
+/* Class = "UILabel"; text = "Shopping List"; ObjectID = "du3-d4-f5K"; */
+"du3-d4-f5K.text" = "Shopping List";
+
+/* Class = "UIButton"; configuration.title = "Freezer"; ObjectID = "evc-jV-fhT"; */
+"evc-jV-fhT.configuration.title" = "Freezer";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "evc-jV-fhT"; */
+"evc-jV-fhT.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Search recipes"; ObjectID = "fJo-jZ-pOr"; */
+"fJo-jZ-pOr.configuration.title" = "Search recipes";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "fJo-jZ-pOr"; */
+"fJo-jZ-pOr.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Log in to Account Account"; ObjectID = "hfx-ev-MqD"; */
+"hfx-ev-MqD.text" = "Log in to Account Account";
+
+/* Class = "UILabel"; text = "Recipes"; ObjectID = "ig2-nS-7gh"; */
+"ig2-nS-7gh.text" = "Recipes";
+
+/* Class = "UILabel"; text = "Enter new password."; ObjectID = "j5O-7f-J2A"; */
+"j5O-7f-J2A.text" = "Enter new password.";
+
+/* Class = "UIButton"; configuration.title = "Fridge"; ObjectID = "nZv-If-SJE"; */
+"nZv-If-SJE.configuration.title" = "Fridge";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "nZv-If-SJE"; */
+"nZv-If-SJE.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Recent Recipes"; ObjectID = "pGH-dz-2ga"; */
+"pGH-dz-2ga.configuration.title" = "Recent Recipes";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "pGH-dz-2ga"; */
+"pGH-dz-2ga.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Fridge"; ObjectID = "pfu-VO-XJG"; */
+"pfu-VO-XJG.configuration.title" = "Fridge";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "pfu-VO-XJG"; */
+"pfu-VO-XJG.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Shopping List"; ObjectID = "qTi-Ou-wra"; */
+"qTi-Ou-wra.configuration.title" = "Shopping List";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "qTi-Ou-wra"; */
+"qTi-Ou-wra.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Preferences"; ObjectID = "vQv-wV-aBj"; */
+"vQv-wV-aBj.configuration.title" = "Preferences";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "vQv-wV-aBj"; */
+"vQv-wV-aBj.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Fridge"; ObjectID = "vg9-Or-vIY"; */
+"vg9-Or-vIY.configuration.title" = "Fridge";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "vg9-Or-vIY"; */
+"vg9-Or-vIY.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Search Recipes / Recommended Recipes"; ObjectID = "vpD-NN-T9c"; */
+"vpD-NN-T9c.text" = "Search Recipes / Recommended Recipes";
+
+/* Class = "UIButton"; configuration.title = "Login"; ObjectID = "xuu-k3-ul3"; */
+"xuu-k3-ul3.configuration.title" = "Login";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "xuu-k3-ul3"; */
+"xuu-k3-ul3.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Pantry"; ObjectID = "xwN-5K-yX6"; */
+"xwN-5K-yX6.text" = "Pantry";
+
+/* Class = "UIButton"; configuration.title = "New Recipe"; ObjectID = "y3w-fw-y6Z"; */
+"y3w-fw-y6Z.configuration.title" = "New Recipe";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "y3w-fw-y6Z"; */
+"y3w-fw-y6Z.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Create New Account Account"; ObjectID = "zcd-Xa-ieJ"; */
+"zcd-Xa-ieJ.text" = "Create New Account Account";
