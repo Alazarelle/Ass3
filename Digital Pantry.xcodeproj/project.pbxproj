@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65500B3C2A1365380007F7C9 /* OpenAIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 65500B3B2A1365380007F7C9 /* OpenAIKit */; };
+		65500B412A136B7F0007F7C9 /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = 65500B402A136B7F0007F7C9 /* OpenAISwift */; };
+		65500B432A136BBC0007F7C9 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65500B422A136BBC0007F7C9 /* APICaller.swift */; };
 		65D5B9F82A0A2C0100307B35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B9F72A0A2C0100307B35 /* AppDelegate.swift */; };
 		65D5B9FA2A0A2C0100307B35 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B9F92A0A2C0100307B35 /* SceneDelegate.swift */; };
 		65D5B9FC2A0A2C0100307B35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B9FB2A0A2C0100307B35 /* ViewController.swift */; };
@@ -39,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		65500B422A136BBC0007F7C9 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		65D5B9F42A0A2C0100307B35 /* Digital Pantry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Digital Pantry.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D5B9F72A0A2C0100307B35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65D5B9F92A0A2C0100307B35 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,7 +54,7 @@
 		78BCF4042A136D8E00FA93C9 /* RecipeAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeAddViewController.swift; sourceTree = "<group>"; };
 		78BCF4052A136D8E00FA93C9 /* FreezerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreezerViewController.swift; sourceTree = "<group>"; };
 		78BCF4062A136D8E00FA93C9 /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
-		78BCF4072A136D8E00FA93C9 /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
+		78BCF4072A136D8E00FA93C9 /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourceco.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		78BCF4082A136D8E00FA93C9 /* PantryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PantryViewController.swift; sourceTree = "<group>"; };
 		78BCF4092A136D8E00FA93C9 /* RecipeChatGPTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeChatGPTViewController.swift; sourceTree = "<group>"; };
 		78BCF40A2A136D8F00FA93C9 /* RecipePreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipePreferencesViewController.swift; sourceTree = "<group>"; };
@@ -78,17 +82,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65500B412A136B7F0007F7C9 /* OpenAISwift in Frameworks */,
+				65500B3C2A1365380007F7C9 /* OpenAIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6540E7E92A138856007352FF /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		65D5B9EB2A0A2C0100307B35 = {
 			isa = PBXGroup;
 			children = (
 				65D5B9F62A0A2C0100307B35 /* Digital Pantry */,
 				65D5B9F52A0A2C0100307B35 /* Products */,
+				6540E7E92A138856007352FF /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,6 +125,7 @@
 				65D5BA002A0A2C0300307B35 /* Assets.xcassets */,
 				65D5BA022A0A2C0300307B35 /* LaunchScreen.storyboard */,
 				65D5BA052A0A2C0300307B35 /* Info.plist */,
+				65500B422A136BBC0007F7C9 /* APICaller.swift */,
 			);
 			path = "Digital Pantry";
 			sourceTree = "<group>";
@@ -169,6 +184,10 @@
 			dependencies = (
 			);
 			name = "Digital Pantry";
+			packageProductDependencies = (
+				65500B3B2A1365380007F7C9 /* OpenAIKit */,
+				65500B402A136B7F0007F7C9 /* OpenAISwift */,
+			);
 			productName = "Digital Pantry";
 			productReference = 65D5B9F42A0A2C0100307B35 /* Digital Pantry.app */;
 			productType = "com.apple.product-type.application";
@@ -197,6 +216,10 @@
 				Base,
 			);
 			mainGroup = 65D5B9EB2A0A2C0100307B35;
+			packageReferences = (
+				65500B3A2A1365380007F7C9 /* XCRemoteSwiftPackageReference "openai-kit" */,
+				65500B3F2A136B7F0007F7C9 /* XCRemoteSwiftPackageReference "OpenAISwift" */,
+			);
 			productRefGroup = 65D5B9F52A0A2C0100307B35 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,6 +256,8 @@
 				C2FD438B2A1C9338006F864C /* Recipe_Ingredient.swift in Sources */,
 				C2FD438D2A1C97DF006F864C /* RecipeDiet.swift in Sources */,
 				65D5B9FC2A0A2C0100307B35 /* ViewController.swift in Sources */,
+				65500B432A136BBC0007F7C9 /* APICaller.swift in Sources */,
+				65D5B9F82A0A2C0100307B35 /* AppDelegate.swift in Sources */,
 				C2FD437F2A1C80D5006F864C /* RecipeLog.swift in Sources */,
 				C2FD437B2A1C72E0006F864C /* Ingredients.swift in Sources */,
 				78BCF4122A136D8F00FA93C9 /* PantryViewController.swift in Sources */,
@@ -466,6 +491,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		65500B3A2A1365380007F7C9 /* XCRemoteSwiftPackageReference "openai-kit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dylanshine/openai-kit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		65500B3F2A136B7F0007F7C9 /* XCRemoteSwiftPackageReference "OpenAISwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adamrushy/OpenAISwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		65500B3B2A1365380007F7C9 /* OpenAIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65500B3A2A1365380007F7C9 /* XCRemoteSwiftPackageReference "openai-kit" */;
+			productName = OpenAIKit;
+		};
+		65500B402A136B7F0007F7C9 /* OpenAISwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65500B3F2A136B7F0007F7C9 /* XCRemoteSwiftPackageReference "OpenAISwift" */;
+			productName = OpenAISwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 65D5B9EC2A0A2C0100307B35 /* Project object */;
 }
