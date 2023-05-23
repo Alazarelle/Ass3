@@ -14,7 +14,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         createTables()
         insertTableData()
-        readAllergyTable()
+        //readAllergyTable()
+        importFoodDataCSV()
     }
     
 
