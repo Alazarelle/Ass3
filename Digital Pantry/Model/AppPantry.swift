@@ -16,7 +16,7 @@ var dateFormatter = DateFormatter()
 
 
 struct AppPantryItem {
-    //properties/members of AppUser
+    //properties/members of appPantryID
     var appPantryID: Int
     //var appUserID: Int
     var ingredientID: Int
@@ -24,7 +24,7 @@ struct AppPantryItem {
     var expiryDate: Date
     
 
-    //initialised where we have not obtained a UniqueIdentifier (appUserID) as yet
+    //initialised where we have not obtained a UniqueIdentifier (appPantryID) as yet
     init?(appUserID: Int, ingredientID: Int, quantity: Double, expiryDate: Date) {
         self.appPantryID = -1
         if quantity.isZero { //if mandatory fields/properties are empty
