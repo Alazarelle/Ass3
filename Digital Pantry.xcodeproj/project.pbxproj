@@ -27,6 +27,10 @@
 		78BCF4162A136D8F00FA93C9 /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */; };
 		78BCF4172A136D8F00FA93C9 /* RecipeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF40D2A136D8F00FA93C9 /* RecipeSearchViewController.swift */; };
 		78DE3A712A136A320024BA10 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DE3A702A136A320024BA10 /* RecipeViewController.swift */; };
+		829E594E2A1CB382000FFCCE /* CoreXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = 829E594D2A1CB382000FFCCE /* CoreXLSX */; };
+		829E59512A1CB391000FFCCE /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 829E59502A1CB391000FFCCE /* SQLite */; };
+		829E595E2A1CB58C000FFCCE /* databaseSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829E595D2A1CB58C000FFCCE /* databaseSetup.swift */; };
+		829E59602A1CB59A000FFCCE /* Release 2 - Food Details.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 829E595F2A1CB59A000FFCCE /* Release 2 - Food Details.xlsx */; };
 		C28A9D242A17AFD0004AA244 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A9D232A17AFD0004AA244 /* AppUser.swift */; };
 		C28A9D262A17B00F004AA244 /* AppPantry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A9D252A17B00F004AA244 /* AppPantry.swift */; };
 		C2FD437B2A1C72E0006F864C /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD437A2A1C72E0006F864C /* Ingredients.swift */; };
@@ -63,6 +67,8 @@
 		78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		78BCF40D2A136D8F00FA93C9 /* RecipeSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSearchViewController.swift; sourceTree = "<group>"; };
 		78DE3A702A136A320024BA10 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		829E595D2A1CB58C000FFCCE /* databaseSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = databaseSetup.swift; path = ../../../Resources/databaseSetup.swift; sourceTree = "<group>"; };
+		829E595F2A1CB59A000FFCCE /* Release 2 - Food Details.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Release 2 - Food Details.xlsx"; path = "../../../../Desktop/Release 2 - Food Details.xlsx"; sourceTree = "<group>"; };
 		C28A9D232A17AFD0004AA244 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		C28A9D252A17B00F004AA244 /* AppPantry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPantry.swift; sourceTree = "<group>"; };
 		C28B2CB92A1C28F600AC4A46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -84,6 +90,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				829E59512A1CB391000FFCCE /* SQLite in Frameworks */,
+				829E594E2A1CB382000FFCCE /* CoreXLSX in Frameworks */,
 				65500B412A136B7F0007F7C9 /* OpenAISwift in Frameworks */,
 				65500B3C2A1365380007F7C9 /* OpenAIKit in Frameworks */,
 			);
@@ -119,6 +127,7 @@
 		65D5B9F62A0A2C0100307B35 /* Digital Pantry */ = {
 			isa = PBXGroup;
 			children = (
+				829E595C2A1CB57C000FFCCE /* Resources */,
 				C2E123962A138A4900A97CC1 /* Model */,
 				65D5B9F72A0A2C0100307B35 /* AppDelegate.swift */,
 				65D5B9F92A0A2C0100307B35 /* SceneDelegate.swift */,
@@ -149,6 +158,15 @@
 				78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		829E595C2A1CB57C000FFCCE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				829E595F2A1CB59A000FFCCE /* Release 2 - Food Details.xlsx */,
+				829E595D2A1CB58C000FFCCE /* databaseSetup.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		C2E123962A138A4900A97CC1 /* Model */ = {
@@ -190,6 +208,8 @@
 			packageProductDependencies = (
 				65500B3B2A1365380007F7C9 /* OpenAIKit */,
 				65500B402A136B7F0007F7C9 /* OpenAISwift */,
+				829E594D2A1CB382000FFCCE /* CoreXLSX */,
+				829E59502A1CB391000FFCCE /* SQLite */,
 			);
 			productName = "Digital Pantry";
 			productReference = 65D5B9F42A0A2C0100307B35 /* Digital Pantry.app */;
@@ -222,6 +242,8 @@
 			packageReferences = (
 				65500B3A2A1365380007F7C9 /* XCRemoteSwiftPackageReference "openai-kit" */,
 				65500B3F2A136B7F0007F7C9 /* XCRemoteSwiftPackageReference "OpenAISwift" */,
+				829E594C2A1CB382000FFCCE /* XCRemoteSwiftPackageReference "CoreXLSX" */,
+				829E594F2A1CB391000FFCCE /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 			);
 			productRefGroup = 65D5B9F52A0A2C0100307B35 /* Products */;
 			projectDirPath = "";
@@ -237,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				829E59602A1CB59A000FFCCE /* Release 2 - Food Details.xlsx in Resources */,
 				65D5BA042A0A2C0300307B35 /* LaunchScreen.storyboard in Resources */,
 				65D5BA012A0A2C0300307B35 /* Assets.xcassets in Resources */,
 				65D5B9FF2A0A2C0100307B35 /* Main.storyboard in Resources */,
@@ -266,6 +289,7 @@
 				78BCF4122A136D8F00FA93C9 /* PantryViewController.swift in Sources */,
 				C2FD43872A1C89A3006F864C /* Preferences.swift in Sources */,
 				78BCF4132A136D8F00FA93C9 /* RecipeChatGPTViewController.swift in Sources */,
+				829E595E2A1CB58C000FFCCE /* databaseSetup.swift in Sources */,
 				65D5B9F82A0A2C0100307B35 /* AppDelegate.swift in Sources */,
 				C28A9D242A17AFD0004AA244 /* AppUser.swift in Sources */,
 				78BCF4102A136D8F00FA93C9 /* AddItemViewController.swift in Sources */,
@@ -513,6 +537,22 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		829E594C2A1CB382000FFCCE /* XCRemoteSwiftPackageReference "CoreXLSX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CoreOffice/CoreXLSX.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.14.2;
+			};
+		};
+		829E594F2A1CB391000FFCCE /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.14.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -525,6 +565,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 65500B3F2A136B7F0007F7C9 /* XCRemoteSwiftPackageReference "OpenAISwift" */;
 			productName = OpenAISwift;
+		};
+		829E594D2A1CB382000FFCCE /* CoreXLSX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 829E594C2A1CB382000FFCCE /* XCRemoteSwiftPackageReference "CoreXLSX" */;
+			productName = CoreXLSX;
+		};
+		829E59502A1CB391000FFCCE /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 829E594F2A1CB391000FFCCE /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
