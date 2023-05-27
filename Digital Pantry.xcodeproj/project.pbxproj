@@ -30,7 +30,7 @@
 		829E594E2A1CB382000FFCCE /* CoreXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = 829E594D2A1CB382000FFCCE /* CoreXLSX */; };
 		829E59512A1CB391000FFCCE /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 829E59502A1CB391000FFCCE /* SQLite */; };
 		829E595E2A1CB58C000FFCCE /* databaseSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829E595D2A1CB58C000FFCCE /* databaseSetup.swift */; };
-		82F04D642A22CF0F00779EA8 /* Release 2 - Food Details.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 82F04D632A22CF0F00779EA8 /* Release 2 - Food Details.xlsx */; };
+		829E59602A1CB59A000FFCCE /* Release 2 - Food Details.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 829E595F2A1CB59A000FFCCE /* Release 2 - Food Details.xlsx */; };
 		C28A9D242A17AFD0004AA244 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A9D232A17AFD0004AA244 /* AppUser.swift */; };
 		C28A9D262A17B00F004AA244 /* AppPantry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A9D252A17B00F004AA244 /* AppPantry.swift */; };
 		C2FD437B2A1C72E0006F864C /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD437A2A1C72E0006F864C /* Ingredients.swift */; };
@@ -67,8 +67,8 @@
 		78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		78BCF40D2A136D8F00FA93C9 /* RecipeSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSearchViewController.swift; sourceTree = "<group>"; };
 		78DE3A702A136A320024BA10 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
-		829E595D2A1CB58C000FFCCE /* databaseSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = databaseSetup.swift; path = ../../../Resources/databaseSetup.swift; sourceTree = "<group>"; };
-		82F04D632A22CF0F00779EA8 /* Release 2 - Food Details.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Release 2 - Food Details.xlsx"; sourceTree = "<group>"; };
+		829E595D2A1CB58C000FFCCE /* databaseSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = databaseSetup.swift; sourceTree = "<group>"; };
+		829E595F2A1CB59A000FFCCE /* Release 2 - Food Details.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Release 2 - Food Details.xlsx"; sourceTree = "<group>"; };
 		C28A9D232A17AFD0004AA244 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		C28A9D252A17B00F004AA244 /* AppPantry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPantry.swift; sourceTree = "<group>"; };
 		C28B2CB92A1C28F600AC4A46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 		829E595C2A1CB57C000FFCCE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				82F04D632A22CF0F00779EA8 /* Release 2 - Food Details.xlsx */,
+				829E595F2A1CB59A000FFCCE /* Release 2 - Food Details.xlsx */,
 				829E595D2A1CB58C000FFCCE /* databaseSetup.swift */,
 			);
 			path = Resources;
@@ -259,7 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82F04D642A22CF0F00779EA8 /* Release 2 - Food Details.xlsx in Resources */,
+				829E59602A1CB59A000FFCCE /* Release 2 - Food Details.xlsx in Resources */,
 				65D5BA042A0A2C0300307B35 /* LaunchScreen.storyboard in Resources */,
 				65D5BA012A0A2C0300307B35 /* Assets.xcassets in Resources */,
 				65D5B9FF2A0A2C0100307B35 /* Main.storyboard in Resources */,
@@ -457,6 +457,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -484,6 +485,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
