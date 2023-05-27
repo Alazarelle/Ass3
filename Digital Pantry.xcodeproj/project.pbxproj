@@ -67,8 +67,8 @@
 		78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		78BCF40D2A136D8F00FA93C9 /* RecipeSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSearchViewController.swift; sourceTree = "<group>"; };
 		78DE3A702A136A320024BA10 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
-		829E595D2A1CB58C000FFCCE /* databaseSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = databaseSetup.swift; path = ../../../Resources/databaseSetup.swift; sourceTree = "<group>"; };
-		829E595F2A1CB59A000FFCCE /* Release 2 - Food Details.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Release 2 - Food Details.xlsx"; path = "../../../../Desktop/Release 2 - Food Details.xlsx"; sourceTree = "<group>"; };
+		829E595D2A1CB58C000FFCCE /* databaseSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = databaseSetup.swift; sourceTree = "<group>"; };
+		829E595F2A1CB59A000FFCCE /* Release 2 - Food Details.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Release 2 - Food Details.xlsx"; sourceTree = "<group>"; };
 		C28A9D232A17AFD0004AA244 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		C28A9D252A17B00F004AA244 /* AppPantry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPantry.swift; sourceTree = "<group>"; };
 		C28B2CB92A1C28F600AC4A46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
