@@ -9,14 +9,14 @@ import Foundation
 
 struct RecipeLog {
     //properties/members of RecipeLog
-    var recipeLogID: Int
+    var recipeLogID: Int64
     //var appUserID: Int
-    var recipeID: Int
+    var recipeID: Int64
     var createdAtDate: Date
     
 
     //initialised where we have not obtained a UniqueIdentifier (recipeLogID) as yet
-    init?(recipeID: Int, createdAtDate: Date) {
+    init?(recipeID: Int64, createdAtDate: Date) {
         self.recipeLogID = -1
         //self.appUserID = appUserID
         self.recipeID = recipeID
@@ -24,18 +24,18 @@ struct RecipeLog {
     }
     
     //use case: calling data back from DB/table
-    init?(recipeLogID: Int, recipeID: Int, createdAtDate: Date) {
+    init?(recipeLogID: Int64, recipeID: Int64, createdAtDate: Date) {
         self.recipeLogID = recipeLogID
         //self.appUserID = appUserID
         self.recipeID = recipeID
         self.createdAtDate = createdAtDate
     }
     
-    mutating func setRecipeLogID(recipeLogID: Int) { //once the DB has a recipeLogID, use this to set it
+    mutating func setRecipeLogID(recipeLogID: Int64) { //once the DB has a recipeLogID, use this to set it
         self.recipeLogID = recipeLogID
     }
     
-    func getRecipeLogID() -> Int { //retrieve recipeLogID
+    func getRecipeLogID() -> Int64 { //retrieve recipeLogID
         return recipeLogID
     }
     
@@ -43,11 +43,11 @@ struct RecipeLog {
     //    return appUserID
     //}
     
-    func getRecipeId() -> Int { //retrieve recipeID
+    func getRecipeId() -> Int64 { //retrieve recipeID
         return recipeID
     }
     
-    mutating func setRecipeID(recipeID: Int) { //add a recipeID to item
+    mutating func setRecipeID(recipeID: Int64) { //add a recipeID to item
         self.recipeID = recipeID
     }
     

@@ -62,15 +62,35 @@ func createTables() {
             t.column(Expression<String>("desc"))
         })
         
+        
+        //ingredients
+        let ingredients = Table("ingredients")
+        try db.run(ingredients.create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("foodCatId"))
+            t.column(Expression<String>("name"))
+            t.column(Expression<String>("desc"))
+//            t.column(Expression<Int64>("categoryId"),references: foodCat, id)
+            //t.column(Expression<String?>("allergies"))//,references: allergyCategory, id) //will link to another table as ForeignKey
+        })
+        
+        //inventory
+        try db.run(Table("inventory").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<String>("name"))
+            t.column(Expression<String>("desc"))
+        })
+        
+
         //recipes
         let recipes = Table("recipes")
         try db.run(recipes.create { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
-            t.column(Expression<String>("ingredients"))
-            t.column(Expression<String?>("diets"))
-            t.column(Expression<String>("cookingTime"))
+            //t.column(Expression<String>("ingredients"))//,references: ingredients, id) //will link to another table as ForeignKey
+            //t.column(Expression<String?>("diets"))//,references: ingredients, id)) //will link to another table as ForeignKey
+            t.column(Expression<Int64>("cookingTime"))
             t.column(Expression<String>("complexity"))
         })
         
@@ -87,7 +107,41 @@ func createTables() {
             t.column(Expression<String>("type"))
             t.column(Expression<Int64?>("allergyId"),references: Table("allergyCategory"), Expression<Int64>("id"))
             t.column(Expression<Int64?>("dietId"),references: Table("dietCategory"), Expression<Int64>("id"))
+    
+            //
         })
+
+        //ingredient_allergy
+        try db.run(Table("ingredient_allergy").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("ingredId"))
+            t.column(Expression<Int64>("allergyId"))
+//
+        })
+        
+        //recipe_ingredient
+        try db.run(Table("recipe_ingredient").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("recipeId"))
+            t.column(Expression<Int64>("ingredId"))
+//
+        })
+        
+        //recipe_diet
+        try db.run(Table("recipe_diet").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("recipeId"))
+            t.column(Expression<Int64>("dietId"))
+//
+        })
+        //section (Pantry, Fridge or Freezer, if we decide to use)
+        try db.run(Table("section").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<String>("desc"))
+            t.column(Expression<Int64>("inventoryId")) //AppPantry
+//
+        })
+        
 
     } catch {
         print (error)

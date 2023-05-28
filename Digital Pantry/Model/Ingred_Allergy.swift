@@ -9,46 +9,46 @@ import Foundation
 
 struct Ingred_Allergy {
     //properties/members of DietCategory
-    var ingred_AllergyID: Int
-    var ingredID: Int
-    var allergyID: Int
+    var ingred_AllergyID: Int64
+    var ingredID: Int64
+    var allergyID: Int64
     
     //initialised where we have not obtained a UniqueIdentifier (ingred_AllergyID) as yet
-    init?(ingredID: Int, allergyID: Int) {
+    init?(ingredID: Int64, allergyID: Int64) {
         self.ingred_AllergyID = -1
         self.ingredID = ingredID
         self.allergyID = allergyID
     }
     
     //use case: calling data back from DB/table
-    init?(ingred_AllergyID: Int, ingredID: Int, allergyID: Int) {
+    init?(ingred_AllergyID: Int64, ingredID: Int64, allergyID: Int64) {
         self.ingred_AllergyID = ingred_AllergyID
         self.ingredID = ingredID
         self.allergyID = allergyID
         
     }
     
-    mutating func setIngred_AllergyID(ingred_AllergyID: Int) { //once the DB has a ingred_AllergyID, use this to set it
+    mutating func setIngred_AllergyID(ingred_AllergyID: Int64) { //once the DB has a ingred_AllergyID, use this to set it
         self.ingred_AllergyID = ingred_AllergyID
     }
     
-    func getIngred_AllergyID() -> Int { //retrieve ingred_AllergyID
+    func getIngred_AllergyID() -> Int64 { //retrieve ingred_AllergyID
         return ingred_AllergyID
     }
         
-    func getIngredID() -> Int { //retrieve ingredID
+    func getIngredID() -> Int64 { //retrieve ingredID
         return ingredID
     }
     
-    mutating func setIngredID(ingredID: Int) { //add a ingredID to item
+    mutating func setIngredID(ingredID: Int64) { //add a ingredID to item
         self.ingredID = ingredID
     }
 
-    func getAllergyID() -> Int { //retrieve allergyID
+    func getAllergyID() -> Int64 { //retrieve allergyID
         return allergyID
     }
     
-    mutating func setAllergyID(allergyID: Int) { //add a allergyID to item
+    mutating func setAllergyID(allergyID: Int64) { //add a allergyID to item
         self.allergyID = allergyID
     }
 }
