@@ -119,22 +119,24 @@ func insertNewInventory(newPantryItem : AppPantryItem) {
      }
 }
 
-func insertNewRecipes(newRecipe : Recipe) {
+func insertNewRecipe(newRecipe : Recipe) {
  do {
      let db = connectDatabase()
      //handle recipe  data
-     let recipe = Table("recipe")
+     let recipe = Table("recipes")
 
 //     let id = Expression<Int64>("id")
      let name = Expression<String>("name")
-     let desc = Expression<String>("desc")
-     let cookingTime = Expression<Int64>("cookingTime")
+     let instructions = Expression<String>("instructions")
+     let cookingTime = Expression<String>("cookingTime")
+     let complexity = Expression<Int64>("complexity")
 
 
      try db.run(recipe.insert(
      //id <- newRecipe.recipeID
      name <- newRecipe.recipeName,
-     desc <- newRecipe.recipeDescription,
+     instructions <- newRecipe.instructions,
+     complexity <- newRecipe.complexity,
      cookingTime <- newRecipe.cookingTime ))
      } catch {
          print (error)

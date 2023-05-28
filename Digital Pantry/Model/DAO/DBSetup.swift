@@ -18,10 +18,24 @@ func createTables() {
     //wrap
     do {
         let db = connectDatabase()
+        
+        try db.execute("DROP TABLE if exists recipes")
         try db.execute("DROP TABLE if exists ingredients")
         try db.execute("DROP TABLE if exists allergyCategory")
         try db.execute("DROP TABLE if exists dietCategory")
         try db.execute("DROP TABLE if exists inventory")
+
+        //recipes
+        let recipes = Table("recipes")
+        try db.run(recipes.create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<String>("name"))
+            t.column(Expression<String>("instructions"))
+            //t.column(Expression<String>("ingredients"))//,references: ingredients, id) //will link to another table as ForeignKey
+            //t.column(Expression<String?>("diets"))//,references: ingredients, id)) //will link to another table as ForeignKey
+            t.column(Expression<Int64>("cookingTime"))
+            t.column(Expression<String>("complexity"))
+        })
         
         //ingredients
         try db.run(Table("ingredients").create { t in
@@ -61,18 +75,6 @@ func createTables() {
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
-        })
-
-        //recipes
-        let recipes = Table("recipes")
-        try db.run(recipes.create { t in
-            t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<String>("name"))
-            t.column(Expression<String>("desc"))
-            //t.column(Expression<String>("ingredients"))//,references: ingredients, id) //will link to another table as ForeignKey
-            //t.column(Expression<String?>("diets"))//,references: ingredients, id)) //will link to another table as ForeignKey
-            t.column(Expression<Int64>("cookingTime"))
-            t.column(Expression<String>("complexity"))
         })
         
         //recipeLog

@@ -257,7 +257,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unc-JK-K5J">
-                                <rect key="frame" x="16" y="208" width="358" height="575"/>
+                                <rect key="frame" x="16" y="208" width="358" height="542"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="qlA-sR-fJe">
                                         <rect key="frame" x="1" y="1" width="358" height="542"/>
@@ -327,6 +327,15 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="GeR-oe-R85"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="fyz-Cp-iTq"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wnN-1m-TM6">
+                                <rect key="frame" x="15" y="758" width="358" height="34.333333333333485"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Save Recipe"/>
+                                <connections>
+                                    <action selector="saveRecipeButtonPressed:" destination="5rH-n1-hOx" eventType="touchUpInside" id="JIv-Vb-fBH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rdg-04-K0y"/>
                         <color key="backgroundColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
