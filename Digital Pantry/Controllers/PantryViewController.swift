@@ -9,9 +9,15 @@ import UIKit
 
 class PantryViewController: UIViewController { //Freezer, Fridge and Pantry could be united in one InventoryControler
 
+    @IBOutlet weak var testTextField: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        let inventory = readInventoryTable()
+        
+        testTextField.text = inventory.description
     }
     
 
