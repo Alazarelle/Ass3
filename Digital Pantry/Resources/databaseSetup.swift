@@ -24,7 +24,6 @@ func createTables() {
             t.column(Expression<String>("desc"))
 //            t.column(Expression<Int64>("categoryId"),references: foodCat, id)
             t.column(Expression<Int64?>("allergies"),references: Table("allergyCategory"), Expression<Int64>("id"))
-            t.column(Expression<Bool>("shoppingList"))
         })
         
         //inventory
@@ -33,6 +32,7 @@ func createTables() {
             t.column(Expression<Double>("quantity"))
             t.column(Expression<Date>("expiryDate"))
             t.column(Expression<Int64>("ingredientId"),references: Table("ingredients"), Expression<Int64>("id"))
+            t.column(Expression<Bool>("shoppingList"))
         })
         
         //allergy
@@ -232,7 +232,7 @@ func readAllergyTable(){
     }
 }
 
-func newInventoryItem(name: String, description: String, quantity: Double, expiryDate: Date){
+func newInventoryItem(name: String, description: String, quantity: Double, expiryDate: Date, shoppingList: Bool){
     do{
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let db = try! Connection("\(path)/db.sqlite3")
@@ -245,6 +245,7 @@ func newInventoryItem(name: String, description: String, quantity: Double, expir
         let dbquantity = Expression<Double>("quantity")
         let dbexpiryDate = Expression<Date>("expiryDate")
         let dbingredientId = Expression<Int64>("ingredientId")
+        let dbshoppingList = Expression<Bool>("shoppingList")
         var ingredientId:Int64 = 0
         
         try db.run(ingredient.insert(
@@ -258,7 +259,8 @@ func newInventoryItem(name: String, description: String, quantity: Double, expir
         try db.run(inventory.insert(
         dbquantity <- quantity,
         dbexpiryDate <- expiryDate,
-        dbingredientId <- ingredientId
+        dbingredientId <- ingredientId,
+        dbshoppingList <- shoppingList
         ))
         
         print("Item added")
