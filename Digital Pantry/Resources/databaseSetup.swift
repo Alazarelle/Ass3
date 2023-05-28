@@ -254,7 +254,8 @@ func importFoodDataCSV(){
     do {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         print("./Release 2 – Food Details.xlsx")
-        print("filemanager: \(FileManager.default)")
+        print("filemanager: \(FileManager.d
+efault)")
 //        var lol = Bundle.main.bundleURL
 //        print("bundleurl: \()")
 //        print("filemanager: \(bundleURL.appendingPathComponent("Release 2 – Food Details.xlsx"))")
