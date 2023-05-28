@@ -9,11 +9,15 @@ import Foundation
 import SQLite
 import CoreXLSX
 
+func connectDatabase()->Connection{
+    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+    return try! Connection("\(path)/db.sqlite3")
+}
+
 func createTables() {
     //wrap
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         try db.execute("DROP TABLE ingredients")
         try db.execute("DROP TABLE inventory")
         
@@ -57,9 +61,7 @@ func createTables() {
             t.column(Expression<String>("desc"))
         })
         
-        
-        
-        
+
         //recipes
         let recipes = Table("recipes")
         try db.run(recipes.create { t in
@@ -94,8 +96,7 @@ func createTables() {
 func insertTableData() {
     //wrap
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         
         //Allergy data
         let allergy = Table("allergyCategory")
@@ -209,8 +210,7 @@ func insertTableData() {
 
 func readAllergyTable(){
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
     
         let allergy = Table("allergyCategory")
         let diet = Table("dietCategory")
@@ -234,8 +234,7 @@ func readAllergyTable(){
 
 func newInventoryItem(name: String, description: String, quantity: Double, expiryDate: Date, shoppingList: Bool){
     do{
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         
         let inventory = Table("inventory")
         let ingredient = Table("ingredients")
@@ -273,8 +272,7 @@ func newInventoryItem(name: String, description: String, quantity: Double, expir
 func readInventoryTable() -> [AppPantryItem]{
     var items = [AppPantryItem]()
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
     
         let inventory = Table("inventory")
         let ingredient = Table("ingredients")
@@ -314,8 +312,8 @@ func readInventoryTable() -> [AppPantryItem]{
 
 
 func importFoodDataCSV(){
-
     do {
+        let db = connectDatabase()
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         print("./Release 2 – Food Details.xlsx")
         print("filemanager: \(FileManager.default)")
