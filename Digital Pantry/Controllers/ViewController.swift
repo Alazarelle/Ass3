@@ -9,15 +9,21 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        createTables()
-        insertTableData()
-        readAllergyTable()
+
+        self.navigationItem.setHidesBackButton(true, animated: true)
 //        importFoodDataCSV()
     }
     
-
+    @IBAction func tableUpdate(_ sender: Any) {
+        createTables()
+        insertTableData()
+        readAllergyTable()
+    }
+    
 }
 
