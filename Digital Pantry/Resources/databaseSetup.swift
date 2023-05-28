@@ -42,12 +42,11 @@ func createTables() {
         let ingredients = Table("ingredients")
         try db.run(ingredients.create { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("foodCatId"))
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
-            t.column(Expression<Int64>("quantity"))
-            t.column(Expression<String>("expiryDate"))
 //            t.column(Expression<Int64>("categoryId"),references: foodCat, id)
-            t.column(Expression<String?>("allergies"))//,references: allergyCategory, id)
+            //t.column(Expression<String?>("allergies"))//,references: allergyCategory, id) //will link to another table as ForeignKey
         })
         
         //inventory
@@ -64,25 +63,59 @@ func createTables() {
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
-            t.column(Expression<String>("ingredients"))//,references: ingredients, id)
-            t.column(Expression<String?>("diets"))//,references: ingredients, id))
-            t.column(Expression<String>("cookingTime"))
+            //t.column(Expression<String>("ingredients"))//,references: ingredients, id) //will link to another table as ForeignKey
+            //t.column(Expression<String?>("diets"))//,references: ingredients, id)) //will link to another table as ForeignKey
+            t.column(Expression<Int64>("cookingTime"))
             t.column(Expression<String>("complexity"))
         })
         
         //recipeLog
         try db.run(Table("recipeLog").create { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("recipeId"))
 //            t.column(Expression<Int64>("recipeID"),references: recipes, id)
             t.column(Expression<Date>("createdDate"))
         })
         
         //preferences
-        try db.run(Table("prefrences").create { t in
+        try db.run(Table("preferences").create { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("type"))
-//            t.column(Expression<Int64>("typeId"),references: allergy, id)
+            t.column(Expression<Int64>("typeId"))
+//
         })
+
+        //ingredient_allergy
+        try db.run(Table("ingredient_allergy").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("ingredId"))
+            t.column(Expression<Int64>("allergyId"))
+//
+        })
+        
+        //recipe_ingredient
+        try db.run(Table("recipe_ingredient").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("recipeId"))
+            t.column(Expression<Int64>("ingredId"))
+//
+        })
+        
+        //recipe_diet
+        try db.run(Table("recipe_diet").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("recipeId"))
+            t.column(Expression<Int64>("dietId"))
+//
+        })
+        //section (Pantry, Fridge or Freezer, if we decide to use)
+        try db.run(Table("section").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<String>("desc"))
+            t.column(Expression<Int64>("inventoryId")) //AppPantry
+//
+        })
+        
 
     } catch {
         print (error)
@@ -230,6 +263,11 @@ func readAllergyTable(){
     }
 }
 
+func dbActionTest() {
+    
+    //let newAllerge : AllergyCategory
+    //insertNewAllergy(newAllergy: AllergyCategory)
+}
 
 
 
@@ -254,8 +292,7 @@ func importFoodDataCSV(){
     do {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         print("./Release 2 – Food Details.xlsx")
-        print("filemanager: \(FileManager.d
-efault)")
+        print("filemanager: \(FileManager.default)")
 //        var lol = Bundle.main.bundleURL
 //        print("bundleurl: \()")
 //        print("filemanager: \(bundleURL.appendingPathComponent("Release 2 – Food Details.xlsx"))")

@@ -10,7 +10,7 @@ import Foundation
 struct Ingredient {
     //properties/members of Ingredient
     var ingredientID: Int
-    var foodCategoryID: Int
+    var foodCategoryID: Int64
     var ingredName: String
     var ingredDescripion: String
     

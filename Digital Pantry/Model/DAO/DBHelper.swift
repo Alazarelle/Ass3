@@ -6,49 +6,77 @@
 //
 
 import Foundation
+import SQLite
 import SQLite3
+import CoreXLSX
 
-class DBHelper {
-    var db : OpaquePointer?
-    var path : String = "pantryDB.sqlite"
-    init() {
-        self.db = createDB()
-        self.createTable(queryText: "CREATE TABLE IF NOT EXISTS AppUser(appUserID INTEGER PRIMARY KEY AUTOINCREMENT, loginEmail TEXT, preferredName TEXT, hasDietNeed INTEGER, isAdmin INTEGER, deactivate INTEGER);")
-    }
+func insertTableData2() {
+    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+    let db = try! Connection("\(path)/db.sqlite3")
+}
+
+
+//class DBHelper {
+//    //var db : OpaquePointer?
+    //var path : String = "pantryDB.sqlite"
+//    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+//    let db = try! Connection("\(path)/db.sqlite3")
     
-    func createDB() -> OpaquePointer? {
-        let filePath = try! FileManager.default.url(for: .documentDirectory, in:   .userDomainMask,  appropriateFor: nil, create: false).appendingPathExtension(path)
-        var db : OpaquePointer? = nil
+//    init() {
+//        self.db = createDB()
+//        self.createTable(queryText: "CREATE TABLE IF NOT EXISTS AppUser(appUserID INTEGER PRIMARY KEY AUTOINCREMENT, loginEmail TEXT, preferredName TEXT, hasDietNeed INTEGER, isAdmin INTEGER, deactivate INTEGER);")
+//    }
+    
+//    func createDB() -> OpaquePointer? {
+//        let filePath = try! FileManager.default.url(for: .documentDirectory, in:   .userDomainMask,  appropriateFor: nil, create: false).appendingPathExtension(path)
+//        var db : OpaquePointer? = nil
         
-        if sqlite3_open(filePath.path,  &db) != SQLITE_OK {
-            print("There is an error in creating the DB")
-            return nil
-        } else {
-            print("Database has been created with path \(path)")
-            return db
-        }
-    }
+//        if sqlite3_open(filePath.path,  &db) != SQLITE_OK {
+//            print("There is an error in creating the DB")
+//            return nil
+//        } else {
+//            print("Database has been created with path \(path)")
+//            return db
+//        }
+//    }
     
-    func createTable(queryText : String) {
+//    func createTable(queryText : String) {
         //let query =
-        var createTable : OpaquePointer? = nil
+//        var createTable : OpaquePointer? = nil
         
-        if sqlite3_prepare_v2(self.db, queryText, -1, &createTable, nil) == SQLITE_OK {
-            if sqlite3_step(createTable) == SQLITE_DONE {
-                print("Table creation succeeded")
-                      } else {
-                    print("Table creation failed")
-                }
-        } else {
-            print("Preparation failed")
-        }
-    }
+//        if sqlite3_prepare_v2(self.db, queryText, -1, &createTable, nil) == SQLITE_OK {
+//            if sqlite3_step(createTable) == SQLITE_DONE {
+//                print("Table creation succeeded")
+//                      } else {
+ //                   print("Table creation failed")
+//                }
+//        } else {
+//            print("Preparation failed")
+//        }
+//    }
     
-    func insertAppUser(loginEmail: String, preferredName: String, hasDietNeed: Bool, isAdmin: Bool, deactivate: Bool) {
-        let query = "INSERT INTO AppUser (appUserID, loginEmail, preferredName, hasDietNeed, isAdmin, deactivate) VALUES ( ?, ?, ?, ?, ? ?);"
-        var statement : OpaquePointer? = nil
-        
-        
+    func insertAppUserDONTUSE(loginEmail: String, preferredName: String, hasDietNeed: Bool, isAdmin: Bool, deactivate: Bool) {
+        do {
+            
+            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+            let db = try! Connection("\(path)/db.sqlite3")
+            
+            //Allergy data
+            let allergy = Table("allergyCategory")
+            let name = Expression<String>("name")
+            let desc = Expression<String>("desc")
+            
+            try db.run(allergy.insert(
+            name <- "Peanut Allergy",
+            desc <- "Suitable for people suffering from a peanut allergy. Recipes and ingredients containing peanuts or traces of peanuts will be omitted from your recipe searches"))
+
+        } catch {
+            print (error)
+        }
+         //   let query = "INSERT INTO AppUser (appUserID, loginEmail, preferredName, hasDietNeed, isAdmin, deactivate) VALUES ( ?, ?, ?, ?, ? ?);"
+         //   var statement : OpaquePointer? = nil
+            
+        }
             
         if sqlite3_prepare(db, query, -1, &statement, nil ) == SQLITE_OK {
             sqlite3_bind_int(statement, 1, 1)

@@ -17,16 +17,16 @@ var dateFormatter = DateFormatter()
 
 struct AppPantryItem {
     //properties/members of appPantryID
-    var appPantryID: Int
+    var appPantryID: Int64
     //var appUserID: Int
-    var ingredientID: Int
-    var quantity: Double
+    var ingredientID: Int64
+    var quantity: Int64
     var expiryDate: Date
     //var sectionID: Int
 
 
     //initialised where we have not obtained a UniqueIdentifier (appPantryID) as yet
-    init?(appUserID: Int, ingredientID: Int, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
+    init?(appUserID: Int, ingredientID: Int64, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
         self.appPantryID = -1
         if quantity.isZero { //if mandatory fields/properties are empty
             print("Pantry quantity not set")
@@ -40,7 +40,7 @@ struct AppPantryItem {
     }
     
     //use case: calling data back from DB/table
-    init?(appPantryID: Int, appUserID: Int, ingredientID: Int, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
+    init?(appPantryID: Int64, appUserID: Int64, ingredientID: Int, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
         self.appPantryID = appPantryID
         //self.appUserID = appUserID
         self.ingredientID = ingredientID
@@ -49,11 +49,11 @@ struct AppPantryItem {
         //self.sectionID = sectionID //if we decide to have Pantry, Fridge, Freezer
     }
     
-    mutating func setAppPantryID(appPantryID: Int) { //once the DB has a UserID, use this to set it
+    mutating func setAppPantryID(appPantryID: Int64) { //once the DB has a UserID, use this to set it
         self.appPantryID = appPantryID
     }
     
-    func getAppPantryID() -> Int { //retrieve PantryID
+    func getAppPantryID() -> Int64 { //retrieve PantryID
         return appPantryID
     }
     
@@ -61,7 +61,7 @@ struct AppPantryItem {
     //    return appUserID
     //}
     
-    func getIngredientId() -> Int { //retrieve IngredientID
+    func getIngredientId() -> Int64 { //retrieve IngredientID
         return ingredientID
     }
     
