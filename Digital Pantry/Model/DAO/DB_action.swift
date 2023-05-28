@@ -104,13 +104,19 @@ func insertNewInventory(newPantryItem : AppPantryItem) {
      let ingredientID = Expression<Int64>("ingredientID")
      let quantity = Expression<Int64>("quantity")
      let expiryDate = Expression<Date>("expiryDate")
-
+     let name = Expression<String>("name")
+     let desc = Expression<String>("desc")
+     //var ingredientName: String
+     //var ingredientDesc: String
 
      try db.run(Inventory.insert(
      //id <- newPantryItem.appPantryID
      ingredientID <- newPantryItem.ingredientID,
      quantity <- newPantryItem.quantity,
-     expiryDate <- newPantryItem.expiryDate ))
+     expiryDate <- newPantryItem.expiryDate,
+     name <- newPantryItem.ingredientName,
+     desc <- newPantryItem.ingredientDesc
+                ))
      } catch {
          print (error)
      }
@@ -118,8 +124,7 @@ func insertNewInventory(newPantryItem : AppPantryItem) {
 
 func insertNewRecipes(newRecipe : Recipe) {
  do {
-     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-     let db = try! Connection("\(path)/db.sqlite3")
+     let db = connectDatabase()
      //handle recipe  data
      let recipe = Table("recipe")
 
@@ -254,12 +259,10 @@ func insertNewSection(newSection : SectionOfPantry) {
         let desc = Expression<String>("desc")
         let ingredId = Expression<Int64>("ingredId")
         
-        
         try db.run(sections.insert(
             //id <- newSection.sectionID
             desc <- newSection.section,
             ingredId <- newSection.appPantryID ))
-        
     } catch {
         print (error)
     }

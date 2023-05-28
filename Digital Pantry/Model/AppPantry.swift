@@ -22,13 +22,13 @@ struct AppPantryItem {
     var ingredientID: Int64
     var ingredientName: String
     var ingredientDesc: String
-    var quantity: Double
+    var quantity: Int64
     var expiryDate: Date
     //var sectionID: Int
 
 
     //initialised where we have not obtained a UniqueIdentifier (appPantryID) as yet
-    init?(appUserID: Int, ingredientID: Int64, ingredientName: String, ingredientDesc: String, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
+    init?(appUserID: Int, ingredientID: Int64, ingredientName: String, ingredientDesc: String, quantity: Int64, expiryDate: Date) { //, sectionID: Int) {
         self.appPantryID = -1
         //if quantity.isZero { //if mandatory fields/properties are empty
             //print("Pantry quantity not set")
@@ -44,7 +44,7 @@ struct AppPantryItem {
     }
     
     //use case: calling data back from DB/table
-    init?(appPantryID: Int64, appUserID: Int, ingredientID: Int64, ingredientName: String, ingredientDesc: String, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
+    init?(appPantryID: Int64, appUserID: Int, ingredientID: Int64, ingredientName: String, ingredientDesc: String, quantity: Int64, expiryDate: Date) { //, sectionID: Int) {
         self.appPantryID = appPantryID
         //self.appUserID = appUserID
         self.ingredientID = ingredientID
@@ -71,25 +71,25 @@ struct AppPantryItem {
         return ingredientID
     }
     
-    mutating func setQuantity(quantity: Double) { //add a quantity to item
+    mutating func setQuantity(quantity: Int64) { //add a quantity to item
         self.quantity = quantity
     }
     
-    func getQuantity() -> Double { //retrieve quantity of pantry item
+    func getQuantity() -> Int64 { //retrieve quantity of pantry item
         return quantity
     }
     
-    mutating func deductFromQuantity(updateAmount: Double) -> Double { //update quantity (subtract)
+    mutating func deductFromQuantity(updateAmount: Int64) -> Int64 { //update quantity (subtract)
         if self.quantity >= updateAmount { //if there is enough quantity
             self.quantity -= updateAmount
             return updateAmount //how much we reduced it by
         }
         else { //if insufficient quantity, let them know it wasn't reduced
-            return 0.00
+            return 0
         }
     }
     
-    mutating func addToQuantity(updateAmount: Double) -> Double { //update quantity (add)
+    mutating func addToQuantity(updateAmount: Int64) -> Int64 { //update quantity (add)
         return self.quantity
     }
     

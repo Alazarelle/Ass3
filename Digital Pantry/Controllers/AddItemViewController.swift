@@ -20,7 +20,7 @@ class AddItemViewController: UIViewController {
     }
     
     @IBAction func submitButtonClick(_ sender: Any) {
-        newInventoryItem(name: ingredientNameTextField.text!, description: ingredientDescTextField.text!, quantity: Double(quantityTextField.text!)!, expiryDate: expiryDatePicker.date, shoppingList: true)
+        newInventoryItem(name: ingredientNameTextField.text!, description: ingredientDescTextField.text!, quantity: Int64(quantityTextField.text!)!, expiryDate: expiryDatePicker.date, shoppingList: true)
     }
     
 }

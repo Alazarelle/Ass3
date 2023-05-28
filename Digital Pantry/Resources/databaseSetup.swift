@@ -285,7 +285,7 @@ func readAllergyTable(){
     }
 }
 
-func newInventoryItem(name: String, description: String, quantity: Double, expiryDate: Date, shoppingList: Bool){
+func newInventoryItem(name: String, description: String, quantity: Int64, expiryDate: Date, shoppingList: Bool){
     do{
         let db = connectDatabase()
         
@@ -294,7 +294,7 @@ func newInventoryItem(name: String, description: String, quantity: Double, expir
         let dbid = Expression<Int64>("id")
         let dbname = Expression<String>("name")
         let dbdesc = Expression<String>("desc")
-        let dbquantity = Expression<Double>("quantity")
+        let dbquantity = Expression<Int64>("quantity")
         let dbexpiryDate = Expression<Date>("expiryDate")
         let dbingredientId = Expression<Int64>("ingredientId")
         let dbshoppingList = Expression<Bool>("shoppingList")
@@ -330,7 +330,7 @@ func readInventoryTable() -> [AppPantryItem]{
         let inventory = Table("inventory")
         let ingredient = Table("ingredients")
         let id = Expression<Int64>("id")
-        let quantity = Expression<Double>("quantity")
+        let quantity = Expression<Int64>("quantity")
         let expiryDate = Expression<Date>("expiryDate")
         let ingredientId = Expression<Int64>("ingredientId")
         let name = Expression<String>("name")

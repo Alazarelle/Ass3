@@ -9,13 +9,13 @@ import Foundation
 
 struct Ingredient {
     //properties/members of Ingredient
-    var ingredientID: Int
+    var ingredientID: Int64
     var foodCategoryID: Int64
     var ingredName: String
     var ingredDescripion: String
     
     //initialised where we have not obtained a UniqueIdentifier (ingredientID) as yet
-    init?(ingredName: String, foodCategoryID: Int, ingredDescripion: String) { 
+    init?(ingredName: String, foodCategoryID: Int64, ingredDescripion: String) { 
         self.ingredientID = -1
         self.foodCategoryID = foodCategoryID
         self.ingredName = ingredName
@@ -23,26 +23,26 @@ struct Ingredient {
     }
     
     //use case: calling data back from DB/table
-    init?(ingredientID: Int, foodCategoryID: Int, ingredName: String, ingredDescripion: String) { //, sectionID: Int) {
+    init?(ingredientID: Int64, foodCategoryID: Int64, ingredName: String, ingredDescripion: String) { //, sectionID: Int) {
         self.ingredientID = ingredientID
         self.foodCategoryID = foodCategoryID
         self.ingredName = ingredName
         self.ingredDescripion = ingredDescripion
     }
     
-    mutating func setIngredientID(ingredientID: Int) { //once the DB has a ingredientID, use this to set it
+    mutating func setIngredientID(ingredientID: Int64) { //once the DB has a ingredientID, use this to set it
         self.ingredientID = ingredientID
     }
     
-    func getIngredientID() -> Int { //retrieve ingredientID
+    func getIngredientID() -> Int64 { //retrieve ingredientID
         return ingredientID
     }
     
-    mutating func setFoodCategoryID(foodCategoryID: Int) { //set foodCategoryID
+    mutating func setFoodCategoryID(foodCategoryID: Int64) { //set foodCategoryID
         self.foodCategoryID = foodCategoryID
     }
     
-    func getFoodCategoryID() -> Int { //retrieve foodCategoryID
+    func getFoodCategoryID() -> Int64 { //retrieve foodCategoryID
         return foodCategoryID
     }
     
