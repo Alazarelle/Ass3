@@ -9,11 +9,35 @@ import Foundation
 import SQLite
 import CoreXLSX
 
+func connectDatabase()->Connection{
+    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+    return try! Connection("\(path)/db.sqlite3")
+}
+
 func createTables() {
     //wrap
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
+        try db.execute("DROP TABLE ingredients")
+        try db.execute("DROP TABLE inventory")
+        
+        //ingredients
+        try db.run(Table("ingredients").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<String>("name"))
+            t.column(Expression<String>("desc"))
+//            t.column(Expression<Int64>("categoryId"),references: foodCat, id)
+            t.column(Expression<Int64?>("allergies"),references: Table("allergyCategory"), Expression<Int64>("id"))
+        })
+        
+        //inventory
+        try db.run(Table("inventory").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Double>("quantity"))
+            t.column(Expression<Date>("expiryDate"))
+            t.column(Expression<Int64>("ingredientId"),references: Table("ingredients"), Expression<Int64>("id"))
+            t.column(Expression<Bool>("shoppingList"))
+        })
         
         //allergy
         try db.run(Table("allergyCategory").create { t in
@@ -52,11 +76,11 @@ func createTables() {
         //inventory
         try db.run(Table("inventory").create { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<Int64>("quantity"))
-            t.column(Expression<Date>("expiryDate"))
-//            t.column(Expression<Int64>("ingredientId"),references: ingredients, id)
+            t.column(Expression<String>("name"))
+            t.column(Expression<String>("desc"))
         })
         
+
         //recipes
         let recipes = Table("recipes")
         try db.run(recipes.create { t in
@@ -125,8 +149,7 @@ func createTables() {
 func insertTableData() {
     //wrap
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         
         //Allergy data
         let allergy = Table("allergyCategory")
@@ -240,8 +263,7 @@ func insertTableData() {
 
 func readAllergyTable(){
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
     
         let allergy = Table("allergyCategory")
         let diet = Table("dietCategory")
@@ -263,12 +285,67 @@ func readAllergyTable(){
     }
 }
 
-func dbActionTest() {
+func newInventoryItem(name: String, description: String, quantity: Double, expiryDate: Date, shoppingList: Bool){
+    do{
+        let db = connectDatabase()
+        
+        let inventory = Table("inventory")
+        let ingredient = Table("ingredients")
+        let dbid = Expression<Int64>("id")
+        let dbname = Expression<String>("name")
+        let dbdesc = Expression<String>("desc")
+        let dbquantity = Expression<Double>("quantity")
+        let dbexpiryDate = Expression<Date>("expiryDate")
+        let dbingredientId = Expression<Int64>("ingredientId")
+        let dbshoppingList = Expression<Bool>("shoppingList")
+        var ingredientId:Int64 = 0
+        
+        try db.run(ingredient.insert(
+        dbname <- name,
+        dbdesc <- description))
     
-    //let newAllerge : AllergyCategory
-    //insertNewAllergy(newAllergy: AllergyCategory)
+        for ingredient in try db.prepare(ingredient.order(dbid.desc).limit(1)){
+            ingredientId = ingredient[dbid]
+        }
+        
+        try db.run(inventory.insert(
+        dbquantity <- quantity,
+        dbexpiryDate <- expiryDate,
+        dbingredientId <- ingredientId,
+        dbshoppingList <- shoppingList
+        ))
+        
+        print("Item added")
+        
+    } catch {
+        print(error)
+    }
 }
 
+func readInventoryTable() -> [AppPantryItem]{
+    var items = [AppPantryItem]()
+    do {
+        let db = connectDatabase()
+    
+        let inventory = Table("inventory")
+        let ingredient = Table("ingredients")
+        let id = Expression<Int64>("id")
+        let quantity = Expression<Double>("quantity")
+        let expiryDate = Expression<Date>("expiryDate")
+        let ingredientId = Expression<Int64>("ingredientId")
+        let name = Expression<String>("name")
+        let desc = Expression<String>("desc")
+        
+        let innerJoin = inventory.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[id])
+        
+        for innerJoin in try db.prepare(innerJoin) {
+            items.append(AppPantryItem(appPantryID: innerJoin[inventory[id]],appUserID: 1, ingredientID: innerJoin[ingredient[id]], ingredientName: innerJoin[ingredient[name]], ingredientDesc: innerJoin[ingredient[desc]], quantity: innerJoin[inventory[quantity]], expiryDate: innerJoin[inventory[expiryDate]])!)
+        }
+    } catch {
+        print (error)
+    }
+    return items
+}
 
 
 
@@ -288,8 +365,8 @@ func dbActionTest() {
 
 
 func importFoodDataCSV(){
-
     do {
+        let db = connectDatabase()
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         print("./Release 2 – Food Details.xlsx")
         print("filemanager: \(FileManager.default)")

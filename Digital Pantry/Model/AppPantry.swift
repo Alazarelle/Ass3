@@ -20,30 +20,36 @@ struct AppPantryItem {
     var appPantryID: Int64
     //var appUserID: Int
     var ingredientID: Int64
-    var quantity: Int64
+    var ingredientName: String
+    var ingredientDesc: String
+    var quantity: Double
     var expiryDate: Date
     //var sectionID: Int
 
 
     //initialised where we have not obtained a UniqueIdentifier (appPantryID) as yet
-    init?(appUserID: Int, ingredientID: Int64, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
+    init?(appUserID: Int, ingredientID: Int64, ingredientName: String, ingredientDesc: String, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
         self.appPantryID = -1
-        if quantity.isZero { //if mandatory fields/properties are empty
-            print("Pantry quantity not set")
-            return nil
-        }
+        //if quantity.isZero { //if mandatory fields/properties are empty
+            //print("Pantry quantity not set")
+            //return nil
+        //}
         //self.appUserID = appUserID
         self.ingredientID = ingredientID
+        self.ingredientName = ingredientName
+        self.ingredientDesc = ingredientDesc
         self.quantity = quantity
         self.expiryDate = expiryDate
         //self.sectionID = sectionID //if we decide to have Pantry, Fridge, Freezer
     }
     
     //use case: calling data back from DB/table
-    init?(appPantryID: Int64, appUserID: Int64, ingredientID: Int, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
+    init?(appPantryID: Int64, appUserID: Int, ingredientID: Int64, ingredientName: String, ingredientDesc: String, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
         self.appPantryID = appPantryID
         //self.appUserID = appUserID
         self.ingredientID = ingredientID
+        self.ingredientName = ingredientName
+        self.ingredientDesc = ingredientDesc
         self.quantity = quantity
         self.expiryDate = expiryDate
         //self.sectionID = sectionID //if we decide to have Pantry, Fridge, Freezer
