@@ -25,6 +25,14 @@ func createTables() {
         try db.execute("DROP TABLE if exists ingredients")
         try db.execute("DROP TABLE if exists foodCategory")
 
+        //food category
+        let foodCat = Table("foodCategory")
+        try db.run(foodCat.create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<String>("name"))
+            t.column(Expression<String>("desc"))
+        })
+        
         //ingredients
         try db.run(Table("ingredients").create { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
@@ -50,32 +58,45 @@ func createTables() {
             t.column(Expression<String>("desc"))
         })
         
+        //ingredient_allergy
+        try db.run(Table("ingredient_allergy").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("ingredId"))
+            t.column(Expression<Int64>("allergyId"))
+        })
+        
         //diet
         try db.run(Table("dietCategory").create { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
         })
-        
-        //food category
-        let foodCat = Table("foodCategory")
-        try db.run(foodCat.create { t in
-            t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<String>("name"))
-            t.column(Expression<String>("desc"))
-        })
 
+        
         //recipes
         let recipes = Table("recipes")
         try db.run(recipes.create { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
-            //t.column(Expression<String>("ingredients"))//,references: ingredients, id) //will link to another table as ForeignKey
-            //t.column(Expression<String?>("diets"))//,references: ingredients, id)) //will link to another table as ForeignKey
             t.column(Expression<Int64>("cookingTime"))
             t.column(Expression<String>("complexity"))
         })
+        
+        //recipe_ingredient
+        try db.run(Table("recipe_ingredient").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("recipeId"))
+            t.column(Expression<Int64>("ingredId"))
+        })
+        
+        //recipe_diet
+        try db.run(Table("recipe_diet").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("recipeId"))
+            t.column(Expression<Int64>("dietId"))
+        })
+
         
         //recipeLog
         try db.run(Table("recipeLog").create { t in
@@ -91,30 +112,7 @@ func createTables() {
             t.column(Expression<Int64?>("allergyId"),references: Table("allergyCategory"), Expression<Int64>("id"))
             t.column(Expression<Int64?>("dietId"),references: Table("dietCategory"), Expression<Int64>("id"))
         })
-
-        //ingredient_allergy
-        try db.run(Table("ingredient_allergy").create { t in
-            t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<Int64>("ingredId"))
-            t.column(Expression<Int64>("allergyId"))
-//
-        })
         
-        //recipe_ingredient
-        try db.run(Table("recipe_ingredient").create { t in
-            t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<Int64>("recipeId"))
-            t.column(Expression<Int64>("ingredId"))
-//
-        })
-        
-        //recipe_diet
-        try db.run(Table("recipe_diet").create { t in
-            t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<Int64>("recipeId"))
-            t.column(Expression<Int64>("dietId"))
-//
-        })
         //section (Pantry, Fridge or Freezer, if we decide to use)
         try db.run(Table("section").create { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
@@ -270,95 +268,81 @@ func readMajorTables(){
 func importFoodDataCSV(){
     do {
         let db = connectDatabase()
-        let path = Bundle.main.path(forResource: "IngredientsAndCategories", ofType: "xlsx") ?? "none"
-        print(path)
-
-        guard let file = XLSXFile(filepath: path) else {
-            fatalError("XLSX file corrupted or does not exist")
-        }
-        let paths = try file.parseWorksheetPaths()
-        let worksheet = try file.parseWorksheet(at: paths.first!)
-        let sharedStrings = try file.parseSharedStrings()
-        for row in worksheet.data?.rows ?? [] {
-            //Add Category unless existing one
-            var category = ""
-            var ingredient = ""
-            var desc = ""
-            for c in row.cells {
-                let ref = Int(c.value ?? "") ?? 0
-//              Ingredient
-                if (ref < 1617) {
-                    guard let ing = c.stringValue(sharedStrings!) else {return}
-                    ingredient = ing
-//              Category
-                } else if (ref >= 1617 && ref < 1907) {
-                    guard let cat = c.stringValue(sharedStrings!) else {return}
-                    category = cat
-//              Description
-                } else if (ref >= 1907) {
-                    guard let d = c.stringValue(sharedStrings!) else {return}
-                    desc = d
-                }
-                var fk:Int64 = 0
-                if (category != "" && ingredient != "" && desc != "") {
-                    let foodCat = FoodCategory(foodCategName: category, foodCategDescripion: category)!
-                    if (doesCategoryExist(newFoodCat: foodCat) == false){
-                        insertNewFoodCat(newFoodCat: foodCat)
+        let foodCat = Table("foodCategory")
+        let count = try db.scalar(foodCat.count)
+        if (count == 0) {
+            let path = Bundle.main.path(forResource: "IngredientsAndCategories", ofType: "xlsx") ?? "none"
+            print(path)
+            
+            guard let file = XLSXFile(filepath: path) else {
+                fatalError("XLSX file corrupted or does not exist")
+            }
+            let paths = try file.parseWorksheetPaths()
+            let worksheet = try file.parseWorksheet(at: paths.first!)
+            let sharedStrings = try file.parseSharedStrings()
+            for row in worksheet.data?.rows ?? [] {
+                //Add Category unless existing one
+                var category = ""
+                var ingredient = ""
+                var desc = ""
+                for c in row.cells {
+                    let ref = Int(c.value ?? "") ?? 0
+                    //              Ingredient
+                    if (ref < 1617) {
+                        guard let ing = c.stringValue(sharedStrings!) else {return}
+                        ingredient = ing
+                        //              Category
+                    } else if (ref >= 1617 && ref < 1907) {
+                        guard let cat = c.stringValue(sharedStrings!) else {return}
+                        category = cat
+                        //              Description
+                    } else if (ref >= 1907) {
+                        guard let d = c.stringValue(sharedStrings!) else {return}
+                        desc = d
                     }
-                    do {
-                        for cat in try db.prepare(Table("foodCategory").order( Expression<Int64>("id").desc).limit(1)){
-                            fk = cat[ Expression<Int64>("id")]
+                    var fk:Int64 = 0
+                    if (category != "" && ingredient != "" && desc != "") {
+                        let newFoodCat = FoodCategory(foodCategName: category, foodCategDescripion: category)!
+                        if (doesCategoryExist(newFoodCat: newFoodCat) == false){
+                            insertNewFoodCat(newFoodCat: newFoodCat)
+                        }
+                        do {
+                            for cat in try db.prepare(foodCat.order( Expression<Int64>("id").desc).limit(1)){
+                                fk = cat[ Expression<Int64>("id")]
+                            }
+                        }
+                        //check for allergies
+                        insertNewIngredient(newIngredient: Ingredient(ingredName: ingredient, foodCategoryID: fk, ingredDescripion: desc)!)
+                        if (category.contains("peanut") || desc.contains("peanut")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 1)!)
+                        }
+                        if (category.contains(" nut") || desc.contains(" nut")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 2)!)
+                        }
+                        if (category.contains("Crustacea") || category.contains("Molluscs")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 3)!)
+                        }
+                        if (ingredient.contains("fish") || category.contains("fish")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 4)!)
+                        }
+                        if (desc.contains("cows milk") || desc.contains("cows skim milk")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 5)!)
+                        }
+                        if (category.contains("egg") || desc.contains("egg")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 6)!)
+                        }
+                        if (desc.contains("soy")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 7)!)
+                        }
+                        if (desc.contains("wheat")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 8)!)
+                        }
+                        if (desc.contains("sesame")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 9)!)
                         }
                     }
-                    insertNewIngredient(newIngredient: Ingredient(ingredName: ingredient, foodCategoryID: fk, ingredDescripion: desc)!)
-                    
-                    //check for allergies
-//                        name <- "Peanut Allergy",
-//                        desc <- "Suitable for people suffering from a peanut allergy. Recipes and ingredients containing peanuts or traces of peanuts will be omitted from your recipe searches"))
-//
-//                    try db.run(allergy.insert(
-//                        name <- "Tree Nut Allergy",
-//                        desc <- "People suffering from a tree nut allergy are typically allergic to most non-legume nuts (such as Hazelnut, Walnut, Almond, and Macadamia. Recipes and products containing nuts will be omitted from your recipe searches"))
-//
-//                    try db.run(allergy.insert(
-//                        name <- "Shellfish Allergy",
-//                        desc <- "People suffering from a shellfish allergy are typically allergic to molluscs, crustaceans, and cephlopods (such as Crab, Lobster, Oyster, and Octopus). Recipes and products containing shellfish will be omitted from your recipe searches"))
-//
-//                    try db.run(allergy.insert(
-//                        name <- "Fish Allergy",
-//                        desc <- "Suitable for people suffering from a fish allergy. Recipes and products containing fish will be omitted from your recipe searches"))
-//
-//                    try db.run(allergy.insert(
-//                        name <- "Milk Allergy",
-//                        desc <- "Suitable for people suffering from a milk allergy. Recipes and products containing cow milk will be omitted from your recipe searches"))
-//
-//                    try db.run(allergy.insert(
-//                        name <- "Egg Allergy",
-//                        desc <- "Suitable for people suffering from an egg allergy. Recipes and products containing eggs will be omitted from your recipe searches"))
-//
-//                    try db.run(allergy.insert(
-//                        name <- "Soy Allergy",
-//                        desc <- "Suitable for people suffering from a soybean allergy. Recipes and products containing soy will be omitted from your recipe searches"))
-//
-//                    try db.run(allergy.insert(
-//                        name <- "Wheat Allergy",
-//                        desc <- "Suitable for people suffering from a wheat allergy. Recipes and products containing wheat will be omitted from your recipe searches"))
-//
-//                    try db.run(allergy.insert(
-//                        name <- "Sesame Allergy",
-//                        desc <- "Suitable for people suffering from a sesame seed allergy. Recipes and products containing sesame will be omitted from your recipe searches"))
-//                }
-                    
-                    //                //insert
-                    //                //          try db.run(ingredients.insert(
-                    //                //          name <- "Peanut Allergy",
-                    //                //          desc <- "Suitable for people suffering from a peanut allergy. Recipes and ingredients containing peanuts or traces of peanuts will be omitted from your recipe searches"
-                    //                //          quantity <- 0))
-                    //            }
-                    //        }
                 }
             }
-            
         }
      } catch {
          print (error)
