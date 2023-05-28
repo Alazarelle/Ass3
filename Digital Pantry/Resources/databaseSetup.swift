@@ -339,6 +339,7 @@ func readInventoryTable() -> [AppPantryItem]{
         let innerJoin = inventory.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[id])
         
         for innerJoin in try db.prepare(innerJoin) {
+            print(innerJoin[inventory[quantity]])
             items.append(AppPantryItem(appPantryID: innerJoin[inventory[id]],appUserID: 1, ingredientID: innerJoin[ingredient[id]], ingredientName: innerJoin[ingredient[name]], ingredientDesc: innerJoin[ingredient[desc]], quantity: innerJoin[inventory[quantity]], expiryDate: innerJoin[inventory[expiryDate]])!)
         }
     } catch {

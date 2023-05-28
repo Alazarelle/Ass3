@@ -104,19 +104,21 @@ func insertNewInventory(newPantryItem : AppPantryItem) {
      let ingredientID = Expression<Int64>("ingredientID")
      let quantity = Expression<Int64>("quantity")
      let expiryDate = Expression<Date>("expiryDate")
-     let name = Expression<String>("name")
-     let desc = Expression<String>("desc")
+     //let name = Expression<String>("name")
+     //let desc = Expression<String>("desc")
      //var ingredientName: String
      //var ingredientDesc: String
-
+     let shoppingList = Expression<Bool>("shoppingList")
+     
      try db.run(Inventory.insert(
      //id <- newPantryItem.appPantryID
      ingredientID <- newPantryItem.ingredientID,
      quantity <- newPantryItem.quantity,
      expiryDate <- newPantryItem.expiryDate,
-     name <- newPantryItem.ingredientName,
-     desc <- newPantryItem.ingredientDesc
-                ))
+     //name <- newPantryItem.ingredientName,
+     //desc <- newPantryItem.ingredientDesc
+     shoppingList <- newPantryItem.shoppingList
+            ))
      } catch {
          print (error)
      }
