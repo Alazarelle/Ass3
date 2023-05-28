@@ -27,5 +27,9 @@ class ShoppingListViewController: UIViewController {
         
         testTextView.text = inventory.description
     }
+    @IBAction func mainMenuButtonClick(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "MainMenuViewController") as! ViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
