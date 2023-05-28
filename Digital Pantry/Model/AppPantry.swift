@@ -20,16 +20,16 @@ struct AppPantryItem {
     var appPantryID: Int64
     //var appUserID: Int
     var ingredientID: Int64
-    //var ingredientName: String
-    //var ingredientDesc: String
+    var ingredientName: String
+    var ingredientDesc: String
     var quantity: Int64
     var expiryDate: Date
-    var shoppingList: Bool
+    //var shoppingList: Bool
     //var sectionID: Int
 
 
     //initialised where we have not obtained a UniqueIdentifier (appPantryID) as yet
-    init?(ingredientID: Int64, quantity: Int64, expiryDate: Date, shoppingList: Bool) { //, sectionID: Int) {
+    init?(ingredientID: Int64, ingredientName: String, ingredientDesc: String, quantity: Int64, expiryDate: Date) { //, sectionID: Int) {
         self.appPantryID = -1
         //if quantity.isZero { //if mandatory fields/properties are empty
             //print("Pantry quantity not set")
@@ -37,24 +37,23 @@ struct AppPantryItem {
         //}
         //self.appUserID = appUserID
          self.ingredientID = ingredientID
-        //self.ingredientName = ingredientName
-        //self.ingredientDesc = ingredientDesc
+        self.ingredientName = ingredientName
+        self.ingredientDesc = ingredientDesc
         self.quantity = quantity
         self.expiryDate = expiryDate
-        self.shoppingList = shoppingList
+//        self.shoppingList = shoppingList
         //self.sectionID = sectionID //if we decide to have Pantry, Fridge, Freezer
     }
     
     //use case: calling data back from DB/table
-    init?(appPantryID: Int64, ingredientID: Int64, quantity: Int64, expiryDate: Date, shoppingList: Bool) { //, sectionID: Int) {
+    init?(appPantryID: Int64, ingredientID: Int64, ingredientName: String, ingredientDesc: String,  quantity: Int64, expiryDate: Date ) {  //, shoppingList: Bool) { //, sectionID: Int) {
         self.appPantryID = appPantryID
         //self.appUserID = appUserID
         self.ingredientID = ingredientID
-        //self.ingredientName = ingredientName
-        //self.ingredientDesc = ingredientDesc
+        self.ingredientName = ingredientName
+        self.ingredientDesc = ingredientDesc
         self.quantity = quantity
         self.expiryDate = expiryDate
-        self.shoppingList = shoppingList
         //self.sectionID = sectionID //if we decide to have Pantry, Fridge, Freezer
     }
     
@@ -144,13 +143,13 @@ struct AppPantryItem {
     //func getSectionID() -> Int { //retrieve sectionID
     //    return sectionID
     //}
-    mutating func setShoppingList(shoppingList: Bool) { //set new shoppingList indicator
-        self.shoppingList = shoppingList
-    }
-    
-    func getShoppingList() -> Bool { //retrieve shoppingList indicator
-        return shoppingList
-    }
+//    mutating func setShoppingList(shoppingList: Bool) { //set new shoppingList indicator
+//        self.shoppingList = shoppingList
+//    }
+//    
+//    func getShoppingList() -> Bool { //retrieve shoppingList indicator
+//        return shoppingList
+//    }
     
 }
 

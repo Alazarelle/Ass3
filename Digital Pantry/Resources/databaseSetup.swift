@@ -107,9 +107,8 @@ func createTables() {
             t.column(Expression<String>("type"))
             t.column(Expression<Int64?>("allergyId"),references: Table("allergyCategory"), Expression<Int64>("id"))
             t.column(Expression<Int64?>("dietId"),references: Table("dietCategory"), Expression<Int64>("id"))
-        })
-            t.column(Expression<Int64>("typeId"))
-//
+    
+            //
         })
 
         //ingredient_allergy
@@ -347,7 +346,7 @@ func readInventoryTable() -> [AppPantryItem]{
         let innerJoin = inventory.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[id])
         
         for innerJoin in try db.prepare(innerJoin) {
-            items.append(AppPantryItem(appPantryID: innerJoin[inventory[id]],appUserID: 1, ingredientID: innerJoin[ingredient[id]], ingredientName: innerJoin[ingredient[name]], ingredientDesc: innerJoin[ingredient[desc]],
+            items.append(AppPantryItem(appPantryID: innerJoin[inventory[id]],ingredientID: innerJoin[ingredient[id]], ingredientName: innerJoin[ingredient[name]], ingredientDesc: innerJoin[ingredient[desc]],
                                        quantity: innerJoin[inventory[quantity]], expiryDate: innerJoin[inventory[expiryDate]])!)
         }
     } catch {
