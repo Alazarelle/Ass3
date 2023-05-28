@@ -29,12 +29,12 @@
 		78DE3A712A136A320024BA10 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DE3A702A136A320024BA10 /* RecipeViewController.swift */; };
 		829E594E2A1CB382000FFCCE /* CoreXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = 829E594D2A1CB382000FFCCE /* CoreXLSX */; };
 		829E59512A1CB391000FFCCE /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 829E59502A1CB391000FFCCE /* SQLite */; };
-		829E595E2A1CB58C000FFCCE /* databaseSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829E595D2A1CB58C000FFCCE /* databaseSetup.swift */; };
+		829E595E2A1CB58C000FFCCE /* DBSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829E595D2A1CB58C000FFCCE /* DBSetup.swift */; };
 		829E59602A1CB59A000FFCCE /* Release 2 - Food Details.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 829E595F2A1CB59A000FFCCE /* Release 2 - Food Details.xlsx */; };
+		82F04D6A2A23403700779EA8 /* IngredientsAndCategories.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 82F04D692A23403700779EA8 /* IngredientsAndCategories.xlsx */; };
 		C20B1B312A22DFAD00277A03 /* DB_action.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20B1B302A22DFAD00277A03 /* DB_action.swift */; };
 		C28A9D242A17AFD0004AA244 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A9D232A17AFD0004AA244 /* AppUser.swift */; };
 		C28A9D262A17B00F004AA244 /* AppPantry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A9D252A17B00F004AA244 /* AppPantry.swift */; };
-		C29E8DB62A22380800D51738 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29E8DB52A22380800D51738 /* DBHelper.swift */; };
 		C2FD437B2A1C72E0006F864C /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD437A2A1C72E0006F864C /* Ingredients.swift */; };
 		C2FD437D2A1C7C81006F864C /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD437C2A1C7C81006F864C /* Recipe.swift */; };
 		C2FD437F2A1C80D5006F864C /* RecipeLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD437E2A1C80D5006F864C /* RecipeLog.swift */; };
@@ -69,13 +69,13 @@
 		78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		78BCF40D2A136D8F00FA93C9 /* RecipeSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSearchViewController.swift; sourceTree = "<group>"; };
 		78DE3A702A136A320024BA10 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
-		829E595D2A1CB58C000FFCCE /* databaseSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = databaseSetup.swift; sourceTree = "<group>"; };
+		829E595D2A1CB58C000FFCCE /* DBSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBSetup.swift; sourceTree = "<group>"; };
 		829E595F2A1CB59A000FFCCE /* Release 2 - Food Details.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Release 2 - Food Details.xlsx"; sourceTree = "<group>"; };
+		82F04D692A23403700779EA8 /* IngredientsAndCategories.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = IngredientsAndCategories.xlsx; sourceTree = "<group>"; };
 		C20B1B302A22DFAD00277A03 /* DB_action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB_action.swift; sourceTree = "<group>"; };
 		C28A9D232A17AFD0004AA244 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		C28A9D252A17B00F004AA244 /* AppPantry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPantry.swift; sourceTree = "<group>"; };
 		C28B2CB92A1C28F600AC4A46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		C29E8DB52A22380800D51738 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		C2FD437A2A1C72E0006F864C /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
 		C2FD437C2A1C7C81006F864C /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		C2FD437E2A1C80D5006F864C /* RecipeLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeLog.swift; sourceTree = "<group>"; };
@@ -167,8 +167,8 @@
 		829E595C2A1CB57C000FFCCE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				82F04D692A23403700779EA8 /* IngredientsAndCategories.xlsx */,
 				829E595F2A1CB59A000FFCCE /* Release 2 - Food Details.xlsx */,
-				829E595D2A1CB58C000FFCCE /* databaseSetup.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -176,7 +176,7 @@
 		C29E8DB42A2237D400D51738 /* DAO */ = {
 			isa = PBXGroup;
 			children = (
-				C29E8DB52A22380800D51738 /* DBHelper.swift */,
+				829E595D2A1CB58C000FFCCE /* DBSetup.swift */,
 				C20B1B302A22DFAD00277A03 /* DB_action.swift */,
 			);
 			path = DAO;
@@ -273,6 +273,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82F04D6A2A23403700779EA8 /* IngredientsAndCategories.xlsx in Resources */,
 				829E59602A1CB59A000FFCCE /* Release 2 - Food Details.xlsx in Resources */,
 				65D5BA042A0A2C0300307B35 /* LaunchScreen.storyboard in Resources */,
 				65D5BA012A0A2C0300307B35 /* Assets.xcassets in Resources */,
@@ -303,9 +304,8 @@
 				C20B1B312A22DFAD00277A03 /* DB_action.swift in Sources */,
 				78BCF4122A136D8F00FA93C9 /* PantryViewController.swift in Sources */,
 				C2FD43872A1C89A3006F864C /* Preferences.swift in Sources */,
-				C29E8DB62A22380800D51738 /* DBHelper.swift in Sources */,
 				78BCF4132A136D8F00FA93C9 /* RecipeChatGPTViewController.swift in Sources */,
-				829E595E2A1CB58C000FFCCE /* databaseSetup.swift in Sources */,
+				829E595E2A1CB58C000FFCCE /* DBSetup.swift in Sources */,
 				65D5B9F82A0A2C0100307B35 /* AppDelegate.swift in Sources */,
 				C28A9D242A17AFD0004AA244 /* AppUser.swift in Sources */,
 				78BCF4102A136D8F00FA93C9 /* AddItemViewController.swift in Sources */,

@@ -9,7 +9,7 @@ import Foundation
 
 struct FoodCategory {
     //properties/members of Ingredient
-    var foodCategoryID: Int
+    var foodCategoryID: Int64
     var foodCategName: String
     var foodCategDescripion: String
     
@@ -21,18 +21,18 @@ struct FoodCategory {
     }
     
     //use case: calling data back from DB/table
-    init?(foodCategoryID: Int, foodCategName: String, foodCategDescripion: String) {
+    init?(foodCategoryID: Int64, foodCategName: String, foodCategDescripion: String) {
         self.foodCategoryID = foodCategoryID
         self.foodCategName = foodCategName
         self.foodCategDescripion = foodCategDescripion
         
     }
     
-    mutating func setFoodCategoryID(foodCategoryID: Int) { //once the DB has a foodCategoryID, use this to set it
+    mutating func setFoodCategoryID(foodCategoryID: Int64) { //once the DB has a foodCategoryID, use this to set it
         self.foodCategoryID = foodCategoryID
     }
     
-    func getFoodCategoryID() -> Int { //retrieve foodCategoryID
+    func getFoodCategoryID() -> Int64 { //retrieve foodCategoryID
         return foodCategoryID
     }
         
