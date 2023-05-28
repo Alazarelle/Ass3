@@ -22,7 +22,9 @@ func createTables() {
         try db.execute("DROP TABLE if exists allergyCategory")
         try db.execute("DROP TABLE if exists dietCategory")
         try db.execute("DROP TABLE if exists inventory")
-        
+        try db.execute("DROP TABLE if exists ingredients")
+        try db.execute("DROP TABLE if exists foodCategory")
+
         //ingredients
         try db.run(Table("ingredients").create { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
@@ -228,23 +230,24 @@ func insertTableData() {
     }
 }
 
-func readAllergyTable(){
+func readMajorTables(){
     do {
         let db = connectDatabase()
 
         let allergy = Table("allergyCategory")
         let diet = Table("dietCategory")
         let foods = Table("ingredients")
+        let categories = Table("foodCategory")
         let id = Expression<Int64>("id")
         let name = Expression<String>("name")
         let desc = Expression<String>("desc")
 
-        print("Allergy Catgeory:")
+        print("Allergy Category:")
         for allergy in try db.prepare(allergy) {
                 print("id: \(allergy[id]), name: \(allergy[name]), desc: \(allergy[desc])")
         }
 
-        print("Diet Catgeory:")
+        print("Diet Category:")
         for diet in try db.prepare(diet) {
                 print("id: \(diet[id]), name: \(diet[name]), desc: \(diet[desc])")
         }
@@ -253,95 +256,112 @@ func readAllergyTable(){
         for food in try db.prepare(foods) {
                 print("id: \(food[id]), name: \(food[name]), desc: \(food[desc])")
         }
+        
+        print("Food Categories:")
+        for cat in try db.prepare(categories) {
+                print("id: \(cat[id]), name: \(cat[name]), desc: \(cat[desc])")
+        }
     } catch {
         print (error)
     }
 }
 
 
-//func importFoodDataCSV(){
-//    do {
-//        let db = connectDatabase()
-//        let path = Bundle.main.path(forResource: "IngredientsAndCategories", ofType: "xlsx") ?? "none"
-//        print(path)
+func importFoodDataCSV(){
+    do {
+        let db = connectDatabase()
+        let path = Bundle.main.path(forResource: "IngredientsAndCategories", ofType: "xlsx") ?? "none"
+        print(path)
+
+        guard let file = XLSXFile(filepath: path) else {
+            fatalError("XLSX file corrupted or does not exist")
+        }
+        let paths = try file.parseWorksheetPaths()
+        let worksheet = try file.parseWorksheet(at: paths.first!)
+        let sharedStrings = try file.parseSharedStrings()
+        for row in worksheet.data?.rows ?? [] {
+            //Add Category unless existing one
+            var category = ""
+            var ingredient = ""
+            var desc = ""
+            for c in row.cells {
+                let ref = Int(c.value ?? "") ?? 0
+//              Ingredient
+                if (ref < 1617) {
+                    guard let ing = c.stringValue(sharedStrings!) else {return}
+                    ingredient = ing
+//              Category
+                } else if (ref >= 1617 && ref < 1907) {
+                    guard let cat = c.stringValue(sharedStrings!) else {return}
+                    category = cat
+//              Description
+                } else if (ref >= 1907) {
+                    guard let d = c.stringValue(sharedStrings!) else {return}
+                    desc = d
+                }
+                var fk:Int64 = 0
+                if (category != "" && ingredient != "" && desc != "") {
+                    let foodCat = FoodCategory(foodCategName: category, foodCategDescripion: category)!
+                    if (doesCategoryExist(newFoodCat: foodCat) == false){
+                        insertNewFoodCat(newFoodCat: foodCat)
+                    }
+                    do {
+                        for cat in try db.prepare(Table("foodCategory").order( Expression<Int64>("id").desc).limit(1)){
+                            fk = cat[ Expression<Int64>("id")]
+                        }
+                    }
+                    insertNewIngredient(newIngredient: Ingredient(ingredName: ingredient, foodCategoryID: fk, ingredDescripion: desc)!)
+                    
+                    //check for allergies
+//                        name <- "Peanut Allergy",
+//                        desc <- "Suitable for people suffering from a peanut allergy. Recipes and ingredients containing peanuts or traces of peanuts will be omitted from your recipe searches"))
 //
-//        guard let file = XLSXFile(filepath: path) else {
-//            fatalError("XLSX file corrupted or does not exist")
-//        }
-//        let paths = try file.parseWorksheetPaths()
-//        let worksheet = try file.parseWorksheet(at: paths.first!)
-//        let sharedStrings = try file.parseSharedStrings()
-//        for row in worksheet.data?.rows ?? [] {
-//            var category = ""
-//            var ingredient = ""
-//            var desc = ""
-//            //Add Category unless existing one
-//            for c in row.cells {
-//                print(c.reference)
-//                let ref:String = String(c.reference)
-//                if (ref.contains("A")) {
-//                    guard var category = c.stringValue(sharedStrings!) else {return}
-//                } else if (ref.contains("B")) {
-//                    guard var ingredient = c.stringValue(sharedStrings!) else {return}
-//                } else if (ref.contains("C")) {
-//                    guard var desc = c.stringValue(sharedStrings!) else {return}
-//                }
+//                    try db.run(allergy.insert(
+//                        name <- "Tree Nut Allergy",
+//                        desc <- "People suffering from a tree nut allergy are typically allergic to most non-legume nuts (such as Hazelnut, Walnut, Almond, and Macadamia. Recipes and products containing nuts will be omitted from your recipe searches"))
 //
-//                //            let category = row.cells[0].stringValue(sharedStrings!) ?? ""
-//                //            let ingredient = row.cells[1].stringValue(sharedStrings!) ?? ""
-//                //            let desc = "test"//row.cells[2].stringValue(sharedStrings!) ?? ""
-//            }
-//            var fk:Int64 = 0
-//            do {
-//                insertNewFoodCat(newFoodCat: FoodCategory(foodCategName: category, foodCategDescripion: category)!)
-//                for cat in try db.prepare(Table("foodCategory").order( Expression<Int64>("id").desc).limit(1)){
-//                    fk = cat[ Expression<Int64>("id")]
+//                    try db.run(allergy.insert(
+//                        name <- "Shellfish Allergy",
+//                        desc <- "People suffering from a shellfish allergy are typically allergic to molluscs, crustaceans, and cephlopods (such as Crab, Lobster, Oyster, and Octopus). Recipes and products containing shellfish will be omitted from your recipe searches"))
+//
+//                    try db.run(allergy.insert(
+//                        name <- "Fish Allergy",
+//                        desc <- "Suitable for people suffering from a fish allergy. Recipes and products containing fish will be omitted from your recipe searches"))
+//
+//                    try db.run(allergy.insert(
+//                        name <- "Milk Allergy",
+//                        desc <- "Suitable for people suffering from a milk allergy. Recipes and products containing cow milk will be omitted from your recipe searches"))
+//
+//                    try db.run(allergy.insert(
+//                        name <- "Egg Allergy",
+//                        desc <- "Suitable for people suffering from an egg allergy. Recipes and products containing eggs will be omitted from your recipe searches"))
+//
+//                    try db.run(allergy.insert(
+//                        name <- "Soy Allergy",
+//                        desc <- "Suitable for people suffering from a soybean allergy. Recipes and products containing soy will be omitted from your recipe searches"))
+//
+//                    try db.run(allergy.insert(
+//                        name <- "Wheat Allergy",
+//                        desc <- "Suitable for people suffering from a wheat allergy. Recipes and products containing wheat will be omitted from your recipe searches"))
+//
+//                    try db.run(allergy.insert(
+//                        name <- "Sesame Allergy",
+//                        desc <- "Suitable for people suffering from a sesame seed allergy. Recipes and products containing sesame will be omitted from your recipe searches"))
 //                }
-//                insertNewIngredient(newIngredient: Ingredient(ingredName: ingredient, foodCategoryID: fk, ingredDescripion: desc)!)
-//            }
-////               for c in row.cells {
-////                   print("yeh:")
-////                print("Ingredient: \(row.cells[0].stringValue(sharedStrings!) ?? "")")
-////                print("Categeory: \(row.cells[1].stringValue(sharedStrings!) ?? "")")
-////               }
-//            }
-////            for wbk in try file.parseWorkbooks() {
-////                print(wbk)
-////              for (name, path) in try file.parseWorksheetPathsAndNames(workbook: wbk) {
-////
-////                let worksheet = try file.parseWorksheet(at: path)
-////                for row in worksheet.data?.rows ?? [] {
-////                  for c in row.cells {
-////                      print(c.value)
-////                  }
-////                }
-////              }
-////            }
-//    ////        Ingredients
-//    //        let ingredients = Table("ingredients")
-//    //        let name = Expression<String>("name")
-//    //        let desc = Expression<String>("desc")
-//    //        let quantity = Expression<Int64>("quantity")
-//    //        go through sheet rows
-//    //        for path in try file.parseWorksheetPaths() {
-//    //            let ws = try file.parseWorksheet(at: path)
-//    //            for row in ws.data?.rows ?? [] {
-//    //                for c in row.cells {
-//    //                    //something to store data into table
-//    //                    //case switch for row cell
-//    //                    print("")
-//    //                    print(c)
-//    //                }
-//    //                //check for allergies
-//    //                //insert
-//    //                //          try db.run(ingredients.insert(
-//    //                //          name <- "Peanut Allergy",
-//    //                //          desc <- "Suitable for people suffering from a peanut allergy. Recipes and ingredients containing peanuts or traces of peanuts will be omitted from your recipe searches"
-//    //                //          quantity <- 0))
-//    //            }
-//    //        }
-//         } catch {
-//             print (error)
-//         }
-//    }
+                    
+                    //                //insert
+                    //                //          try db.run(ingredients.insert(
+                    //                //          name <- "Peanut Allergy",
+                    //                //          desc <- "Suitable for people suffering from a peanut allergy. Recipes and ingredients containing peanuts or traces of peanuts will be omitted from your recipe searches"
+                    //                //          quantity <- 0))
+                    //            }
+                    //        }
+                }
+            }
+            
+        }
+     } catch {
+         print (error)
+     }
+}
 

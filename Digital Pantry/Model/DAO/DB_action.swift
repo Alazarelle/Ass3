@@ -68,6 +68,20 @@ func insertNewFoodCat(newFoodCat : FoodCategory) {
     }
 }
 
+func doesCategoryExist(newFoodCat : FoodCategory) -> Bool {
+    let db = connectDatabase()
+    do {
+        for _ in try db.prepare("SELECT * from foodCategory WHERE name = ?", newFoodCat.getFoodCategName()){
+            return true
+        }
+        return false
+    } catch {
+        print(error)
+        return true
+        
+    }
+}
+
 func insertNewIngredient(newIngredient : Ingredient) {
     do {
         let db = connectDatabase()
@@ -83,7 +97,7 @@ func insertNewIngredient(newIngredient : Ingredient) {
             //id <- newIngredient.ingredientID
             foodCatId <- newIngredient.foodCategoryID,
             name <- newIngredient.ingredName,
-            desc <- newIngredient.ingredDescripion ))
+            desc <- newIngredient.ingredDescripion))
     } catch {
         print (error)
     }
