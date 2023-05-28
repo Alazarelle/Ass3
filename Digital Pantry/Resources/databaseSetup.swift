@@ -29,7 +29,7 @@ func createTables() {
         //inventory
         try db.run(Table("inventory").create { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<Double>("quantity"))
+            t.column(Expression<Int64>("quantity"))
             t.column(Expression<Date>("expiryDate"))
             t.column(Expression<Int64>("ingredientId"),references: Table("ingredients"), Expression<Int64>("id"))
             t.column(Expression<Bool>("shoppingList"))
@@ -232,7 +232,7 @@ func readAllergyTable(){
     }
 }
 
-func newInventoryItem(name: String, description: String, quantity: Double, expiryDate: Date, shoppingList: Bool){
+func newInventoryItem(name: String, description: String, quantity: Int64, expiryDate: Date, shoppingList: Bool){
     do{
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let db = try! Connection("\(path)/db.sqlite3")
@@ -242,7 +242,7 @@ func newInventoryItem(name: String, description: String, quantity: Double, expir
         let dbid = Expression<Int64>("id")
         let dbname = Expression<String>("name")
         let dbdesc = Expression<String>("desc")
-        let dbquantity = Expression<Double>("quantity")
+        let dbquantity = Expression<Int64>("quantity")
         let dbexpiryDate = Expression<Date>("expiryDate")
         let dbingredientId = Expression<Int64>("ingredientId")
         let dbshoppingList = Expression<Bool>("shoppingList")
@@ -270,7 +270,7 @@ func newInventoryItem(name: String, description: String, quantity: Double, expir
     }
 }
 
-func readInventoryTable() -> [AppPantryItem]{
+func readInventoryTableForShoppingList() -> [AppPantryItem]{
     var items = [AppPantryItem]()
     do {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
@@ -279,21 +279,63 @@ func readInventoryTable() -> [AppPantryItem]{
         let inventory = Table("inventory")
         let ingredient = Table("ingredients")
         let id = Expression<Int64>("id")
-        let quantity = Expression<Double>("quantity")
+        let quantity = Expression<Int64>("quantity")
         let expiryDate = Expression<Date>("expiryDate")
         let ingredientId = Expression<Int64>("ingredientId")
+        let shoppingList = Expression<Bool>("shoppingList")
         let name = Expression<String>("name")
         let desc = Expression<String>("desc")
         
         let innerJoin = inventory.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[id])
         
-        for innerJoin in try db.prepare(innerJoin) {
+        for innerJoin in try db.prepare(innerJoin.where(inventory[shoppingList] == true)) {
             items.append(AppPantryItem(appPantryID: innerJoin[inventory[id]],appUserID: 1, ingredientID: innerJoin[ingredient[id]], ingredientName: innerJoin[ingredient[name]], ingredientDesc: innerJoin[ingredient[desc]], quantity: innerJoin[inventory[quantity]], expiryDate: innerJoin[inventory[expiryDate]])!)
         }
     } catch {
         print (error)
     }
     return items
+}
+
+func readInventoryTableForPantry() -> [AppPantryItem]{
+    var items = [AppPantryItem]()
+    do {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/db.sqlite3")
+    
+        let inventory = Table("inventory")
+        let ingredient = Table("ingredients")
+        let id = Expression<Int64>("id")
+        let quantity = Expression<Int64>("quantity")
+        let expiryDate = Expression<Date>("expiryDate")
+        let ingredientId = Expression<Int64>("ingredientId")
+        let shoppingList = Expression<Bool>("shoppingList")
+        let name = Expression<String>("name")
+        let desc = Expression<String>("desc")
+        
+        let innerJoin = inventory.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[id])
+        
+        for innerJoin in try db.prepare(innerJoin.where(inventory[shoppingList] == false)) {
+            items.append(AppPantryItem(appPantryID: innerJoin[inventory[id]],appUserID: 1, ingredientID: innerJoin[ingredient[id]], ingredientName: innerJoin[ingredient[name]], ingredientDesc: innerJoin[ingredient[desc]], quantity: innerJoin[inventory[quantity]], expiryDate: innerJoin[inventory[expiryDate]])!)
+        }
+    } catch {
+        print (error)
+    }
+    return items
+}
+
+func buyShoppingList(){
+    do {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/db.sqlite3")
+    
+        let inventory = Table("inventory")
+        let shoppingList = Expression<Bool>("shoppingList")
+
+        try db.run(inventory.where(shoppingList == true).update(shoppingList <- false))
+    } catch {
+        print (error)
+    }
 }
 
 

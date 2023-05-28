@@ -95,15 +95,36 @@
                                     <segue destination="HMU-Sv-stY" kind="show" id="Nc5-FR-mz3"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Gx6-4g-8Xh">
+                                <rect key="frame" x="77" y="222" width="240" height="506"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VqK-eO-fUM">
+                                <rect key="frame" x="169" y="762" width="54" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Buy"/>
+                                <connections>
+                                    <action selector="buyButtonClick:" destination="7HC-Tw-Jm7" eventType="touchUpInside" id="hYz-hg-jeL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rAk-9g-j8k"/>
                         <color key="backgroundColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="p2Q-GP-rYW"/>
+                    <connections>
+                        <outlet property="testTextView" destination="Gx6-4g-8Xh" id="eR8-Fc-sbB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7SN-gD-5sD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="233" y="582"/>
+            <point key="canvasLocation" x="232.30769230769229" y="581.51658767772506"/>
         </scene>
         <!--Add Item View Controller-->
         <scene sceneID="MQU-zI-nHL">
@@ -512,7 +533,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="o0g-N0-boN"/>
                     <connections>
-                        <outlet property="testTextField" destination="PsR-PQ-UlI" id="2eI-eS-c9e"/>
+                        <outlet property="testTextView" destination="PsR-PQ-UlI" id="Me3-Fi-4TD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="he9-q2-8Ji" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
