@@ -17,43 +17,49 @@ var dateFormatter = DateFormatter()
 
 struct AppPantryItem {
     //properties/members of appPantryID
-    var appPantryID: Int
+    var appPantryID: Int64
     //var appUserID: Int
-    var ingredientID: Int
+    var ingredientID: Int64
+    var ingredientName: String
+    var ingredientDesc: String
     var quantity: Double
     var expiryDate: Date
     //var sectionID: Int
 
 
     //initialised where we have not obtained a UniqueIdentifier (appPantryID) as yet
-    init?(appUserID: Int, ingredientID: Int, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
+    init?(appUserID: Int, ingredientID: Int64, ingredientName: String, ingredientDesc: String, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
         self.appPantryID = -1
-        if quantity.isZero { //if mandatory fields/properties are empty
-            print("Pantry quantity not set")
-            return nil
-        }
+        //if quantity.isZero { //if mandatory fields/properties are empty
+            //print("Pantry quantity not set")
+            //return nil
+        //}
         //self.appUserID = appUserID
         self.ingredientID = ingredientID
+        self.ingredientName = ingredientName
+        self.ingredientDesc = ingredientDesc
         self.quantity = quantity
         self.expiryDate = expiryDate
         //self.sectionID = sectionID //if we decide to have Pantry, Fridge, Freezer
     }
     
     //use case: calling data back from DB/table
-    init?(appPantryID: Int, appUserID: Int, ingredientID: Int, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
+    init?(appPantryID: Int64, appUserID: Int, ingredientID: Int64, ingredientName: String, ingredientDesc: String, quantity: Double, expiryDate: Date) { //, sectionID: Int) {
         self.appPantryID = appPantryID
         //self.appUserID = appUserID
         self.ingredientID = ingredientID
+        self.ingredientName = ingredientName
+        self.ingredientDesc = ingredientDesc
         self.quantity = quantity
         self.expiryDate = expiryDate
         //self.sectionID = sectionID //if we decide to have Pantry, Fridge, Freezer
     }
     
-    mutating func setAppPantryID(appPantryID: Int) { //once the DB has a UserID, use this to set it
+    mutating func setAppPantryID(appPantryID: Int64) { //once the DB has a UserID, use this to set it
         self.appPantryID = appPantryID
     }
     
-    func getAppPantryID() -> Int { //retrieve PantryID
+    func getAppPantryID() -> Int64 { //retrieve PantryID
         return appPantryID
     }
     
@@ -61,7 +67,7 @@ struct AppPantryItem {
     //    return appUserID
     //}
     
-    func getIngredientId() -> Int { //retrieve IngredientID
+    func getIngredientId() -> Int64 { //retrieve IngredientID
         return ingredientID
     }
     
