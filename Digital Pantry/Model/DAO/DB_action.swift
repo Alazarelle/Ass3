@@ -12,8 +12,7 @@ import CoreXLSX
 
 func insertNewAllergy(newAllergy : AllergyCategory) {
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle allergy  data
         let allergy = Table("allergyCategory")
         
@@ -32,8 +31,7 @@ func insertNewAllergy(newAllergy : AllergyCategory) {
 
 func insertNewDietCat(newDiet : DietCategory) {
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle dietCat  data
         let dietCat = Table("dietCategory")
         //let id = Expression<Int64>("id")
@@ -52,8 +50,7 @@ func insertNewDietCat(newDiet : DietCategory) {
 
 func insertNewFoodCat(newFoodCat : FoodCategory) {
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle foodCat  data
         let foodCat = Table("foodCategory")
         
@@ -73,12 +70,11 @@ func insertNewFoodCat(newFoodCat : FoodCategory) {
 
 func insertNewIngredient(newIngredient : Ingredient) {
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle ingredients  data
         let ingredients = Table("ingredients")
         
-        let id = Expression<Int64>("id")
+//        let id = Expression<Int64>("id")
         let foodCatId = Expression<Int64>("foodCatId")
         let name = Expression<String>("name")
         let desc = Expression<String>("desc")
@@ -95,12 +91,11 @@ func insertNewIngredient(newIngredient : Ingredient) {
 
 func insertNewInventory(newPantryItem : AppPantryItem) {
  do {
-     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-     let db = try! Connection("\(path)/db.sqlite3")
+     let db = connectDatabase()
      //handle Inventory  data
      let Inventory = Table("inventory")
 
-     let id = Expression<Int64>("id")
+//     let id = Expression<Int64>("id")
      let ingredientID = Expression<Int64>("ingredientID")
      let quantity = Expression<Int64>("quantity")
      let expiryDate = Expression<Date>("expiryDate")
@@ -130,7 +125,7 @@ func insertNewRecipes(newRecipe : Recipe) {
      //handle recipe  data
      let recipe = Table("recipe")
 
-     let id = Expression<Int64>("id")
+//     let id = Expression<Int64>("id")
      let name = Expression<String>("name")
      let desc = Expression<String>("desc")
      let cookingTime = Expression<Int64>("cookingTime")
@@ -149,12 +144,11 @@ func insertNewRecipes(newRecipe : Recipe) {
 
 func insertNewRecipeLog(newRecipeLogs : RecipeLog) {
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle recipeLog  data
         let recipeLog = Table("recipeLog")
         
-        let id = Expression<Int64>("id")
+//        let id = Expression<Int64>("id")
         let recipeId = Expression<Int64>("recipeId")
         let createdDate = Expression<Date>("createdDate")
         
@@ -169,11 +163,10 @@ func insertNewRecipeLog(newRecipeLogs : RecipeLog) {
 }
 func insertNewPreferences(newPreferences : Preference) {
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle preferences  data
         let preferences = Table("preferences")
-        let id = Expression<Int64>("id")
+//        let id = Expression<Int64>("id")
         let type = Expression<String>("type")
         let typeId = Expression<Int64>("typeId")
         
@@ -190,12 +183,11 @@ func insertNewPreferences(newPreferences : Preference) {
 
 func insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy) {
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle ingredient_allergy  data
         let ingredient_allergy = Table("ingredient_allergy")
         
-        let id = Expression<Int64>("id")
+//        let id = Expression<Int64>("id")
         let ingredId = Expression<Int64>("ingredId")
         let allergyId = Expression<Int64>("allergyId")
         
@@ -211,12 +203,11 @@ func insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy) {
 
 func insertNewRecipe_ingredient(newRecipe_ingredient : Recipe_Ingred) {
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle recipe_ingredient  data
         let recipe_ingredient = Table("recipe_ingredient")
         
-        let id = Expression<Int64>("id")
+//        let id = Expression<Int64>("id")
         let recipeId = Expression<Int64>("recipeId")
         let ingredId = Expression<Int64>("ingredId")
         
@@ -231,12 +222,11 @@ func insertNewRecipe_ingredient(newRecipe_ingredient : Recipe_Ingred) {
 
 func insertNewRecipe_diet(newRecipe_diet : Recipe_Diet) {
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle recipe_diet  data
         let recipe_diet = Table("recipe_diet")
         
-        let id = Expression<Int64>("id")
+//        let id = Expression<Int64>("id")
         let recipeId = Expression<Int64>("recipeId")
         let ingredId = Expression<Int64>("ingredId")
         
@@ -252,12 +242,11 @@ func insertNewRecipe_diet(newRecipe_diet : Recipe_Diet) {
 
 func insertNewSection(newSection : SectionOfPantry) {
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle sections  data
         let sections = Table("section")
         
-        let id = Expression<Int64>("id")
+//        let id = Expression<Int64>("id")
         let desc = Expression<String>("desc")
         let ingredId = Expression<Int64>("ingredId")
         

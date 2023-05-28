@@ -348,7 +348,7 @@ func readInventoryTableForShoppingList() -> [AppPantryItem]{
         let innerJoin = inventory.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[id])
         
         for innerJoin in try db.prepare(innerJoin.where(inventory[shoppingList] == true)) {
-            items.append(AppPantryItem(appPantryID: innerJoin[inventory[id]],appUserID: 1, ingredientID: innerJoin[ingredient[id]], ingredientName: innerJoin[ingredient[name]], ingredientDesc: innerJoin[ingredient[desc]], quantity: innerJoin[inventory[quantity]], expiryDate: innerJoin[inventory[expiryDate]])!)
+            items.append(AppPantryItem(appPantryID: innerJoin[inventory[id]], ingredientID: innerJoin[ingredient[id]], ingredientName: innerJoin[ingredient[name]], ingredientDesc: innerJoin[ingredient[desc]], quantity: innerJoin[inventory[quantity]], expiryDate: innerJoin[inventory[expiryDate]])!)
         }
     } catch {
         print (error)
@@ -375,7 +375,7 @@ func readInventoryTableForPantry() -> [AppPantryItem]{
         let innerJoin = inventory.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[id])
         
         for innerJoin in try db.prepare(innerJoin.where(inventory[shoppingList] == false)) {
-            items.append(AppPantryItem(appPantryID: innerJoin[inventory[id]],appUserID: 1, ingredientID: innerJoin[ingredient[id]], ingredientName: innerJoin[ingredient[name]], ingredientDesc: innerJoin[ingredient[desc]], quantity: innerJoin[inventory[quantity]], expiryDate: innerJoin[inventory[expiryDate]])!)
+            items.append(AppPantryItem(appPantryID: innerJoin[inventory[id]], ingredientID: innerJoin[ingredient[id]], ingredientName: innerJoin[ingredient[name]], ingredientDesc: innerJoin[ingredient[desc]], quantity: innerJoin[inventory[quantity]], expiryDate: innerJoin[inventory[expiryDate]])!)
         }
     } catch {
         print (error)
