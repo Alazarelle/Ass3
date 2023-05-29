@@ -79,15 +79,6 @@ func createTables() {
             t.column(Expression<String>("desc"))
         })
 
-        
-        //food category
-        let foodCat = Table("foodCategory")
-        try db.run(foodCat.create(ifNotExists: true) { t in
-            t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<String>("name"))
-            t.column(Expression<String>("desc"))
-        })
-
         //recipes
         let recipes = Table("recipes")
         try db.run(recipes.create(ifNotExists: true) { t in
