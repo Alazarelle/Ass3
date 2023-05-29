@@ -104,6 +104,7 @@ func updateInventory(pantryID : Int64, updatedPantryItem : AppPantryItem) {//que
      let db = try! Connection("\(path)/db.sqlite3")
      //handle Inventory  data
      let inventory = Table("inventory")
+     let ingredient = Table("ingredients")
 
      let id = Expression<Int64>("id")
      let ingredientID = Expression<Int64>("ingredientID")
@@ -111,18 +112,21 @@ func updateInventory(pantryID : Int64, updatedPantryItem : AppPantryItem) {//que
      let expiryDate = Expression<Date>("expiryDate")
      let name = Expression<String>("name")
      let desc = Expression<String>("desc")
-     //let shoppingList = Expression<Bool>("shoppingList")
-     let thisInventory = inventory.filter(id == pantryID)
      
+     let thisInventory = inventory.filter(id == pantryID)
+     let thisIngredient = ingredient.filter(id == updatedPantryItem.ingredientID)
      
      try db.run(thisInventory.update(
-//     id <- newPantryItem.appPantryID,
-     ingredientID <- updatedPantryItem.ingredientID,
-     quantity <- updatedPantryItem.quantity,
-     expiryDate <- updatedPantryItem.expiryDate,
-     name <- updatedPantryItem.ingredientName,
-     desc <- updatedPantryItem.ingredientDesc
+        id <- pantryID,
+        quantity <- updatedPantryItem.quantity,
+        expiryDate <- updatedPantryItem.expiryDate
 //   shoppingList <- newPantryItem.shoppingList
+     ))
+     
+     try db.run(thisIngredient.update(
+        id <- updatedPantryItem.ingredientID,
+        name <- updatedPantryItem.ingredientName,
+        desc <- updatedPantryItem.ingredientDesc
      ))
      } catch {
          print (error)

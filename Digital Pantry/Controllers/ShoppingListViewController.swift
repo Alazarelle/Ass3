@@ -49,7 +49,10 @@ class ShoppingListViewController: UIViewController {
 extension ShoppingListViewController:UITableViewDelegate {
     func tableView(_ tableView:UITableView, didSelectRowAt indexPath: IndexPath){
         //what should the app do when user selecting row at a certain index?
-        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "UpdatePantryItemViewController") as! UpdatePantryItemViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+        vc.id = inventory[indexPath.row].appPantryID
+        vc.shoppingList = true
     }
     
 }

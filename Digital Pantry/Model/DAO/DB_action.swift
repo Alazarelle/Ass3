@@ -399,3 +399,46 @@ func readStorage() -> [String]{
     }
     return places
 }
+
+func readInventoryFromId(id: Int64) -> AppPantryItem?{
+    var item:AppPantryItem?
+    do {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/db.sqlite3")
+        
+        let inventory = Table("inventory")
+        let ingredient = Table("ingredients")
+        let dbid = Expression<Int64>("id")
+        let quantity = Expression<Int64>("quantity")
+        let expiryDate = Expression<Date>("expiryDate")
+        let ingredientId = Expression<Int64>("ingredientId")
+        let name = Expression<String>("name")
+        let desc = Expression<String>("desc")
+        
+        let innerJoin = inventory.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[dbid])
+        
+        for innerJoin in  try db.prepare(innerJoin.where(inventory[dbid] == id)){
+            item = AppPantryItem(appPantryID: innerJoin[inventory[dbid]], ingredientID: innerJoin[ingredient[dbid]], ingredientName: innerJoin[ingredient[name]], ingredientDesc: innerJoin[ingredient[desc]], quantity: innerJoin[inventory[quantity]], expiryDate: innerJoin[inventory[expiryDate]])!
+        }
+    } catch {
+        print (error)
+    }
+    return item
+}
+
+func deleteInventoryItem(id: Int64){
+    do {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/db.sqlite3")
+        
+        let inventory = Table("inventory")
+        let dbid = Expression<Int64>("id")
+        
+        let thisInventory = inventory.filter(dbid == id)
+        
+        try db.run(thisInventory.delete())
+        
+    } catch {
+        print (error)
+    }
+}
