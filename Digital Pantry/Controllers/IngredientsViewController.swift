@@ -29,7 +29,6 @@ class IngredientsViewController: UIViewController {
         for ingredient in ingredients{
             data.append(ingredient.ingredName)
         }
-        print(ingredients)
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self

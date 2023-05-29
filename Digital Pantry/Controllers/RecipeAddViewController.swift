@@ -58,6 +58,8 @@ class RecipeAddViewController: UIViewController {
                 insertNewRecipe_ingredient(newRecipe_ingredient: Recipe_Ingred(recipeID: recipeId!, ingredID: (ingredient?.ingredientID)!)!)
             }
         }
+        let vc = storyboard?.instantiateViewController(withIdentifier: "RecipeRecentViewController") as! RecipeRecentViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func ChooseIngredientsButtonPressed(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "IngredientsViewController") as! IngredientsViewController

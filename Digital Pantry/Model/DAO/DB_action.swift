@@ -399,7 +399,6 @@ func readRecipes() -> [Recipe]{
         let complexity = Expression<Int64>("complexity")
 
         for recipe in try db.prepare(recipe) {
-                print("id: \(recipe[id]), name: \(recipe[name]), instructions: \(recipe[instructions]), cookingTime: \(recipe[cookingTime]), complexity: \(recipe[complexity])")
             recipes.append(Recipe(recipeID: recipe[id], recipeName: recipe[name], instructions: recipe[instructions], cookingTime: recipe[cookingTime], complexity: recipe[complexity])!)
         }
     } catch {
