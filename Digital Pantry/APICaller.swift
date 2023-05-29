@@ -18,7 +18,7 @@ final class APICaller{
     //curl https://api.openai.com/v1/models -H "Authorization: Bearer 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"
     
     public func setup() {
-        self.client = OpenAISwift(authToken: "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")
+        self.client = OpenAISwift(authToken: "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")
     }
     
     public func getResponse(input: String, completion: @escaping (Result<String,Error>) -> Void){

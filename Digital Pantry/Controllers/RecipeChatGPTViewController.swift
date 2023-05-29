@@ -43,7 +43,7 @@ class RecipeChatGPTViewController: UIViewController {
                     do {
                         let aiRecipe = try JSONDecoder().decode(AIGeneratedRecipe.self, from: data)
                         recipe = Recipe.init(aiGeneratedRecipe: aiRecipe)
-                        print(recipe)
+                        
                         self?.recipeNameLabel.text = aiRecipe.recipeName
                         numberOfIngredients = aiRecipe.ingredients.count
                         for ingredient in aiRecipe.ingredients{
@@ -69,6 +69,7 @@ class RecipeChatGPTViewController: UIViewController {
     }
     
     @IBAction func saveRecipeButtonPressed(_ sender: UIButton) {
+        print(recipe)
         insertNewRecipe(newRecipe: recipe!)
     }
     

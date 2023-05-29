@@ -35,8 +35,8 @@ func createTables() {
             t.column(Expression<String>("instructions"))
             //t.column(Expression<String>("ingredients"))//,references: ingredients, id) //will link to another table as ForeignKey
             //t.column(Expression<String?>("diets"))//,references: ingredients, id)) //will link to another table as ForeignKey
-            t.column(Expression<Int64>("cookingTime"))
-            t.column(Expression<String>("complexity"))
+            t.column(Expression<String>("cookingTime"))
+            t.column(Expression<Int64>("complexity"))
         })
         
         //ingredients

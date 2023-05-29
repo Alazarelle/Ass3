@@ -365,6 +365,21 @@
             </objects>
             <point key="canvasLocation" x="1049.2307692307693" y="2047.3933649289099"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="HZo-4N-IZl">
+            <objects>
+                <viewController id="pWv-xZ-IIU" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="avD-9B-66S">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="m8v-VX-fHl"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YUl-0p-bRC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1838" y="2055"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="bcV-AP-ogD">
             <objects>
@@ -457,15 +472,26 @@
                                 <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="D8z-Dz-fW4">
+                                <rect key="frame" x="75" y="282" width="240" height="400"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OAD-3Y-XNa"/>
                         <color key="backgroundColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="Kam-DS-1iL"/>
+                    <connections>
+                        <outlet property="RecentrecipesTextView" destination="D8z-Dz-fW4" id="Hoy-Xy-iWe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C5H-U9-wbp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1865" y="1318"/>
+            <point key="canvasLocation" x="1864.6153846153845" y="1317.2985781990521"/>
         </scene>
         <!--Recipe Add View Controller-->
         <scene sceneID="biq-gL-4Eg">

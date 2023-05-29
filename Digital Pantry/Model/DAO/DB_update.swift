@@ -142,14 +142,14 @@ func updateRecipes(recipeId : Int64, updatedRecipe : Recipe) {//query to make a 
         
         let id = Expression<Int64>("id")
         let name = Expression<String>("name")
-        let desc = Expression<String>("desc")
-        let cookingTime = Expression<Int64>("cookingTime")
+        let instructions = Expression<String>("instructions")
+        let cookingTime = Expression<String>("cookingTime")
         
         let thisRecipe = recipe.filter(id == recipeId)
         
         try db.run(thisRecipe.update(
             name <- updatedRecipe.recipeName,
-            desc <- updatedRecipe.recipeDescription,
+            instructions <- updatedRecipe.instructions,
             cookingTime <- updatedRecipe.cookingTime ))
         
         } catch {

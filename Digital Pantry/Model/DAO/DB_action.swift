@@ -136,9 +136,10 @@ func insertNewInventory(newPantryItem : AppPantryItem) {
 func insertNewRecipe(newRecipe : Recipe) {
  do {
      let db = connectDatabase()
-     //handle recipe  data
+     //handle recipe data
      let recipe = Table("recipes")
 
+     print(newRecipe)
 //     let id = Expression<Int64>("id")
      let name = Expression<String>("name")
      let instructions = Expression<String>("instructions")
@@ -150,8 +151,8 @@ func insertNewRecipe(newRecipe : Recipe) {
      //id <- newRecipe.recipeID
      name <- newRecipe.recipeName,
      instructions <- newRecipe.instructions,
-     complexity <- newRecipe.complexity,
-     cookingTime <- newRecipe.cookingTime ))
+     cookingTime <- newRecipe.cookingTime,
+     complexity <- newRecipe.complexity))
      } catch {
          print (error)
      }
@@ -379,4 +380,32 @@ func buyShoppingList(){
     } catch {
         print (error)
     }
+}
+
+func readRecipes() -> [Recipe]{
+    var recipes = [Recipe]()
+    do {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/db.sqlite3")
+    
+        let recipe = Table("recipes")
+        let id = Expression<Int64>("id")
+        let name = Expression<String>("name")
+        let instructions = Expression<String>("instructions")
+        let cookingTime = Expression<String>("cookingTime")
+        let complexity = Expression<Int64>("complexity")
+        
+
+        
+        //let innerJoin = recipes.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[id])
+        for recipe in try db.prepare(recipe) {
+                print("id: \(recipe[id]), name: \(recipe[name]), instructions: \(recipe[instructions]), cookingTime: \(recipe[cookingTime]), complexity: \(recipe[complexity])")
+            recipes.append(Recipe(recipeID: recipe[id], recipeName: recipe[name], instructions: recipe[instructions], cookingTime: recipe[cookingTime], complexity: recipe[complexity])!)
+        }
+        
+        
+    } catch {
+        print (error)
+    }
+    return recipes
 }
