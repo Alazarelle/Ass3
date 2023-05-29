@@ -40,25 +40,33 @@ func createTables() {
         })
         
         //ingredients
-        try db.run(Table("ingredients").create { t in
+        try db.run(Table("ingredients").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
-            t.column(Expression<Int64>("foodCatId"), references: Table("foodCategory"), Expression<Int64>("id"))
+            //t.column(Expression<Int64>("foodCatId"), references: Table("foodCategory"), Expression<Int64>("id"))
             t.column(Expression<Int64?>("allergies"),references: Table("allergyCategory"), Expression<Int64>("id"))
         })
         
         //inventory
-        try db.run(Table("inventory").create { t in
+        try db.run(Table("inventory").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<Int64>("quantity"))
             t.column(Expression<Date>("expiryDate"))
             t.column(Expression<Int64>("ingredientId"),references: Table("ingredients"), Expression<Int64>("id"))
             t.column(Expression<Bool>("shoppingList"))
+            t.column(Expression<Int64>("storageId"),references: Table("storage"), Expression<Int64>("id"))
+        })
+        
+        //storage
+        
+        try db.run(Table("storage").create(ifNotExists: true) { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<String>("desc"))
         })
         
         //allergy
-        try db.run(Table("allergyCategory").create { t in
+        try db.run(Table("allergyCategory").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
@@ -72,16 +80,15 @@ func createTables() {
         })
         
         //diet
-        try db.run(Table("dietCategory").create { t in
+        try db.run(Table("dietCategory").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
         })
 
-        
-        //food category
-        let foodCat = Table("foodCategory")
-        try db.run(foodCat.create { t in
+        //recipes
+        let recipes = Table("recipes")
+        try db.run(recipes.create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
@@ -105,14 +112,14 @@ func createTables() {
 
         
         //recipeLog
-        try db.run(Table("recipeLog").create { t in
+        try db.run(Table("recipeLog").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<Int64>("recipeID"),references: Table("recipes"), Expression<Int64>("id"))
             t.column(Expression<Date>("createdDate"))
         })
         
         //preferences
-        try db.run(Table("preferences").create { t in
+        try db.run(Table("preferences").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("type"))
             t.column(Expression<Int64?>("allergyId"),references: Table("allergyCategory"), Expression<Int64>("id"))
@@ -120,7 +127,7 @@ func createTables() {
         })
         
         //section (Pantry, Fridge or Freezer, if we decide to use)
-        try db.run(Table("section").create { t in
+        try db.run(Table("section").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("desc"))
             t.column(Expression<Int64>("inventoryId")) //AppPantry
@@ -228,6 +235,20 @@ func insertTableData() {
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Gluten Free (Coeliac)", dietCategDescripion: "Most commonly followed by people suffering from Coeliac disease, this diet focuses on excluding foods containing gluten, such as wheat, barley and oats (such as bread and flour). This diet is also sometimes followed to reduce the symptoms of irritable bowel syndrome (IBS). Recipes and products containing gluten will be omitted from your recipe searches.")!)
             
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Low FODMAP", dietCategDescripion: "People following a Low FODMAP diet attempt to eliminate fermentable carbohydrates (FODMAPs) from their diets. This is usually followed by people attempting to reduce the symptoms of irritable bowel syndrome (IBS). This diet focusses on excluding foods high in fructans, fructose, and lactose (such as Apples, Onions, Fruit Juice, Milk, Soft Cheeses, and stone fruits among others). Recipes and products containing these will be excluded from your recipe searches.")!)
+        }
+        
+        let storage = Table("storage")
+        
+        count = try db.scalar(storage.count)
+        if (count == 0) {
+            try db.run(storage.insert(
+                desc <- "Pantry"))
+            
+            try db.run(storage.insert(
+                desc <- "Fridge"))
+            
+            try db.run(storage.insert(
+                desc <- "Freezer"))
         }
     } catch {
         print (error)
