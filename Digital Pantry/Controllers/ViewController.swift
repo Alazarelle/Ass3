@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    
+    var executeDB = true
     
     override func viewDidLoad() {
         super.viewDidLoad()

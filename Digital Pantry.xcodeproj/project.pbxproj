@@ -16,6 +16,7 @@
 		65D5B9FF2A0A2C0100307B35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D5B9FD2A0A2C0100307B35 /* Main.storyboard */; };
 		65D5BA012A0A2C0300307B35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D5BA002A0A2C0300307B35 /* Assets.xcassets */; };
 		65D5BA042A0A2C0300307B35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D5BA022A0A2C0300307B35 /* LaunchScreen.storyboard */; };
+		78A170452A2495C700614B62 /* AddDirectItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A170442A2495C700614B62 /* AddDirectItemViewController.swift */; };
 		78BCF40E2A136D8F00FA93C9 /* RecipeAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4042A136D8E00FA93C9 /* RecipeAddViewController.swift */; };
 		78BCF40F2A136D8F00FA93C9 /* FreezerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4052A136D8E00FA93C9 /* FreezerViewController.swift */; };
 		78BCF4102A136D8F00FA93C9 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4062A136D8E00FA93C9 /* AddItemViewController.swift */; };
@@ -58,6 +59,7 @@
 		65D5BA002A0A2C0300307B35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65D5BA032A0A2C0300307B35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		65D5BA052A0A2C0300307B35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78A170442A2495C700614B62 /* AddDirectItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDirectItemViewController.swift; sourceTree = "<group>"; };
 		78BCF4042A136D8E00FA93C9 /* RecipeAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeAddViewController.swift; sourceTree = "<group>"; };
 		78BCF4052A136D8E00FA93C9 /* FreezerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreezerViewController.swift; sourceTree = "<group>"; };
 		78BCF4062A136D8E00FA93C9 /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				78BCF40B2A136D8F00FA93C9 /* RecipeRecentViewController.swift */,
 				78BCF40D2A136D8F00FA93C9 /* RecipeSearchViewController.swift */,
 				78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */,
+				78A170442A2495C700614B62 /* AddDirectItemViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				C2FD438D2A1C97DF006F864C /* RecipeDiet.swift in Sources */,
 				65D5B9FC2A0A2C0100307B35 /* ViewController.swift in Sources */,
 				65500B432A136BBC0007F7C9 /* APICaller.swift in Sources */,
+				78A170452A2495C700614B62 /* AddDirectItemViewController.swift in Sources */,
 				65D5B9F82A0A2C0100307B35 /* AppDelegate.swift in Sources */,
 				C2FD437F2A1C80D5006F864C /* RecipeLog.swift in Sources */,
 				C2FD437B2A1C72E0006F864C /* Ingredients.swift in Sources */,

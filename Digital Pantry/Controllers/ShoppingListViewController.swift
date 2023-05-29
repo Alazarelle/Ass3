@@ -30,6 +30,7 @@ class ShoppingListViewController: UIViewController {
     @IBAction func mainMenuButtonClick(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "MainMenuViewController") as! ViewController
         self.navigationController?.pushViewController(vc, animated: true)
+        vc.executeDB = false
     }
     
 }
