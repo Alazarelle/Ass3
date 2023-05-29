@@ -20,7 +20,17 @@ func createTables() {
         let db = connectDatabase()
         try db.execute("DROP TABLE if exists allergyCategory")
         try db.execute("DROP TABLE if exists dietCategory")
+        try db.execute("DROP TABLE if exists inventory")
         try db.execute("DROP TABLE if exists ingredients")
+        try db.execute("DROP TABLE if exists foodCategory")
+
+        //food category
+        let foodCat = Table("foodCategory")
+        try db.run(foodCat.create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<String>("name"))
+            t.column(Expression<String>("desc"))
+        })
         
         //ingredients
         try db.run(Table("ingredients").create(ifNotExists: true) { t in
@@ -55,12 +65,20 @@ func createTables() {
             t.column(Expression<String>("desc"))
         })
         
+        //ingredient_allergy
+        try db.run(Table("ingredient_allergy").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("ingredId"))
+            t.column(Expression<Int64>("allergyId"))
+        })
+        
         //diet
         try db.run(Table("dietCategory").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
         })
+
         
         //food category
         let foodCat = Table("foodCategory")
@@ -76,11 +94,24 @@ func createTables() {
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
-            //t.column(Expression<String>("ingredients"))//,references: ingredients, id) //will link to another table as ForeignKey
-            //t.column(Expression<String?>("diets"))//,references: ingredients, id)) //will link to another table as ForeignKey
             t.column(Expression<Int64>("cookingTime"))
             t.column(Expression<String>("complexity"))
         })
+        
+        //recipe_ingredient
+        try db.run(Table("recipe_ingredient").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("recipeId"))
+            t.column(Expression<Int64>("ingredId"))
+        })
+        
+        //recipe_diet
+        try db.run(Table("recipe_diet").create { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<Int64>("recipeId"))
+            t.column(Expression<Int64>("dietId"))
+        })
+
         
         //recipeLog
         try db.run(Table("recipeLog").create(ifNotExists: true) { t in
@@ -96,30 +127,7 @@ func createTables() {
             t.column(Expression<Int64?>("allergyId"),references: Table("allergyCategory"), Expression<Int64>("id"))
             t.column(Expression<Int64?>("dietId"),references: Table("dietCategory"), Expression<Int64>("id"))
         })
-
-        //ingredient_allergy
-        try db.run(Table("ingredient_allergy").create(ifNotExists: true) { t in
-            t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<Int64>("ingredId"))
-            t.column(Expression<Int64>("allergyId"))
-//
-        })
         
-        //recipe_ingredient
-        try db.run(Table("recipe_ingredient").create(ifNotExists: true) { t in
-            t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<Int64>("recipeId"))
-            t.column(Expression<Int64>("ingredId"))
-//
-        })
-        
-        //recipe_diet
-        try db.run(Table("recipe_diet").create(ifNotExists: true) { t in
-            t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<Int64>("recipeId"))
-            t.column(Expression<Int64>("dietId"))
-//
-        })
         //section (Pantry, Fridge or Freezer, if we decide to use)
         try db.run(Table("section").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
@@ -249,23 +257,24 @@ func insertTableData() {
     }
 }
 
-func readAllergyTable(){
+func readMajorTables(){
     do {
         let db = connectDatabase()
 
         let allergy = Table("allergyCategory")
         let diet = Table("dietCategory")
         let foods = Table("ingredients")
+        let categories = Table("foodCategory")
         let id = Expression<Int64>("id")
         let name = Expression<String>("name")
         let desc = Expression<String>("desc")
 
-        print("Allergy Catgeory:")
+        print("Allergy Category:")
         for allergy in try db.prepare(allergy) {
                 print("id: \(allergy[id]), name: \(allergy[name]), desc: \(allergy[desc])")
         }
 
-        print("Diet Catgeory:")
+        print("Diet Category:")
         for diet in try db.prepare(diet) {
                 print("id: \(diet[id]), name: \(diet[name]), desc: \(diet[desc])")
         }
@@ -274,95 +283,98 @@ func readAllergyTable(){
         for food in try db.prepare(foods) {
                 print("id: \(food[id]), name: \(food[name]), desc: \(food[desc])")
         }
+        
+        print("Food Categories:")
+        for cat in try db.prepare(categories) {
+                print("id: \(cat[id]), name: \(cat[name]), desc: \(cat[desc])")
+        }
     } catch {
         print (error)
     }
 }
 
 
-//func importFoodDataCSV(){
-//    do {
-//        let db = connectDatabase()
-//        let path = Bundle.main.path(forResource: "IngredientsAndCategories", ofType: "xlsx") ?? "none"
-//        print(path)
-//
-//        guard let file = XLSXFile(filepath: path) else {
-//            fatalError("XLSX file corrupted or does not exist")
-//        }
-//        let paths = try file.parseWorksheetPaths()
-//        let worksheet = try file.parseWorksheet(at: paths.first!)
-//        let sharedStrings = try file.parseSharedStrings()
-//        for row in worksheet.data?.rows ?? [] {
-//            var category = ""
-//            var ingredient = ""
-//            var desc = ""
-//            //Add Category unless existing one
-//            for c in row.cells {
-//                print(c.reference)
-//                let ref:String = String(c.reference)
-//                if (ref.contains("A")) {
-//                    guard var category = c.stringValue(sharedStrings!) else {return}
-//                } else if (ref.contains("B")) {
-//                    guard var ingredient = c.stringValue(sharedStrings!) else {return}
-//                } else if (ref.contains("C")) {
-//                    guard var desc = c.stringValue(sharedStrings!) else {return}
-//                }
-//
-//                //            let category = row.cells[0].stringValue(sharedStrings!) ?? ""
-//                //            let ingredient = row.cells[1].stringValue(sharedStrings!) ?? ""
-//                //            let desc = "test"//row.cells[2].stringValue(sharedStrings!) ?? ""
-//            }
-//            var fk:Int64 = 0
-//            do {
-//                insertNewFoodCat(newFoodCat: FoodCategory(foodCategName: category, foodCategDescripion: category)!)
-//                for cat in try db.prepare(Table("foodCategory").order( Expression<Int64>("id").desc).limit(1)){
-//                    fk = cat[ Expression<Int64>("id")]
-//                }
-//                insertNewIngredient(newIngredient: Ingredient(ingredName: ingredient, foodCategoryID: fk, ingredDescripion: desc)!)
-//            }
-////               for c in row.cells {
-////                   print("yeh:")
-////                print("Ingredient: \(row.cells[0].stringValue(sharedStrings!) ?? "")")
-////                print("Categeory: \(row.cells[1].stringValue(sharedStrings!) ?? "")")
-////               }
-//            }
-////            for wbk in try file.parseWorkbooks() {
-////                print(wbk)
-////              for (name, path) in try file.parseWorksheetPathsAndNames(workbook: wbk) {
-////
-////                let worksheet = try file.parseWorksheet(at: path)
-////                for row in worksheet.data?.rows ?? [] {
-////                  for c in row.cells {
-////                      print(c.value)
-////                  }
-////                }
-////              }
-////            }
-//    ////        Ingredients
-//    //        let ingredients = Table("ingredients")
-//    //        let name = Expression<String>("name")
-//    //        let desc = Expression<String>("desc")
-//    //        let quantity = Expression<Int64>("quantity")
-//    //        go through sheet rows
-//    //        for path in try file.parseWorksheetPaths() {
-//    //            let ws = try file.parseWorksheet(at: path)
-//    //            for row in ws.data?.rows ?? [] {
-//    //                for c in row.cells {
-//    //                    //something to store data into table
-//    //                    //case switch for row cell
-//    //                    print("")
-//    //                    print(c)
-//    //                }
-//    //                //check for allergies
-//    //                //insert
-//    //                //          try db.run(ingredients.insert(
-//    //                //          name <- "Peanut Allergy",
-//    //                //          desc <- "Suitable for people suffering from a peanut allergy. Recipes and ingredients containing peanuts or traces of peanuts will be omitted from your recipe searches"
-//    //                //          quantity <- 0))
-//    //            }
-//    //        }
-//         } catch {
-//             print (error)
-//         }
-//    }
+func importFoodDataCSV(){
+    do {
+        let db = connectDatabase()
+        let foodCat = Table("foodCategory")
+        let count = try db.scalar(foodCat.count)
+        if (count == 0) {
+            let path = Bundle.main.path(forResource: "IngredientsAndCategories", ofType: "xlsx") ?? "none"
+            print(path)
+            
+            guard let file = XLSXFile(filepath: path) else {
+                fatalError("XLSX file corrupted or does not exist")
+            }
+            let paths = try file.parseWorksheetPaths()
+            let worksheet = try file.parseWorksheet(at: paths.first!)
+            let sharedStrings = try file.parseSharedStrings()
+            for row in worksheet.data?.rows ?? [] {
+                //Add Category unless existing one
+                var category = ""
+                var ingredient = ""
+                var desc = ""
+                for c in row.cells {
+                    let ref = Int(c.value ?? "") ?? 0
+                    //              Ingredient
+                    if (ref < 1617) {
+                        guard let ing = c.stringValue(sharedStrings!) else {return}
+                        ingredient = ing
+                        //              Category
+                    } else if (ref >= 1617 && ref < 1907) {
+                        guard let cat = c.stringValue(sharedStrings!) else {return}
+                        category = cat
+                        //              Description
+                    } else if (ref >= 1907) {
+                        guard let d = c.stringValue(sharedStrings!) else {return}
+                        desc = d
+                    }
+                    var fk:Int64 = 0
+                    if (category != "" && ingredient != "" && desc != "") {
+                        let newFoodCat = FoodCategory(foodCategName: category, foodCategDescripion: category)!
+                        if (doesCategoryExist(newFoodCat: newFoodCat) == false){
+                            insertNewFoodCat(newFoodCat: newFoodCat)
+                        }
+                        do {
+                            for cat in try db.prepare(foodCat.order( Expression<Int64>("id").desc).limit(1)){
+                                fk = cat[ Expression<Int64>("id")]
+                            }
+                        }
+                        //check for allergies
+                        insertNewIngredient(newIngredient: Ingredient(ingredName: ingredient, foodCategoryID: fk, ingredDescripion: desc)!)
+                        if (category.contains("peanut") || desc.contains("peanut")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 1)!)
+                        }
+                        if (category.contains(" nut") || desc.contains(" nut")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 2)!)
+                        }
+                        if (category.contains("Crustacea") || category.contains("Molluscs")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 3)!)
+                        }
+                        if (ingredient.contains("fish") || category.contains("fish")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 4)!)
+                        }
+                        if (desc.contains("cows milk") || desc.contains("cows skim milk")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 5)!)
+                        }
+                        if (category.contains("egg") || desc.contains("egg")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 6)!)
+                        }
+                        if (desc.contains("soy")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 7)!)
+                        }
+                        if (desc.contains("wheat")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 8)!)
+                        }
+                        if (desc.contains("sesame")){
+                            insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 9)!)
+                        }
+                    }
+                }
+            }
+        }
+     } catch {
+         print (error)
+     }
+}
 

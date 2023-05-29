@@ -22,8 +22,8 @@ class ViewController: UIViewController {
     @IBAction func tableUpdate(_ sender: Any) {
         createTables()
         insertTableData()
-//        importFoodDataCSV()
-//        readAllergyTable()
+        importFoodDataCSV()
+        readMajorTables()
     }
     
 }
