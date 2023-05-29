@@ -23,6 +23,10 @@ class AddDirectItemViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        ingredientNameErrorLabel.text = ""
+        quantityErrorLabel.text = ""
+        ingredientDescErrorLabel.text = ""
+        expiryDateErrorLabel.text = ""
     }
     
     @IBAction func submitButtonClick(_ sender: Any) {
