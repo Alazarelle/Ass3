@@ -17,13 +17,19 @@ class RecipeRecentViewController: UIViewController {
         tableView.delegate = self
         // Do any additional setup after loading the view.
     }
-    
-
 }
 
 extension RecipeRecentViewController:UITableViewDelegate {
     func tableView(_ tableView:UITableView, didSelectRowAt indexPath: IndexPath){
         //what should the app do when user selecting row at a certain index?
+
+        let ShowController = storyboard?.instantiateViewController(withIdentifier: "RecipeShowViewController") as! RecipeShowViewController
+
+        ShowController.recipe =  recipes[indexPath.row]
+
+        self.navigationController?.pushViewController(ShowController, animated: true)
+        
+
     }
 }
 
