@@ -23,7 +23,7 @@ func insertNewAllergy(newAllergy : AllergyCategory) {
         try db.run(allergy.insert(
             //id <- newAllergy.allergyCategoryID
             name <- newAllergy.allergyCategName,
-            desc <- newAllergy.allergyCategDescripion ))
+            desc <- newAllergy.allergyCategdescription ))
     } catch {
         print (error)
     }
@@ -42,7 +42,7 @@ func insertNewDietCat(newDiet : DietCategory) {
         try db.run(dietCat.insert(
             //id <- newDiet.dietCategoryID
             name <- newDiet.dietCategName,
-            desc <- newDiet.dietCategDescripion ))
+            desc <- newDiet.dietCategdescription ))
     } catch {
         print (error)
     }
@@ -62,7 +62,7 @@ func insertNewFoodCat(newFoodCat : FoodCategory) {
         try db.run(foodCat.insert(
             //id <- newFoodCat.foodCategoryID
             name <- newFoodCat.foodCategName,
-            desc <- newFoodCat.foodCategDescripion))
+            desc <- newFoodCat.foodCategdescription))
     } catch {
         print (error)
     }
@@ -89,15 +89,15 @@ func insertNewIngredient(newIngredient : Ingredient) {
         let ingredients = Table("ingredients")
         
 //        let id = Expression<Int64>("id")
-        let foodCatId = Expression<Int64>("foodCatId")
+        //let foodCatId = Expression<Int64>("foodCatId")
         let name = Expression<String>("name")
         let desc = Expression<String>("desc")
         
         try db.run(ingredients.insert(
             //id <- newIngredient.ingredientID
-            foodCatId <- newIngredient.foodCategoryID,
+            //foodCatId <- newIngredient.foodCategoryID,
             name <- newIngredient.ingredName,
-            desc <- newIngredient.ingredDescripion))
+            desc <- newIngredient.ingredDescription))
     } catch {
         print (error)
     }
@@ -133,23 +133,26 @@ func insertNewInventory(newPantryItem : AppPantryItem) {
      }
 }
 
-func insertNewRecipes(newRecipe : Recipe) {
+func insertNewRecipe(newRecipe : Recipe) {
  do {
      let db = connectDatabase()
-     //handle recipe  data
-     let recipe = Table("recipe")
+     //handle recipe data
+     let recipe = Table("recipes")
 
+     print(newRecipe)
 //     let id = Expression<Int64>("id")
      let name = Expression<String>("name")
-     let desc = Expression<String>("desc")
-     let cookingTime = Expression<Int64>("cookingTime")
-
+     let instructions = Expression<String>("instructions")
+     let cookingTime = Expression<String>("cookingTime")
+     let complexity = Expression<Int64>("complexity")
+     
 
      try db.run(recipe.insert(
      //id <- newRecipe.recipeID
      name <- newRecipe.recipeName,
-     desc <- newRecipe.recipeDescription,
-     cookingTime <- newRecipe.cookingTime ))
+     instructions <- newRecipe.instructions,
+     cookingTime <- newRecipe.cookingTime,
+     complexity <- newRecipe.complexity))
      } catch {
          print (error)
      }
@@ -382,6 +385,29 @@ func buyShoppingList(){
     }
 }
 
+func readRecipes() -> [Recipe]{
+    var recipes = [Recipe]()
+    do {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/db.sqlite3")
+    
+        let recipe = Table("recipes")
+        let id = Expression<Int64>("id")
+        let name = Expression<String>("name")
+        let instructions = Expression<String>("instructions")
+        let cookingTime = Expression<String>("cookingTime")
+        let complexity = Expression<Int64>("complexity")
+
+        for recipe in try db.prepare(recipe) {
+            recipes.append(Recipe(recipeID: recipe[id], recipeName: recipe[name], instructions: recipe[instructions], cookingTime: recipe[cookingTime], complexity: recipe[complexity])!)
+        }
+    } catch {
+        print (error)
+    }
+    return recipes
+}
+
+
 func readStorage() -> [String]{
     var places = [String]()
     do {
@@ -398,6 +424,59 @@ func readStorage() -> [String]{
         print (error)
     }
     return places
+}
+
+func readIngredients() -> [Ingredient]{
+    var ingredients = [Ingredient]()
+    do {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/db.sqlite3")
+    
+        let ingredientsTable = Table("ingredients")
+        let id = Expression<Int64>("id")
+        //let foodCategoryID = Expression<Int64?>("foodCatId")
+        let ingredName = Expression<String>("name")
+        let ingredDescription = Expression<String>("desc")
+        //let allergyCategoryId = Expression<Int64?>("allergies")
+
+        //let innerJoin = recipes.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[id])
+        for ingredient in try db.prepare(ingredientsTable) {
+
+            ingredients.append(Ingredient(ingredientID: (ingredient[id]),/* foodCategoryID: ingredient[foodCategoryID]!,*/ ingredName: ingredient[ingredName], ingredDescription: ingredient[ingredDescription])!)
+        }
+    } catch {
+        print (error)
+    }
+    return ingredients
+}
+
+
+func readRecipe_Ingredient(recipeId: Int64) -> [Ingredient]{
+    var ingredients = [Ingredient]()
+    do {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let db = try! Connection("\(path)/db.sqlite3")
+    
+        let recipe_ingredientTable = Table("recipe_ingredient")
+        let ingredientsTable = Table("ingredients")
+        let recipeId = Expression<Int64>("recipeId")
+        let ingredId = Expression<Int64>("ingredId")
+        let id = Expression<Int64>("id")
+        let name = Expression<String>("name")
+        let desc = Expression<String>("desc")
+        //let allergies = Expression<Int64?>("allergies")
+
+
+        let innerJoin = ingredientsTable.join(.inner, recipe_ingredientTable, on: recipe_ingredientTable[ingredId] == ingredientsTable[id])
+        
+        for innerJoin in try db.prepare(innerJoin.where(ingredientsTable[id] == ingredId)) {
+            ingredients.append(Ingredient(ingredientID: innerJoin[ingredientsTable[id]], ingredName: innerJoin[ingredientsTable[name]], ingredDescription: innerJoin[ingredientsTable[desc]])!)
+        }
+
+    } catch {
+        print (error)
+    }
+    return ingredients
 }
 
 func readInventoryFromId(id: Int64) -> AppPantryItem?{

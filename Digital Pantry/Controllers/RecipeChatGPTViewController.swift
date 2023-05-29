@@ -12,90 +12,102 @@ import OpenAIKit
 
 var numberOfIngredients =  0
 var ingredientsList = [String]()
-
-struct AiRecipe: Codable {
-    let name: String
-    let ingredients: [String]
-    let instructions: [String]
-
-    private enum CodingKeys: String, CodingKey {
-        case name = "recipe_name"
-        case ingredients = "ingredients"
-        case instructions = "instructions"
-    }
-}
+var recipe : Recipe?
 
 class RecipeChatGPTViewController: UIViewController {
-    
-    
+
+    @IBOutlet weak var saveRecipeButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var recipeNameLabel: UILabel!
+    @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var generateRecipeButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var instructionsLabel: UILabel!
     @IBOutlet weak var instructionsTextView: UITextView!
     
     private var models = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
-        
+        // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
-        // Do any additional setup after loading the view.
-    }
+        generateRecipeButton.titleLabel?.textAlignment = NSTextAlignment.center
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.hidesWhenStopped = true
 
+    }
+    
     @IBAction func generateRecipeButtonPressed(_ sender: UIButton) {
-        APICaller.shared.getResponse(input: "Hi") { [weak self] result in
+        var inventory: [AppPantryItem] = readInventoryTableForInventory(storageId: 0)
+        inventory += readInventoryTableForInventory(storageId: 1)
+        inventory += readInventoryTableForInventory(storageId: 2)
+        var inventoryNames :String = ""
+        for item in inventory{
+            inventoryNames += item.ingredientName + ", "
+        }
+        activityIndicator.startAnimating()
+        APICaller.shared.getResponse(input: inventoryNames) { [weak self] result in
             switch result{
             case .success(let output):
                 DispatchQueue.main.async {
+                    
                     print("success")
+
                     let data = output.data(using: .utf8)!
                     
                     do {
-                        let aiRecipe = try JSONDecoder().decode(AiRecipe.self, from: data)
-                        self?.recipeNameLabel.text = aiRecipe.name
+                        let aiRecipe = try JSONDecoder().decode(AIGeneratedRecipe.self, from: data)
+                        recipe = Recipe.init(aiGeneratedRecipe: aiRecipe)
+                        self?.saveRecipeButton.isHidden = false
+                        self?.recipeNameLabel.text = aiRecipe.recipeName
                         numberOfIngredients = aiRecipe.ingredients.count
                         for ingredient in aiRecipe.ingredients{
                             ingredientsList.append(ingredient)
                         }
-                        self?.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height+400)
+                        self?.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 
                         self?.tableView.heightAnchor.constraint(equalToConstant: CGFloat(numberOfIngredients * 45)).isActive = true
    
-                        
                         self?.instructionsTextView.heightAnchor.constraint(equalToConstant: CGFloat(numberOfIngredients * 170)).isActive = true
                         self?.tableView.reloadData()
                         for instruction in aiRecipe.instructions {
                             self?.instructionsTextView.text += instruction + "\n"
                         }
-                        
-                        
+                        self?.activityIndicator.stopAnimating()
+                        self?.recipeNameLabel.isHidden = false
+                        self?.ingredientsLabel.isHidden = false
+                        self?.instructionsLabel.isHidden = false
+
                     } catch {
                         print(error)
+                        self?.activityIndicator.stopAnimating()
+                        self?.instructionsLabel.text = "An error ocurred. The format in which the AI answered the request is incorrect. Please press the button to try making a new recipe"
                     }
-                    //self?.outputUITextView.text = output
-                    //self?.outputLabel.text = output
                 }
-
             case .failure:
                 print("failed")
             }
-            
         }
+
+    }
+    
+    @IBAction func saveRecipeButtonPressed(_ sender: UIButton) {
+        insertNewRecipe(newRecipe: recipe!)
+        let vc = storyboard?.instantiateViewController(withIdentifier: "RecipeRecentViewController") as! RecipeRecentViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension RecipeChatGPTViewController:UITableViewDelegate {
     func tableView(_ tableView:UITableView, didSelectRowAt indexPath: IndexPath){
         //what should the app do when user selecting row at a certain index?
-        
-        //when a cell is selected, print hello
-        let index = indexPath.row
     }
-    
 }
 
 extension RecipeChatGPTViewController:UITableViewDataSource {

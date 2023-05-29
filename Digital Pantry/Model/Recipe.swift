@@ -11,25 +11,39 @@ struct Recipe {
     //properties/members of Recipe
     var recipeID: Int64
     var recipeName: String
-    var recipeDescription: String
-    var cookingTime: Int64
+    var instructions: String
+    var cookingTime: String
     var complexity: Int64
+    
+    
     //initialised where we have not obtained a UniqueIdentifier (recipeID) as yet
-    init?(foodCategoryID: Int64, recipeName: String, recipeDescription: String, cookingTime: Int64, complexity: Int64) {
+    init(recipeName: String, instructions: String, cookingTime: String, complexity: Int64) {
         self.recipeID = -1
         self.recipeName = recipeName
-        self.recipeDescription = recipeDescription
+        self.instructions = instructions
         self.cookingTime = cookingTime
         self.complexity = complexity
     }
     
     //use case: calling data back from DB/table
-    init?(recipeID: Int64, foodCategoryID: Int64, recipeName: String, recipeDescription: String, cookingTime: Int64, complexity: Int64) {
+    init?(recipeID: Int64, recipeName: String, instructions: String, cookingTime: String, complexity: Int64) {
         self.recipeID = recipeID
         self.recipeName = recipeName
-        self.recipeDescription = recipeDescription
+        self.instructions = instructions
         self.cookingTime = cookingTime
         self.complexity = complexity
+    }
+    
+    init?(aiGeneratedRecipe: AIGeneratedRecipe){
+        self.recipeID = -1
+        self.recipeName = aiGeneratedRecipe.recipeName
+        self.instructions = ""
+        for instruction in aiGeneratedRecipe.instructions{
+            self.instructions.append(instruction)
+            self.instructions.append("\n")
+        }
+        self.cookingTime = aiGeneratedRecipe.cookingTime
+        self.complexity = Int64(aiGeneratedRecipe.complexity)!
     }
     
     mutating func setRecipeID(recipeID: Int64) { //once the DB has a recipeID, use this to set it
@@ -48,19 +62,19 @@ struct Recipe {
         return recipeName
     }
     
-    func getRecipeDescription() -> String { //retrieve ingredient description
-        return recipeDescription
+    func getRecipeInstructions() -> String { //retrieve ingredient description
+        return instructions
     }
     
-    mutating func setRecipeDescription(recipeDescription: String) { //add a ingredient description to item
-        self.recipeDescription = recipeDescription
+    mutating func setRecipeDescription(instructions: String) { //add a ingredient description to item
+        self.instructions = instructions
     }
     
-    mutating func setCookingTime(cookingTime: Int64) { //set cookingTime
+    mutating func setCookingTime(cookingTime: String) { //set cookingTime
         self.cookingTime = cookingTime
     }
     
-    func getCookingTime() -> Int64 { //retrieve cookingTime
+    func getCookingTime() -> String { //retrieve cookingTime
         return cookingTime
     }
     
@@ -70,5 +84,24 @@ struct Recipe {
     
     func getComplexity() -> Int64 { //retrieve complexity
         return complexity
+    }
+    
+
+}
+
+struct AIGeneratedRecipe: Codable {
+    //properties/members of Recipe
+    var recipeName: String
+    var instructions: [String]
+    var cookingTime: String
+    var complexity: String
+    var ingredients: [String]
+    
+    private enum CodingKeys: String, CodingKey {
+        case recipeName = "recipeName"
+        case ingredients = "ingredients"
+        case instructions = "instructions"
+        case cookingTime = "cookingTime"
+        case complexity = "complexity"
     }
 }

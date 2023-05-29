@@ -11,20 +11,20 @@ struct DietCategory {
     //properties/members of DietCategory
     var dietCategoryID: Int
     var dietCategName: String
-    var dietCategDescripion: String
+    var dietCategdescription: String
     
     //initialised where we have not obtained a UniqueIdentifier (dietCategoryID) as yet
-    init?(dietCategName: String, dietCategDescripion: String) {
+    init?(dietCategName: String, dietCategdescription: String) {
         self.dietCategoryID = -1
         self.dietCategName = dietCategName
-        self.dietCategDescripion = dietCategDescripion
+        self.dietCategdescription = dietCategdescription
     }
     
     //use case: calling data back from DB/table
-    init?(dietCategoryID: Int, dietCategName: String, dietCategDescripion: String) {
+    init?(dietCategoryID: Int, dietCategName: String, dietCategdescription: String) {
         self.dietCategoryID = dietCategoryID
         self.dietCategName = dietCategName
-        self.dietCategDescripion = dietCategDescripion
+        self.dietCategdescription = dietCategdescription
         
     }
     
@@ -44,11 +44,11 @@ struct DietCategory {
         self.dietCategName = dietCategName
     }
 
-    func getDietCategDescripion() -> String { //retrieve dietCategDescripion
-        return dietCategDescripion
+    func getDietCategdescription() -> String { //retrieve dietCategdescription
+        return dietCategdescription
     }
     
-    mutating func setDietCategDescripion(dietCategDescripion: String) { //add a dietCategDescripion to item
-        self.dietCategDescripion = dietCategDescripion
+    mutating func setDietCategdescription(dietCategdescription: String) { //add a dietCategdescription to item
+        self.dietCategdescription = dietCategdescription
     }
 }

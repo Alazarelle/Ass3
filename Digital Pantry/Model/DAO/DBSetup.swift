@@ -18,18 +18,25 @@ func createTables() {
     //wrap
     do {
         let db = connectDatabase()
+        
+        try db.execute("DROP TABLE if exists recipes")
+        try db.execute("DROP TABLE if exists ingredients")
         try db.execute("DROP TABLE if exists allergyCategory")
         try db.execute("DROP TABLE if exists dietCategory")
         try db.execute("DROP TABLE if exists inventory")
         try db.execute("DROP TABLE if exists ingredients")
         try db.execute("DROP TABLE if exists foodCategory")
 
-        //food category
-        let foodCat = Table("foodCategory")
-        try db.run(foodCat.create { t in
+        //recipes
+        let recipes = Table("recipes")
+        try db.run(recipes.create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
-            t.column(Expression<String>("desc"))
+            t.column(Expression<String>("instructions"))
+            //t.column(Expression<String>("ingredients"))//,references: ingredients, id) //will link to another table as ForeignKey
+            //t.column(Expression<String?>("diets"))//,references: ingredients, id)) //will link to another table as ForeignKey
+            t.column(Expression<String>("cookingTime"))
+            t.column(Expression<Int64>("complexity"))
         })
         
         //ingredients
@@ -37,7 +44,7 @@ func createTables() {
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
-            //t.column(Expression<Int64>("foodCatId"), references: Table("foodCategory"), Expression<Int64>("id"))
+            //t.column(Expression<Int64?>("foodCatId"), references: Table("foodCategory"), Expression<Int64>("id"))
             t.column(Expression<Int64?>("allergies"),references: Table("allergyCategory"), Expression<Int64>("id"))
         })
         
@@ -66,7 +73,7 @@ func createTables() {
         })
         
         //ingredient_allergy
-        try db.run(Table("ingredient_allergy").create { t in
+        try db.run(Table("ingredient_allergy").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<Int64>("ingredId"))
             t.column(Expression<Int64>("allergyId"))
@@ -78,26 +85,16 @@ func createTables() {
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
         })
-
-        //recipes
-        let recipes = Table("recipes")
-        try db.run(recipes.create(ifNotExists: true) { t in
-            t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<String>("name"))
-            t.column(Expression<String>("desc"))
-            t.column(Expression<Int64>("cookingTime"))
-            t.column(Expression<String>("complexity"))
-        })
         
         //recipe_ingredient
-        try db.run(Table("recipe_ingredient").create { t in
+        try db.run(Table("recipe_ingredient").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<Int64>("recipeId"))
             t.column(Expression<Int64>("ingredId"))
         })
         
         //recipe_diet
-        try db.run(Table("recipe_diet").create { t in
+        try db.run(Table("recipe_diet").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<Int64>("recipeId"))
             t.column(Expression<Int64>("dietId"))
@@ -124,7 +121,6 @@ func createTables() {
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("desc"))
             t.column(Expression<Int64>("inventoryId")) //AppPantry
-//
         })
         
 
@@ -187,47 +183,47 @@ func insertTableData() {
         count = try db.scalar(diet.count)
         if (count == 0) {
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Vegan",
-                 dietCategDescripion:  "People following a vegan diet typically abstain from consuming animal and animal by-products in their diet. A vegan diet excludes meat, fish, eggs, dairy, honey,  gelatine and other animal products and by-products. Recipes and products containing animal products and by-products will be excluded from your recipe searches.")!)
+                dietCategdescription:  "People following a vegan diet typically abstain from consuming animal and animal by-products in their diet. A vegan diet excludes meat, fish, eggs, dairy, honey,  gelatine and other animal products and by-products. Recipes and products containing animal products and by-products will be excluded from your recipe searches.")!)
             
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Vegetarian (Ovo-Lacto)",
-                 dietCategDescripion:  "People following an ovo-lacto vegetarian diet typically abstain from consuming animal meat in their diet, but do consume animal products (such as egg, dairy, and honey). This diet excludes meat, fish and  gelatine, but includes eggs, dairy, honey, and other animal products. Recipes and products containing meat products will be excluded from your recipe searches.")!)
+                 dietCategdescription:  "People following an ovo-lacto vegetarian diet typically abstain from consuming animal meat in their diet, but do consume animal products (such as egg, dairy, and honey). This diet excludes meat, fish and  gelatine, but includes eggs, dairy, honey, and other animal products. Recipes and products containing meat products will be excluded from your recipe searches.")!)
             
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Ovo-Vegetarian",
-                 dietCategDescripion:  "People following a lacto-vegetarian diet abstain from consuming animal meat and egg products in their diet, but do consume dairy products (such as milk, yoghurt, butter, and cheese). This diet excludes ingredients and recipes containing meat, fish,  gelatine, and egg. Recipes and products containing these will be excluded from your recipe searches.")!)
+                 dietCategdescription:  "People following a lacto-vegetarian diet abstain from consuming animal meat and egg products in their diet, but do consume dairy products (such as milk, yoghurt, butter, and cheese). This diet excludes ingredients and recipes containing meat, fish,  gelatine, and egg. Recipes and products containing these will be excluded from your recipe searches.")!)
             
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Lacto-Vegetarian",
-                 dietCategDescripion:  "People following a lacto-vegetarian diet abstain from consuming animal meat and egg products in their diet, but do consume dairy products (such as milk, yoghurt, butter, and cheese). This diet excludes ingredients and recipes containing meat, fish,  gelatine, and egg. Recipes and products containing these will be excluded from your recipe searches.")!)
+                 dietCategdescription:  "People following a lacto-vegetarian diet abstain from consuming animal meat and egg products in their diet, but do consume dairy products (such as milk, yoghurt, butter, and cheese). This diet excludes ingredients and recipes containing meat, fish,  gelatine, and egg. Recipes and products containing these will be excluded from your recipe searches.")!)
             
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Pescatarian",
-                 dietCategDescripion:  "People following a pescatarian diet typically incorporate seafood (such as fish and shellfish) into an otherwise vegetarian diet. This diet excludes meat and meat products except for seafood. Recipes and products containing these will be excluded from your recipe searches.")!)
+                 dietCategdescription:  "People following a pescatarian diet typically incorporate seafood (such as fish and shellfish) into an otherwise vegetarian diet. This diet excludes meat and meat products except for seafood. Recipes and products containing these will be excluded from your recipe searches.")!)
             
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Flexatarian",
-                 dietCategDescripion:  "People following a flexitarian diet follow a mostly vegetarian diet, but occasionally consume animal meat and animal products from time to time.  Vegetarian and vegan recipes and products will be prioritised in your recipes, but recipes and products containing meat, fish and animal products will not be excluded from your recipe searches.")!)
+                 dietCategdescription:  "People following a flexitarian diet follow a mostly vegetarian diet, but occasionally consume animal meat and animal products from time to time.  Vegetarian and vegan recipes and products will be prioritised in your recipes, but recipes and products containing meat, fish and animal products will not be excluded from your recipe searches.")!)
             
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Keto",
-                 dietCategDescripion:  "People following a keto (ketogenic) diet consume foods high in fat and low in carbohydrate’s, causing the body to burn fats rather than carbohydrates for energy.  For this reason, it is often followed by people who undertake intermittent fasting to lose weight.  Recipes and products that are high in unsaturated fats and low in carbohydrates will be prioritised in your recipe searches.")!)
+                 dietCategdescription:  "People following a keto (ketogenic) diet consume foods high in fat and low in carbohydrate’s, causing the body to burn fats rather than carbohydrates for energy.  For this reason, it is often followed by people who undertake intermittent fasting to lose weight.  Recipes and products that are high in unsaturated fats and low in carbohydrates will be prioritised in your recipe searches.")!)
             
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Paleo",
-                 dietCategDescripion:  "People following a paleo (Paleogenic) diet typically consume whole foods and unprocessed foods. This diet attempts to allow the follower to only consume foods thought to have been able to have been consumed by hunter-gatherer humans during the Palaeolithic Era. This diet therefore excludes dairy, grains, legumes, and all processed foods (such as prepared meals, processed sugar, and alcohol). Recipes and products containing these will be excluded from your recipe searches.")!)
+                 dietCategdescription:  "People following a paleo (Paleogenic) diet typically consume whole foods and unprocessed foods. This diet attempts to allow the follower to only consume foods thought to have been able to have been consumed by hunter-gatherer humans during the Palaeolithic Era. This diet therefore excludes dairy, grains, legumes, and all processed foods (such as prepared meals, processed sugar, and alcohol). Recipes and products containing these will be excluded from your recipe searches.")!)
             
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Raw",
-                 dietCategDescripion:  "People following a raw food diet typically only consume foods that are uncooked and unprocessed. This diet focuses on consuming fruit, vegetables, some fermented foods (such as kimchi and yoghurt) and some meats that can be eaten raw (such as sashimi) and excludes processed foods and most processed dairy. Recipes and products containing these will be excluded from your recipe searches.")!)
+                 dietCategdescription:  "People following a raw food diet typically only consume foods that are uncooked and unprocessed. This diet focuses on consuming fruit, vegetables, some fermented foods (such as kimchi and yoghurt) and some meats that can be eaten raw (such as sashimi) and excludes processed foods and most processed dairy. Recipes and products containing these will be excluded from your recipe searches.")!)
             
             insertNewDietCat(newDiet: DietCategory(dietCategName: "No Sugar",
-                 dietCategDescripion:  "This diet primarily involves avoiding the consumption of processed carbohydrates, especially raw and processed sugar. Recipes and products containing processed sugar will be excluded from your recipe searches.")!)
+                 dietCategdescription:  "This diet primarily involves avoiding the consumption of processed carbohydrates, especially raw and processed sugar. Recipes and products containing processed sugar will be excluded from your recipe searches.")!)
             
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Low Fat",
-                 dietCategDescripion:  "This diet primarily involves minimising the consumption of saturated fats, especially in regard to processed and deep-fried foods. Recipes and products containing high amounts of saturated fats will be excluded from your recipes, and recipes and products containing low amounts will be prioritised in your recipe searches.")!)
+                 dietCategdescription:  "This diet primarily involves minimising the consumption of saturated fats, especially in regard to processed and deep-fried foods. Recipes and products containing high amounts of saturated fats will be excluded from your recipes, and recipes and products containing low amounts will be prioritised in your recipe searches.")!)
             
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Kosher",
-                 dietCategDescripion:  "People following a Kosher diet typically must separate meat(except fish) from dairy products and not eat particular meat. This diet attempts to follow the dietary laws within the Torah, of the Jewish faith. This diet therefore avoids pork, shellfish, shrimps, particular animal products or by-products and separates meat from dairy products. Recipes and products containing these will be excluded from your recipe searches.")!)
+                 dietCategdescription:  "People following a Kosher diet typically must separate meat(except fish) from dairy products and not eat particular meat. This diet attempts to follow the dietary laws within the Torah, of the Jewish faith. This diet therefore avoids pork, shellfish, shrimps, particular animal products or by-products and separates meat from dairy products. Recipes and products containing these will be excluded from your recipe searches.")!)
             
             insertNewDietCat(newDiet: DietCategory(dietCategName: "Halal",
-                 dietCategDescripion:  "People following a Halal diet typically must not eat pig (or pig by-products) or drink alcohol. This diet attempts to follow the dietary laws within the Qu’ran, of the Muslim faith. This diet avoids pig and pig by-products like animal blood, animal fats,  gelatine and alcohol. Recipes and products containing these will be excluded from your recipe searches.")!)
+                 dietCategdescription:  "People following a Halal diet typically must not eat pig (or pig by-products) or drink alcohol. This diet attempts to follow the dietary laws within the Qu’ran, of the Muslim faith. This diet avoids pig and pig by-products like animal blood, animal fats,  gelatine and alcohol. Recipes and products containing these will be excluded from your recipe searches.")!)
             
-            insertNewDietCat(newDiet: DietCategory(dietCategName: "Gluten Free (Coeliac)", dietCategDescripion: "Most commonly followed by people suffering from Coeliac disease, this diet focuses on excluding foods containing gluten, such as wheat, barley and oats (such as bread and flour). This diet is also sometimes followed to reduce the symptoms of irritable bowel syndrome (IBS). Recipes and products containing gluten will be omitted from your recipe searches.")!)
+            insertNewDietCat(newDiet: DietCategory(dietCategName: "Gluten Free (Coeliac)", dietCategdescription: "Most commonly followed by people suffering from Coeliac disease, this diet focuses on excluding foods containing gluten, such as wheat, barley and oats (such as bread and flour). This diet is also sometimes followed to reduce the symptoms of irritable bowel syndrome (IBS). Recipes and products containing gluten will be omitted from your recipe searches.")!)
             
-            insertNewDietCat(newDiet: DietCategory(dietCategName: "Low FODMAP", dietCategDescripion: "People following a Low FODMAP diet attempt to eliminate fermentable carbohydrates (FODMAPs) from their diets. This is usually followed by people attempting to reduce the symptoms of irritable bowel syndrome (IBS). This diet focusses on excluding foods high in fructans, fructose, and lactose (such as Apples, Onions, Fruit Juice, Milk, Soft Cheeses, and stone fruits among others). Recipes and products containing these will be excluded from your recipe searches.")!)
+            insertNewDietCat(newDiet: DietCategory(dietCategName: "Low FODMAP", dietCategdescription: "People following a Low FODMAP diet attempt to eliminate fermentable carbohydrates (FODMAPs) from their diets. This is usually followed by people attempting to reduce the symptoms of irritable bowel syndrome (IBS). This diet focusses on excluding foods high in fructans, fructose, and lactose (such as Apples, Onions, Fruit Juice, Milk, Soft Cheeses, and stone fruits among others). Recipes and products containing these will be excluded from your recipe searches.")!)
         }
         
         let storage = Table("storage")
@@ -255,7 +251,7 @@ func readMajorTables(){
         let allergy = Table("allergyCategory")
         let diet = Table("dietCategory")
         let foods = Table("ingredients")
-        let categories = Table("foodCategory")
+        //let categories = Table("foodCategory")
         let id = Expression<Int64>("id")
         let name = Expression<String>("name")
         let desc = Expression<String>("desc")
@@ -275,10 +271,10 @@ func readMajorTables(){
                 print("id: \(food[id]), name: \(food[name]), desc: \(food[desc])")
         }
         
-        print("Food Categories:")
-        for cat in try db.prepare(categories) {
-                print("id: \(cat[id]), name: \(cat[name]), desc: \(cat[desc])")
-        }
+        //print("Food Categories:")
+        //for cat in try db.prepare(categories) {
+        //        print("id: \(cat[id]), name: \(cat[name]), desc: \(cat[desc])")
+        //}
     } catch {
         print (error)
     }
@@ -288,9 +284,9 @@ func readMajorTables(){
 func importFoodDataCSV(){
     do {
         let db = connectDatabase()
-        let foodCat = Table("foodCategory")
-        let count = try db.scalar(foodCat.count)
-        if (count == 0) {
+        //let foodCat = Table("foodCategory")
+        //let count = try db.scalar(foodCat.count)
+        if (/*count == 0*/ true) {
             let path = Bundle.main.path(forResource: "IngredientsAndCategories", ofType: "xlsx") ?? "none"
             print(path)
             
@@ -302,7 +298,7 @@ func importFoodDataCSV(){
             let sharedStrings = try file.parseSharedStrings()
             for row in worksheet.data?.rows ?? [] {
                 //Add Category unless existing one
-                var category = ""
+                //var category = ""
                 var ingredient = ""
                 var desc = ""
                 for c in row.cells {
@@ -312,43 +308,44 @@ func importFoodDataCSV(){
                         guard let ing = c.stringValue(sharedStrings!) else {return}
                         ingredient = ing
                         //              Category
-                    } else if (ref >= 1617 && ref < 1907) {
-                        guard let cat = c.stringValue(sharedStrings!) else {return}
-                        category = cat
+                    } //else if (ref >= 1617 && ref < 1907) {
+                        //guard let cat = c.stringValue(sharedStrings!) else {return}
+                        //category = cat
                         //              Description
-                    } else if (ref >= 1907) {
+                    //}
+                    else if (ref >= 1907) {
                         guard let d = c.stringValue(sharedStrings!) else {return}
                         desc = d
                     }
                     var fk:Int64 = 0
-                    if (category != "" && ingredient != "" && desc != "") {
-                        let newFoodCat = FoodCategory(foodCategName: category, foodCategDescripion: category)!
-                        if (doesCategoryExist(newFoodCat: newFoodCat) == false){
-                            insertNewFoodCat(newFoodCat: newFoodCat)
-                        }
-                        do {
+                    if (/*category != "" && */ingredient != "" && desc != "") {
+                        //let newFoodCat = FoodCategory(foodCategName: category, foodCategdescription: category)!
+                        //if (doesCategoryExist(newFoodCat: newFoodCat) == false){
+                        //    insertNewFoodCat(newFoodCat: newFoodCat)
+                        //}
+                        /*do {
                             for cat in try db.prepare(foodCat.order( Expression<Int64>("id").desc).limit(1)){
                                 fk = cat[ Expression<Int64>("id")]
                             }
-                        }
+                        }*/
                         //check for allergies
-                        insertNewIngredient(newIngredient: Ingredient(ingredName: ingredient, foodCategoryID: fk, ingredDescripion: desc)!)
-                        if (category.contains("peanut") || desc.contains("peanut")){
+                        insertNewIngredient(newIngredient: Ingredient(ingredName: ingredient, /*foodCategoryID: fk,*/ ingredDescription: desc)!)
+                        if (/*category.contains("peanut") ||*/ desc.contains("peanut")){
                             insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 1)!)
                         }
-                        if (category.contains(" nut") || desc.contains(" nut")){
+                        if (/*category.contains(" nut") ||*/ desc.contains(" nut")){
                             insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 2)!)
                         }
-                        if (category.contains("Crustacea") || category.contains("Molluscs")){
+                        if (/*category.contains("Crustacea") ||*/ /*category.contains("Molluscs")*/false){
                             insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 3)!)
                         }
-                        if (ingredient.contains("fish") || category.contains("fish")){
+                        if (ingredient.contains("fish") /*|| category.contains("fish")*/){
                             insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 4)!)
                         }
                         if (desc.contains("cows milk") || desc.contains("cows skim milk")){
                             insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 5)!)
                         }
-                        if (category.contains("egg") || desc.contains("egg")){
+                        if (/*category.contains("egg") ||*/ desc.contains("egg")){
                             insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 6)!)
                         }
                         if (desc.contains("soy")){
