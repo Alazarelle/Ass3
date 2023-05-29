@@ -38,6 +38,9 @@ class UpdatePantryItemViewController: UIViewController{
         ingredientDescTextField.text = item!.ingredientDesc
         ingredientNameTextField.text = item!.ingredientName
         expiryDatePicker.date = item!.expiryDate
+        
+        expiryDatePicker.backgroundColor = .white
+        expiryDatePicker.contentHorizontalAlignment = .center
     }
     
     @IBAction func deleteButtonClick(_ sender: Any) {

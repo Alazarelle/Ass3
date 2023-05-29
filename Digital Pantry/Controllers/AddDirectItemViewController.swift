@@ -27,6 +27,9 @@ class AddDirectItemViewController: UIViewController{
         quantityErrorLabel.text = ""
         ingredientDescErrorLabel.text = ""
         expiryDateErrorLabel.text = ""
+        
+        expiryDatePicker.backgroundColor = .white
+        expiryDatePicker.contentHorizontalAlignment = .center
     }
     
     @IBAction func submitButtonClick(_ sender: Any) {

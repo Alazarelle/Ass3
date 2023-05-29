@@ -35,6 +35,9 @@ class AddItemViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.storagePickerView.delegate = self
         
         storageData = readStorage()
+        
+        expiryDatePicker.backgroundColor = .white
+        expiryDatePicker.contentHorizontalAlignment = .center
     }
     
     override func didReceiveMemoryWarning() {
