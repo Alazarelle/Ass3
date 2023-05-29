@@ -30,8 +30,8 @@
             filePath = "Digital Pantry/Controllers/RecipeChatGPTViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "generateRecipeButtonPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>

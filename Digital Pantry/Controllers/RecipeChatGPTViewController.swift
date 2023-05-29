@@ -29,11 +29,19 @@ class RecipeChatGPTViewController: UIViewController {
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
+        generateRecipeButton.titleLabel?.textAlignment = NSTextAlignment.center
     }
     
 
     @IBAction func generateRecipeButtonPressed(_ sender: UIButton) {
-        APICaller.shared.getResponse(input: "Hi") { [weak self] result in
+        var inventory: [AppPantryItem] = readInventoryTableForInventory(storageId: 0)
+        inventory += readInventoryTableForInventory(storageId: 1)
+        inventory += readInventoryTableForInventory(storageId: 2)
+        var inventoryNames :String = ""
+        for item in inventory{
+            inventoryNames += item.ingredientName + ", "
+        }
+        APICaller.shared.getResponse(input: inventoryNames) { [weak self] result in
             switch result{
             case .success(let output):
                 DispatchQueue.main.async {

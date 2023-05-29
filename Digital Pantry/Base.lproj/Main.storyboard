@@ -261,10 +261,10 @@
                                 <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPk-tj-Gg5">
-                                <rect key="frame" x="15" y="151" width="360" height="34.333333333333343"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPk-tj-Gg5">
+                                <rect key="frame" x="15" y="151" width="360" height="54.333333333333343"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Create new recipe"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Create new recipe with my available ingredients" titleAlignment="center"/>
                                 <connections>
                                     <action selector="generateRecipeButtonPressed:" destination="5rH-n1-hOx" eventType="touchUpInside" id="axt-GX-i50"/>
                                 </connections>
@@ -282,7 +282,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gm-3E-rEg">
-                                                <rect key="frame" x="0.0" y="53.333333333333321" width="358" height="31.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="53.33333333333335" width="358" height="31.333333333333336"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                                 <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
