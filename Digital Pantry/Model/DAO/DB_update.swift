@@ -27,7 +27,7 @@ func updateAllergy(allergyID: Int64, updatedAllergy : AllergyCategory) {//query 
         
         try db.run(thisAllergy.update(
             name <- updatedAllergy.allergyCategName,
-            desc <- updatedAllergy.allergyCategDescripion ))
+            desc <- updatedAllergy.allergyCategdescription ))
     } catch {
         print (error)
     }
@@ -47,7 +47,7 @@ func updateDietCat(dietID: Int64, updatedDiet : DietCategory) {//query to make a
         
         try db.run(thisDiet.update(
             name <- updatedDiet.dietCategName,
-            desc <- updatedDiet.dietCategDescripion ))
+            desc <- updatedDiet.dietCategdescription ))
     } catch {
         print (error)
     }
@@ -68,7 +68,7 @@ func updateFoodCat(foodCatId : Int64, updatedFoodCat : FoodCategory) {//query to
         
         try db.run(thisFoodCat.update(
             name <- updatedFoodCat.foodCategName,
-            desc <- updatedFoodCat.foodCategDescripion ))
+            desc <- updatedFoodCat.foodCategdescription ))
     } catch {
         print (error)
     }
@@ -83,16 +83,16 @@ func updateIngredient(ingredientID : Int64, updatedIngredient : Ingredient) {//q
         let ingredients = Table("ingredients")
         
         let id = Expression<Int64>("id")
-        let foodCatId = Expression<Int64>("foodCatId")
+        //let foodCatId = Expression<Int64>("foodCatId")
         let name = Expression<String>("name")
         let desc = Expression<String>("desc")
         
         let thisIngredient = ingredients.filter(id == ingredientID)
         
         try db.run(thisIngredient.update(
-            foodCatId <- updatedIngredient.foodCategoryID,
+            //foodCatId <- updatedIngredient.foodCategoryID,
             name <- updatedIngredient.ingredName,
-            desc <- updatedIngredient.ingredDescripion ))
+            desc <- updatedIngredient.ingredDescription ))
     } catch {
         print (error)
     }

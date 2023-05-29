@@ -11,20 +11,20 @@ struct AllergyCategory {
     //properties/members of AllergyCategory
     var allergyCategoryID: Int
     var allergyCategName: String
-    var allergyCategDescripion: String
+    var allergyCategdescription: String
     
     //initialised where we have not obtained a UniqueIdentifier (allergyCategoryID) as yet
-    init?(allergyCategName: String, allergyCategDescripion: String) {
+    init?(allergyCategName: String, allergyCategdescription: String) {
         self.allergyCategoryID = -1
         self.allergyCategName = allergyCategName
-        self.allergyCategDescripion = allergyCategDescripion
+        self.allergyCategdescription = allergyCategdescription
     }
     
     //use case: calling data back from DB/table
-    init?(allergyCategoryID: Int, allergyCategName: String, allergyCategDescripion: String) {
+    init?(allergyCategoryID: Int, allergyCategName: String, allergyCategdescription: String) {
         self.allergyCategoryID = allergyCategoryID
         self.allergyCategName = allergyCategName
-        self.allergyCategDescripion = allergyCategDescripion
+        self.allergyCategdescription = allergyCategdescription
         
     }
     
@@ -44,11 +44,11 @@ struct AllergyCategory {
         self.allergyCategName = allergyCategName
     }
 
-    func getAllergyCategDescripion() -> String { //retrieve allergyCategDescripion
-        return allergyCategDescripion
+    func getAllergyCategdescription() -> String { //retrieve allergyCategdescription
+        return allergyCategdescription
     }
     
-    mutating func setAllergyCategDescripion(allergyCategDescripion: String) { //add a allergyCategDescripion to item
-        self.allergyCategDescripion = allergyCategDescripion
+    mutating func setAllergyCategdescription(allergyCategdescription: String) { //add a allergyCategdescription to item
+        self.allergyCategdescription = allergyCategdescription
     }
 }

@@ -11,6 +11,7 @@
 		65500B412A136B7F0007F7C9 /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = 65500B402A136B7F0007F7C9 /* OpenAISwift */; };
 		65500B432A136BBC0007F7C9 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65500B422A136BBC0007F7C9 /* APICaller.swift */; };
 		655C791C2A24A6EB004B142D /* RecipeShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655C791B2A24A6EB004B142D /* RecipeShowViewController.swift */; };
+		655C791E2A24D9BD004B142D /* IngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655C791D2A24D9BD004B142D /* IngredientsViewController.swift */; };
 		65D5B9F82A0A2C0100307B35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B9F72A0A2C0100307B35 /* AppDelegate.swift */; };
 		65D5B9FA2A0A2C0100307B35 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B9F92A0A2C0100307B35 /* SceneDelegate.swift */; };
 		65D5B9FC2A0A2C0100307B35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B9FB2A0A2C0100307B35 /* ViewController.swift */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		65500B422A136BBC0007F7C9 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		655C791B2A24A6EB004B142D /* RecipeShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeShowViewController.swift; sourceTree = "<group>"; };
+		655C791D2A24D9BD004B142D /* IngredientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsViewController.swift; sourceTree = "<group>"; };
 		65D5B9F42A0A2C0100307B35 /* Digital Pantry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Digital Pantry.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D5B9F72A0A2C0100307B35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65D5B9F92A0A2C0100307B35 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				78BCF40C2A136D8F00FA93C9 /* ShoppingListViewController.swift */,
 				78A170442A2495C700614B62 /* AddDirectItemViewController.swift */,
 				655C791B2A24A6EB004B142D /* RecipeShowViewController.swift */,
+				655C791D2A24D9BD004B142D /* IngredientsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				C28A9D242A17AFD0004AA244 /* AppUser.swift in Sources */,
 				78BCF4102A136D8F00FA93C9 /* AddItemViewController.swift in Sources */,
 				C2FD43892A1C8E3F006F864C /* Ingred_Allergy.swift in Sources */,
+				655C791E2A24D9BD004B142D /* IngredientsViewController.swift in Sources */,
 				C28A9D262A17B00F004AA244 /* AppPantry.swift in Sources */,
 				C2FD43832A1C8520006F864C /* AllergyCategory.swift in Sources */,
 				78BCF4142A136D8F00FA93C9 /* RecipePreferencesViewController.swift in Sources */,
