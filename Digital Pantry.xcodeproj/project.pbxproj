@@ -19,9 +19,7 @@
 		781D96F22A24F600008515D4 /* UpdatePantryItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D96F12A24F600008515D4 /* UpdatePantryItemController.swift */; };
 		78A170452A2495C700614B62 /* AddDirectItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A170442A2495C700614B62 /* AddDirectItemViewController.swift */; };
 		78BCF40E2A136D8F00FA93C9 /* RecipeAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4042A136D8E00FA93C9 /* RecipeAddViewController.swift */; };
-		78BCF40F2A136D8F00FA93C9 /* FreezerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4052A136D8E00FA93C9 /* FreezerViewController.swift */; };
 		78BCF4102A136D8F00FA93C9 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4062A136D8E00FA93C9 /* AddItemViewController.swift */; };
-		78BCF4112A136D8F00FA93C9 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4072A136D8E00FA93C9 /* FridgeViewController.swift */; };
 		78BCF4122A136D8F00FA93C9 /* PantryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4082A136D8E00FA93C9 /* PantryViewController.swift */; };
 		78BCF4132A136D8F00FA93C9 /* RecipeChatGPTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF4092A136D8E00FA93C9 /* RecipeChatGPTViewController.swift */; };
 		78BCF4142A136D8F00FA93C9 /* RecipePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BCF40A2A136D8F00FA93C9 /* RecipePreferencesViewController.swift */; };
@@ -64,9 +62,7 @@
 		781D96F12A24F600008515D4 /* UpdatePantryItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePantryItemController.swift; sourceTree = "<group>"; };
 		78A170442A2495C700614B62 /* AddDirectItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDirectItemViewController.swift; sourceTree = "<group>"; };
 		78BCF4042A136D8E00FA93C9 /* RecipeAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeAddViewController.swift; sourceTree = "<group>"; };
-		78BCF4052A136D8E00FA93C9 /* FreezerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreezerViewController.swift; sourceTree = "<group>"; };
 		78BCF4062A136D8E00FA93C9 /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
-		78BCF4072A136D8E00FA93C9 /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourceco.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		78BCF4082A136D8E00FA93C9 /* PantryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PantryViewController.swift; sourceTree = "<group>"; };
 		78BCF4092A136D8E00FA93C9 /* RecipeChatGPTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeChatGPTViewController.swift; sourceTree = "<group>"; };
 		78BCF40A2A136D8F00FA93C9 /* RecipePreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipePreferencesViewController.swift; sourceTree = "<group>"; };
@@ -157,8 +153,6 @@
 				65D5B9FB2A0A2C0100307B35 /* ViewController.swift */,
 				78DE3A702A136A320024BA10 /* RecipeViewController.swift */,
 				78BCF4062A136D8E00FA93C9 /* AddItemViewController.swift */,
-				78BCF4052A136D8E00FA93C9 /* FreezerViewController.swift */,
-				78BCF4072A136D8E00FA93C9 /* FridgeViewController.swift */,
 				78BCF4082A136D8E00FA93C9 /* PantryViewController.swift */,
 				78BCF4042A136D8E00FA93C9 /* RecipeAddViewController.swift */,
 				78BCF4092A136D8E00FA93C9 /* RecipeChatGPTViewController.swift */,
@@ -326,10 +320,8 @@
 				C2FD43832A1C8520006F864C /* AllergyCategory.swift in Sources */,
 				78BCF4142A136D8F00FA93C9 /* RecipePreferencesViewController.swift in Sources */,
 				C2FD438F2A1C9DE1006F864C /* SectionOfPantry.swift in Sources */,
-				78BCF4112A136D8F00FA93C9 /* FridgeViewController.swift in Sources */,
 				78BCF4162A136D8F00FA93C9 /* ShoppingListViewController.swift in Sources */,
 				C2FD437D2A1C7C81006F864C /* Recipe.swift in Sources */,
-				78BCF40F2A136D8F00FA93C9 /* FreezerViewController.swift in Sources */,
 				65D5B9FA2A0A2C0100307B35 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
