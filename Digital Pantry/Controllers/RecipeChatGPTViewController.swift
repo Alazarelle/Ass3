@@ -24,15 +24,19 @@ class RecipeChatGPTViewController: UIViewController {
     @IBOutlet weak var generateRecipeButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var instructionsLabel: UILabel!
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var instructionsTextView: UITextView!
     
     private var models = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ingredientsList = []
+        numberOfIngredients = 0
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
+        
         generateRecipeButton.titleLabel?.textAlignment = NSTextAlignment.center
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +77,7 @@ class RecipeChatGPTViewController: UIViewController {
                         for ingredient in aiRecipe.ingredients{
                             ingredientsList.append(ingredient)
                         }
-                        self?.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                        self?.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 300)
 
                         self?.tableView.heightAnchor.constraint(equalToConstant: CGFloat(numberOfIngredients * 45)).isActive = true
    
@@ -90,7 +94,8 @@ class RecipeChatGPTViewController: UIViewController {
                     } catch {
                         print(error)
                         self?.activityIndicator.stopAnimating()
-                        self?.instructionsLabel.text = "An error ocurred. The format in which the AI answered the request is incorrect. Please press the button to try making a new recipe"
+                        self?.errorLabel.isHidden = false
+                        self?.errorLabel.text = "An error ocurred. The format in which the AI answered the request is incorrect. Please press the button to try making a new recipe"
                     }
                 }
             case .failure:
@@ -101,9 +106,41 @@ class RecipeChatGPTViewController: UIViewController {
     }
     
     @IBAction func saveRecipeButtonPressed(_ sender: UIButton) {
-        insertNewRecipe(newRecipe: recipe!)
+        let id: Int64?
+        if doesCategoryExist(newFoodCat: FoodCategory(foodCategName: "ChatGPT")!){
+            print("Hello")
+
+            id = findCategoryIdByName(catName: "ChatGPT")
+        }
+        else{
+            print("Goodbye")
+
+            insertNewFoodCat(newFoodCat: FoodCategory(foodCategName: "ChatGPT")!)
+            id = findCategoryIdByName(catName: "ChatGPT")
+        }
+        let recipeId = insertNewRecipe(newRecipe: recipe!, flag: true)
+        print("Recipe saved")
+        var flag = false
+        let allIngredients = readIngredients()
+        for ingredientA in ingredientsList{
+            flag = false
+            for ingredientB in allIngredients{
+                if ingredientA == ingredientB.ingredName{
+                    insertNewRecipe_ingredient(newRecipe_ingredient: Recipe_Ingred(recipeID: recipeId, ingredID: ingredientB.ingredientID)!)
+                    flag = true
+                }
+            }
+            if flag == false {
+                print("New ingredient")
+                let newIngredientId = insertNewIngredientAndReturnId(newIngredient: Ingredient(ingredName: ingredientA, foodCategoryID: id!, ingredDescription: ingredientA)!)
+                
+                insertNewRecipe_ingredient(newRecipe_ingredient: Recipe_Ingred(recipeID: recipeId, ingredID: newIngredientId)!)
+            }
+        }
+        
         let vc = storyboard?.instantiateViewController(withIdentifier: "RecipeRecentViewController") as! RecipeRecentViewController
         self.navigationController?.pushViewController(vc, animated: true)
+        
     }
 }
 

@@ -18,13 +18,14 @@ func createTables() {
     //wrap
     do {
         let db = connectDatabase()
-//        try db.execute("DROP TABLE if exists recipes")
-//        try db.execute("DROP TABLE if exists ingredients")
+     //   try db.execute("DROP TABLE if exists recipes")
+    //    try db.execute("DROP TABLE if exists ingredients")
 //        try db.execute("DROP TABLE if exists allergyCategory")
 //        try db.execute("DROP TABLE if exists dietCategory")
 //        try db.execute("DROP TABLE if exists inventory")
-//        try db.execute("DROP TABLE if exists ingredients")
-//        try db.execute("DROP TABLE if exists foodCategory")
+     //   try db.execute("DROP TABLE if exists ingredients")
+    //    try db.execute("DROP TABLE if exists foodCategory")
+     //   try db.execute("DROP TABLE if exists recipe_ingredient")
 
         //recipes
         let recipes = Table("recipes")
