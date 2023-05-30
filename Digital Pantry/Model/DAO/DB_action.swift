@@ -185,15 +185,14 @@ func insertNewPreferences(newPreferences : Preference) {
         let preferences = Table("preferences")
 //        let id = Expression<Int64>("id")
         let type = Expression<String>("type")
-        let allergyId = Expression<Int64>("recipeId")
-        let dietId = Expression<Int64>("allergyId")
+        let allergyId = Expression<Int64>("allergyId")
+        let dietId = Expression<Int64>("dietId")
         
         try db.run(preferences.insert(
             //id <- newPreferences.preferenceID
             type <- newPreferences.type,
-            allergyId <- newPreferences.allergyID ),
-                   dietId <- newPreferences.dietID )
-        )
+            allergyId <- newPreferences.allergyID,
+            dietId <- newPreferences.dietID ))
         
     } catch {
         print (error)
