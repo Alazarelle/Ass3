@@ -86,7 +86,7 @@ func insertNewIngredient(newIngredient : Ingredient) {
         //handle ingredients  data
         let ingredients = Table("ingredients")
         
-//        let id = Expression<Int64>("id")
+        let id = Expression<Int64>("id")
         let foodCatId = Expression<Int64>("foodCategoryID")
         let name = Expression<String>("name")
         let desc = Expression<String>("desc")
@@ -99,6 +99,34 @@ func insertNewIngredient(newIngredient : Ingredient) {
     } catch {
         print (error)
     }
+}
+
+func insertNewIngredientAndReturnId(newIngredient : Ingredient) -> Int64{
+    var idToReturn: Int64?
+    do {
+        let db = connectDatabase()
+        //handle ingredients  data
+        let ingredients = Table("ingredients")
+        
+        let id = Expression<Int64>("id")
+        let foodCatId = Expression<Int64>("foodCategoryID")
+        let name = Expression<String>("name")
+        let desc = Expression<String>("desc")
+        
+        try db.run(ingredients.insert(
+            //id <- newIngredient.ingredientID
+            foodCatId <- newIngredient.foodCategoryID,
+            name <- newIngredient.ingredName,
+            desc <- newIngredient.ingredDescription))
+        
+        for ingredientIterator in try db.prepare(ingredients.where(name == newIngredient.ingredName)){
+            idToReturn = ingredientIterator[id]
+        }
+        
+    } catch {
+        print (error)
+    }
+    return idToReturn!
 }
 
 func insertNewInventory(newPantryItem : AppPantryItem) {
@@ -156,6 +184,36 @@ func insertNewRecipe(newRecipe : Recipe) {
      }
 }
 
+func insertNewRecipe(newRecipe : Recipe, flag: Bool) -> Int64{
+    var idVariable: Int64?
+ do {
+     let db = connectDatabase()
+     //handle recipe data
+     let recipe = Table("recipes")
+
+     print(newRecipe)
+     let id = Expression<Int64>("id")
+     let name = Expression<String>("name")
+     let instructions = Expression<String>("instructions")
+     let cookingTime = Expression<String>("cookingTime")
+     let complexity = Expression<Int64>("complexity")
+     
+
+
+     try db.run(recipe.insert(
+     //id <- newRecipe.recipeID
+     name <- newRecipe.recipeName,
+     instructions <- newRecipe.instructions,
+     cookingTime <- newRecipe.cookingTime,
+     complexity <- newRecipe.complexity))
+     for recipeIterator in try db.prepare(recipe.where(name == newRecipe.recipeName)){
+        idVariable = recipeIterator[id]
+     }
+    } catch {
+         print (error)
+    }
+    return idVariable!
+}
 
 func insertNewRecipeLog(newRecipeLogs : RecipeLog) {
     do {
@@ -346,7 +404,7 @@ func readInventoryTableForInventory(storageId: Int64) -> [AppPantryItem]{
         let name = Expression<String>("name")
         let desc = Expression<String>("desc")
         
-        let innerJoin = inventory.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[id])
+        let innerJoin = inventory.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[id]).order(expiryDate)
         
         for innerJoin in try db.prepare(innerJoin.where(inventory[shoppingList] == false).where(inventory[dbstorageId] == storageId)) {
             items.append(AppPantryItem(appPantryID: innerJoin[inventory[id]], ingredientID: innerJoin[ingredient[id]], ingredientName: innerJoin[ingredient[name]], ingredientDesc: innerJoin[ingredient[desc]], quantity: innerJoin[inventory[quantity]], expiryDate: innerJoin[inventory[expiryDate]])!)
@@ -354,7 +412,7 @@ func readInventoryTableForInventory(storageId: Int64) -> [AppPantryItem]{
     } catch {
         print (error)
     }
-    return items
+    return items.reversed()
 }
 
 func buyShoppingList(){
@@ -370,7 +428,7 @@ func buyShoppingList(){
     }
 }
 
-func readRecipes() -> [Recipe]{
+func readRecipes(prev: Bool) -> [Recipe]{
     var recipes = [Recipe]()
     do {
         let db = connectDatabase()
@@ -388,7 +446,11 @@ func readRecipes() -> [Recipe]{
     } catch {
         print (error)
     }
-    return recipes
+    if (prev) {
+        return recipes.reversed()
+    }  else {
+        return recipes
+    }
 }
 
 
@@ -421,6 +483,7 @@ func readCategories() -> [String]{
         for cat in try db.prepare(categories){
             data.append(cat[name])
         }
+        data.sort()
     } catch {
         print (error)
     }
@@ -480,10 +543,12 @@ func readIngredientsByCategory(catId: Int64) -> [String]{
         for innerJoin in try db.prepare(innerJoin.where(foodCatTable[id] == catId)) {
             data.append(innerJoin[ingredientsTable[ingredName]])
         }
+        data = Array(Set(data))
+        data.sort()
     } catch {
         print (error)
     }
-    return Array(Set(data))
+    return data
 }
     
 
@@ -518,7 +583,7 @@ func readRecipe_Ingredient(recipeId: Int64) -> [Ingredient]{
     
         let recipe_ingredientTable = Table("recipe_ingredient")
         let ingredientsTable = Table("ingredients")
-        let recipeId = Expression<Int64>("recipeId")
+        let dbrecipeId = Expression<Int64>("recipeId")
         let ingredId = Expression<Int64>("ingredId")
         let foodCatId = Expression<Int64>("foodCategoryId")
         let id = Expression<Int64>("id")
@@ -526,9 +591,9 @@ func readRecipe_Ingredient(recipeId: Int64) -> [Ingredient]{
         let desc = Expression<String>("desc")
 
 
-        let innerJoin = ingredientsTable.join(.inner, recipe_ingredientTable, on: recipe_ingredientTable[ingredId] == ingredientsTable[id])
+        let innerJoin = recipe_ingredientTable.join(.inner, ingredientsTable, on: recipe_ingredientTable[ingredId] == ingredientsTable[id])
         
-        for innerJoin in try db.prepare(innerJoin.where(ingredientsTable[id] == ingredId)) {
+        for innerJoin in try db.prepare(innerJoin.where(dbrecipeId == recipeId)) {
             ingredients.append(Ingredient(ingredientID: innerJoin[ingredientsTable[id]], foodCategoryID: innerJoin[ingredientsTable[foodCatId]], ingredName: innerJoin[ingredientsTable[name]], ingredDescription: innerJoin[ingredientsTable[desc]])!)
         }
 
@@ -579,4 +644,20 @@ func deleteInventoryItem(id: Int64){
     }
 }
 
-
+func findCategoryIdByName(catName: String) -> Int64{
+    var idToReturn: Int64?
+    do {
+        let db = connectDatabase()
+        
+        let categories = Table("foodCategory")
+        let id = Expression<Int64>("id")
+        let name = Expression<String>("name")
+        
+        for cat in try db.prepare(categories.where(name == catName)){
+            idToReturn = cat[id]
+        }
+    } catch {
+        print (error)
+    }
+    return idToReturn!
+}

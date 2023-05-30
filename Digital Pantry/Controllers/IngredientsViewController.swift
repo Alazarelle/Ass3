@@ -48,8 +48,8 @@ class IngredientsViewController: UIViewController {
 
 extension IngredientsViewController:UITableViewDelegate {
     func tableView(_ tableView:UITableView, didSelectRowAt indexPath: IndexPath){
-        //what should the app do when user selecting row at a certain index?
-        selectedData.append(ingredients[indexPath.row-1])
+        let ingredient = getIngredientByName(ingName: filteredData[indexPath.row])
+        selectedData.append(ingredient)
         let cell = tableView.cellForRow(at: indexPath)
         cell?.backgroundColor = .gray
     }

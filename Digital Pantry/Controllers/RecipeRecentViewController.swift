@@ -8,7 +8,7 @@
 import UIKit
 
 class RecipeRecentViewController: UIViewController {
-    let recipes = readRecipes()
+    let recipes = readRecipes(prev:true)
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -16,6 +16,10 @@ class RecipeRecentViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         // Do any additional setup after loading the view.
+    }
+    @IBAction func backToRecipesMenuButtonPressed(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -28,8 +32,6 @@ extension RecipeRecentViewController:UITableViewDelegate {
         ShowController.recipe =  recipes[indexPath.row]
 
         self.navigationController?.pushViewController(ShowController, animated: true)
-        
-
     }
 }
 

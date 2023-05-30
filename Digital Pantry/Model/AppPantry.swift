@@ -134,6 +134,10 @@ struct AppPantryItem {
         
         return formatter.string(from: expiryDate)
     }
+    
+    func getIngredient() -> Ingredient {
+        return getIngredientByName(ingName: self.ingredientName)!
+    }
 
     //the below is there in case we want to have Pantry broked down between sections: Pantry, Fridge, Freezer
     //mutating func setSectionID(sectionID: Int) { //set foodCategoryID
