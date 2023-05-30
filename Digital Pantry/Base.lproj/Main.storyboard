@@ -77,9 +77,6 @@
                         <color key="backgroundColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="ry1-Vy-3iw"/>
-                    <connections>
-                        <outlet property="shoppingListBtn" destination="qTi-Ou-wra" id="yZa-TP-kIr"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
