@@ -9,9 +9,12 @@ import UIKit
 
 class RecipePreferencesViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    var prefs = readPreferences()
+    
     @IBOutlet weak var dietsPickerView: UIPickerView!
     @IBOutlet weak var allergiesPickerView: UIPickerView!
     
+    @IBOutlet weak var AllergiesDietsTableView: UITableView!
     
     
     var dietsData = [String]()
@@ -30,6 +33,8 @@ class RecipePreferencesViewController: UIViewController, UIPickerViewDelegate, U
         self.allergiesPickerView.dataSource = self
         self.allergiesPickerView.delegate = self
         
+        AllergiesDietsTableView.delegate = self
+        AllergiesDietsTableView.dataSource = self
         dietsPickerView.tag = 1
         allergiesPickerView.tag = 2
         
@@ -54,16 +59,16 @@ class RecipePreferencesViewController: UIViewController, UIPickerViewDelegate, U
         insertNewPreferences(newPreferences: Preference(type: "Diet", allergyID: 0, dietID: (Int64(exactly: dietsValue))!)!)
                              
         print("set diet id to \(dietsValue) which is for \(dietsData[dietsValue])")
-        let vc = storyboard?.instantiateViewController(withIdentifier: "ShoppingListViewController") as! ShoppingListViewController
+        let vc = storyboard?.instantiateViewController(withIdentifier: "RecipePreferencesViewController") as! RecipePreferencesViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
     @IBAction func allergyAddButton(_ sender: UIButton) {
-        var pref = Preference(type: "Diet", allergyID: 0, dietID: 0)//getDietIdByName(dietName: dietsData[row])
-        insertNewPreferences(newPreferences: Preference(type: "Diet", allergyID: Int64(exactly: allergiesValue)!, dietID: 0)!)
+        //var pref = Preference(type: "Allergy", allergyID: 0, dietID: 0)//getDietIdByName(dietName: dietsData[row])
+        insertNewPreferences(newPreferences: Preference(type: "Allergy", allergyID: Int64(exactly: allergiesValue)!, dietID: 0)!)
         print("set allergy id to \(allergiesValue) which is for \(allergiesData[allergiesValue])")
-        let vc = storyboard?.instantiateViewController(withIdentifier: "ShoppingListViewController") as! ShoppingListViewController
+        let vc = storyboard?.instantiateViewController(withIdentifier: "RecipePreferencesViewController") as! RecipePreferencesViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -116,5 +121,44 @@ class RecipePreferencesViewController: UIViewController, UIPickerViewDelegate, U
 //    }
 
 }
+
+extension RecipePreferencesViewController:UITableViewDelegate {
+    func tableView(_ tableView:UITableView, didSelectRowAt indexPath: IndexPath) {
+        //what should the app do when user selecting row at a certain index?
+        
+//        let ShowController = storyboard?.instantiateViewController(withIdentifier: "RecipePreferencesViewController") as! RecipePreferencesViewController
+        
+        //ShowController.prefs = prefs[indexPath.row]
+        
+//        self.navigationController?.pushViewController(ShowController, animated: true)
+    }
+}
+
+extension RecipePreferencesViewController:UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //as a table view, how many cells should i displayin this section
+        print("This is the count of records: \(prefs.count)")
+        return prefs.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //as a table view, what cell should i display when user is at this index?
+        
+        //dequed a reusable cell from the table view
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        print("THis is the prefs \(prefs.description)")
+        //update the Ui for this cell
+        let pref = prefs[indexPath.row]
+        print("This is PREF!! \(pref) ")
+        
+        cell?.textLabel?.text = pref
+        cell?.textLabel?.textColor = .orange
+        
+        //return the cell to Table View
+        return cell!
+    }
+}
+
 
 

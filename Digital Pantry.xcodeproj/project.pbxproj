@@ -208,8 +208,8 @@
 			children = (
 				C29E8DB42A2237D400D51738 /* DAO */,
 				C28A9D232A17AFD0004AA244 /* AppUser.swift */,
-				C28A9D252A17B00F004AA244 /* AppPantry.swift */,
 				C2FD437A2A1C72E0006F864C /* Ingredients.swift */,
+				C28A9D252A17B00F004AA244 /* AppPantry.swift */,
 				C2FD437C2A1C7C81006F864C /* Recipe.swift */,
 				C2FD437E2A1C80D5006F864C /* RecipeLog.swift */,
 				C2FD43802A1C8375006F864C /* FoodCategory.swift */,
