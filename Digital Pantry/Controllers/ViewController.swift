@@ -16,7 +16,9 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
 
         self.navigationItem.setHidesBackButton(true, animated: true)
-        refresh()
+        if executeDB{
+            refresh()
+        }
     }
     
     @IBAction func tableUpdate(_ sender: Any) {
