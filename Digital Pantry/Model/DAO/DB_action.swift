@@ -234,13 +234,16 @@ func insertNewRecipeLog(newRecipeLogs : RecipeLog) {
         print (error)
     }
 }
+
 func insertNewPreferences(newPreferences : Preference) {
     do {
         let db = connectDatabase()
         //handle preferences  data
         let preferences = Table("preferences")
-//        let id = Expression<Int64>("id")
+        let allergy = Table("allergyCategory")
+        let id = Expression<Int64>("id")
         let type = Expression<String>("type")
+        let name = Expression<String>("name")
         let allergyId = Expression<Int64>("allergyId")
         let dietId = Expression<Int64>("dietId")
         
@@ -250,6 +253,11 @@ func insertNewPreferences(newPreferences : Preference) {
             allergyId <- newPreferences.allergyID,
             dietId <- newPreferences.dietID ))
         
+        for allergy in try db.prepare(allergy.where(id == newPreferences.allergyID))
+        {
+            print("Allergy ID: \(allergy[id]), name: \(allergy[name])")
+        }
+                   
     } catch {
         print (error)
     }
@@ -427,6 +435,29 @@ func buyShoppingList(){
     }
 }
 
+func readAllergiesByIngredient(ingId: Int64) -> AllergyCategory? {
+    do {
+        let db = connectDatabase()
+        
+        let ingAllTable = Table("ingredient_allergy")
+        let allergyTable = Table("allergyCategory")
+        let id = Expression<Int64>("id")
+        let ingredID = Expression<Int64>("ingredId")
+        let allergyID = Expression<Int64>("allergyId")
+        let allergyName = Expression<String>("name")
+        let allergyDesc = Expression<String>("desc")
+
+        let innerJoin = allergyTable.join(.inner, ingAllTable, on: allergyTable[id] == ingAllTable[allergyID])
+        
+        for innerJoin in try db.prepare(innerJoin.where(ingAllTable[ingredID] == ingId)) {
+            return AllergyCategory(allergyCategoryID: Int(innerJoin[allergyTable[id]]), allergyCategName: innerJoin[allergyTable[allergyName]], allergyCategdescription: innerJoin[allergyTable[allergyDesc]])!
+        }
+    } catch {
+        print (error)
+    }
+    return nil
+}
+
 func readRecipes(prev: Bool) -> [Recipe]{
     var recipes = [Recipe]()
     do {
@@ -438,9 +469,31 @@ func readRecipes(prev: Bool) -> [Recipe]{
         let instructions = Expression<String>("instructions")
         let cookingTime = Expression<String>("cookingTime")
         let complexity = Expression<Int64>("complexity")
+        let myAllergies = readMyAllergies()
+        let myDiets = readMyDiets()
 
-        for recipe in try db.prepare(recipe) {
-            recipes.append(Recipe(recipeID: recipe[id], recipeName: recipe[name], instructions: recipe[instructions], cookingTime: recipe[cookingTime], complexity: recipe[complexity])!)
+        if (prev) {
+            //order by date
+            for recipe in try db.prepare(recipe) {
+                let rec = Recipe(recipeID: recipe[id], recipeName: recipe[name], instructions: recipe[instructions], cookingTime: recipe[cookingTime], complexity: recipe[complexity])!
+                let ingredients = readRecipe_Ingredient(recipeId: rec.getRecipeID())
+                var allergyFree = true
+                for food in ingredients {
+                    let all = readAllergiesByIngredient(ingId: food.getIngredientID())
+                    if ( myAllergies.contains(all?.getAllergydCategName() ?? "")){
+                        allergyFree = false
+                        break
+                    }
+                }
+                if (allergyFree){
+                    recipes.append(rec)
+                }
+            }
+        }  else {
+            //order alphabetically
+            for recipe in try db.prepare(recipe.order(name)) {
+                recipes.append(Recipe(recipeID: recipe[id], recipeName: recipe[name], instructions: recipe[instructions], cookingTime: recipe[cookingTime], complexity: recipe[complexity])!)
+            }
         }
     } catch {
         print (error)

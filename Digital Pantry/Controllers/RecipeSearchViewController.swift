@@ -9,10 +9,51 @@ import UIKit
 
 class RecipeSearchViewController: UIViewController {
 
+    let recipes = readRecipes(prev:false)
+
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
         // Do any additional setup after loading the view.
     }
-    
+    @IBAction func backToRecipesMenuButtonPressed(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
 
+extension RecipeSearchViewController:UITableViewDelegate {
+    func tableView(_ tableView:UITableView, didSelectRowAt indexPath: IndexPath){
+        //what should the app do when user selecting row at a certain index?
+
+        let ShowController = storyboard?.instantiateViewController(withIdentifier: "RecipeShowViewController") as! RecipeShowViewController
+
+        ShowController.recipe =  recipes[indexPath.row]
+
+        self.navigationController?.pushViewController(ShowController, animated: true)
+    }
+}
+
+extension RecipeSearchViewController:UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //as a table view, how many cells should i displayin this section
+        return recipes.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //as a table view, what cell should i display when user is at this index?
+        
+        //dequed a reusable cell from the table view
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        
+        //update the Ui for this cell
+        let recipe = recipes[indexPath.row]
+        cell?.textLabel?.text = recipe.recipeName
+        cell?.textLabel?.textColor = .orange
+        //return the cell to Table View
+        return cell!
+    }
 }

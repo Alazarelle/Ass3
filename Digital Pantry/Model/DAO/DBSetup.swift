@@ -25,7 +25,8 @@ func createTables() {
         try db.execute("DROP TABLE if exists foodCategory")
         try db.execute("DROP TABLE if exists recipe_ingredient")
         try db.execute("DROP TABLE if exists recipe_diet")
-
+        try db.execute("DROP TABLE if exists preferences")
+        
         //recipes
         let recipes = Table("recipes")
         try db.run(recipes.create(ifNotExists: true) { t in
