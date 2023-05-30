@@ -88,12 +88,11 @@ func readMyAllergies() -> [String] {
         let prefs = Table("preferences")
         let allergies = Table("allergyCategory")
         let id = Expression<Int64>("id")
-        let allergyId = Expression<Int64>("id")
+        let allergyId = Expression<Int64>("allergyId")
         let type = Expression<String>("type")
         let allergyname = Expression<String>("name")
-        //let description = Expression<String>("desc")
-        let innerJoin = prefs.join(.inner, allergies, on: allergies[allergyId] == prefs[id])
-        
+        let innerJoin = prefs.join(.inner, allergies, on: allergies[id] == prefs[allergyId])
+
         for innerJoin in try db.prepare(innerJoin.where(prefs[type] == "Allergy")) {
             preferanceList.append(innerJoin[allergies[allergyname]])
         }
@@ -109,17 +108,16 @@ func readMyDiets() -> [String] {
         let db = connectDatabase()
         
         let prefs = Table("preferences")
-        let allergies = Table("allergyCategory")
+        let diets = Table("dietCategory")
         let id = Expression<Int64>("id")
-        let allergyId = Expression<Int64>("id")
+        let dietId = Expression<Int64>("dietId")
         let type = Expression<String>("type")
-        let allergyname = Expression<String>("name")
-        //let description = Expression<String>("desc")
-        let innerJoin = prefs.join(.inner, allergies, on: allergies[allergyId] == prefs[id])
+        let dietname = Expression<String>("name")
+        let innerJoin = prefs.join(.inner, diets, on: diets[id] == prefs[dietId])
         
-        for innerJoin in try db.prepare(innerJoin.where(prefs[type] == "Allergy")) {
+        for innerJoin in try db.prepare(innerJoin.where(prefs[type] == "Diet")) {
             
-            preferanceList.append(innerJoin[allergies[allergyname]])
+            preferanceList.append(innerJoin[diets[dietname]])
         
         }
     } catch {
@@ -132,55 +130,6 @@ func readPreferences() -> [String]{
     var preferanceList = [String]()
     preferanceList += readMyAllergies()
     preferanceList += readMyDiets()
-    do {
-        let db = connectDatabase()
-        
-        let prefs = Table("preferences")
-        let diets = Table("dietCategory")
-        //let allergies = Table("allergyCategory")
-        let id = Expression<Int64>("id")
-        let dietId = Expression<Int64>("dietId")
-        //let allergyId = Expression<Int64>("allergyId")
-        let dietName = Expression<String>("name")
-        let type = Expression<String>("type")
-        let dietname = Expression<String>("name")
-        //let allergyname = Expression<String>("name")
-        //let description = Expression<String>("desc")
-        let innerJoin = prefs.join(.inner, diets, on: diets[id] == prefs[dietId])
-        
-        for innerJoin in try db.prepare(innerJoin.where(prefs[type] == "Diet")) {
-            
-            preferanceList.append(innerJoin[diets[dietName]])
-        
-        }
-    } catch {
-        print (error)
-    }
-    
-    do {
-        let db = connectDatabase()
-        
-        let prefs = Table("preferences")
-        let diets = Table("dietCategory")
-        let allergies = Table("allergyCategory")
-        let id = Expression<Int64>("id")
-        //let dietId = Expression<Int64>("id")
-        let allergyId = Expression<Int64>("allergyId")
-        let dietName = Expression<String>("name")
-        let type = Expression<String>("type")
-        let dietname = Expression<String>("name")
-        let allergyname = Expression<String>("name")
-        //let description = Expression<String>("desc")
-        let innerJoin = prefs.join(.inner, allergies, on: allergies[id] == prefs[allergyId])
-        
-        for innerJoin in try db.prepare(innerJoin.where(prefs[type] == "Allergy")) {
-            
-            preferanceList.append(innerJoin[allergies[allergyname]])
-        
-        }
-    } catch {
-        print (error)
-    }
     return preferanceList
 }
 
