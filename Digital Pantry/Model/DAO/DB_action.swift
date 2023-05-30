@@ -234,6 +234,7 @@ func insertNewRecipeLog(newRecipeLogs : RecipeLog) {
         print (error)
     }
 }
+
 func insertNewPreferences(newPreferences : Preference) {
     do {
         let db = connectDatabase()

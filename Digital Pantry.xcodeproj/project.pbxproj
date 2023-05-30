@@ -39,6 +39,7 @@
 		82F04D6A2A23403700779EA8 /* IngredientsAndCategories.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 82F04D692A23403700779EA8 /* IngredientsAndCategories.xlsx */; };
 		C20B1B312A22DFAD00277A03 /* DB_action.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20B1B302A22DFAD00277A03 /* DB_action.swift */; };
 		C2159ACB2A23F64A00030C52 /* DB_update.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2159ACA2A23F64A00030C52 /* DB_update.swift */; };
+		C2159AD52A25B87900030C52 /* DB_read.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2159AD42A25B87800030C52 /* DB_read.swift */; };
 		C28A9D242A17AFD0004AA244 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A9D232A17AFD0004AA244 /* AppUser.swift */; };
 		C28A9D262A17B00F004AA244 /* AppPantry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28A9D252A17B00F004AA244 /* AppPantry.swift */; };
 		C2FD437B2A1C72E0006F864C /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FD437A2A1C72E0006F864C /* Ingredients.swift */; };
@@ -85,6 +86,7 @@
 		82F04D692A23403700779EA8 /* IngredientsAndCategories.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = IngredientsAndCategories.xlsx; sourceTree = "<group>"; };
 		C20B1B302A22DFAD00277A03 /* DB_action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB_action.swift; sourceTree = "<group>"; };
 		C2159ACA2A23F64A00030C52 /* DB_update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB_update.swift; sourceTree = "<group>"; };
+		C2159AD42A25B87800030C52 /* DB_read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB_read.swift; sourceTree = "<group>"; };
 		C28A9D232A17AFD0004AA244 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		C28A9D252A17B00F004AA244 /* AppPantry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPantry.swift; sourceTree = "<group>"; };
 		C28B2CB92A1C28F600AC4A46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				829E595D2A1CB58C000FFCCE /* DBSetup.swift */,
 				C20B1B302A22DFAD00277A03 /* DB_action.swift */,
 				C2159ACA2A23F64A00030C52 /* DB_update.swift */,
+				C2159AD42A25B87800030C52 /* DB_read.swift */,
 			);
 			path = DAO;
 			sourceTree = "<group>";
@@ -205,8 +208,8 @@
 			children = (
 				C29E8DB42A2237D400D51738 /* DAO */,
 				C28A9D232A17AFD0004AA244 /* AppUser.swift */,
-				C28A9D252A17B00F004AA244 /* AppPantry.swift */,
 				C2FD437A2A1C72E0006F864C /* Ingredients.swift */,
+				C28A9D252A17B00F004AA244 /* AppPantry.swift */,
 				C2FD437C2A1C7C81006F864C /* Recipe.swift */,
 				C2FD437E2A1C80D5006F864C /* RecipeLog.swift */,
 				C2FD43802A1C8375006F864C /* FoodCategory.swift */,
@@ -333,6 +336,7 @@
 				C2159ACB2A23F64A00030C52 /* DB_update.swift in Sources */,
 				65D5B9F82A0A2C0100307B35 /* AppDelegate.swift in Sources */,
 				C28A9D242A17AFD0004AA244 /* AppUser.swift in Sources */,
+				C2159AD52A25B87900030C52 /* DB_read.swift in Sources */,
 				78BCF4102A136D8F00FA93C9 /* AddItemViewController.swift in Sources */,
 				C2FD43892A1C8E3F006F864C /* Ingred_Allergy.swift in Sources */,
 				655C791E2A24D9BD004B142D /* IngredientsViewController.swift in Sources */,
