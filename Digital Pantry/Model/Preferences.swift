@@ -12,20 +12,23 @@ struct Preference {
     //properties/members of Preference
     var preferenceID: Int64
     var type: String
-    var typeID: Int64
+    var allergyID: Int64
+    var dietID: Int64
     
     //initialised where we have not obtained a UniqueIdentifier (preferenceID) as yet
-    init?(type: String, typeID: Int64) {
+    init?(type: String, allergyID: Int64, dietID: Int64) {
         self.preferenceID = -1
         self.type = type
-        self.typeID = typeID
+        self.allergyID = allergyID
+        self.dietID = dietID
     }
     
     //use case: calling data back from DB/table
-    init?(preferenceID: Int64, type: String, typeID: Int64 ) {
+    init?(preferenceID: Int64, type: String, allergyID: Int64, dietID: Int64 ) {
         self.preferenceID = preferenceID
         self.type = type
-        self.typeID = typeID
+        self.allergyID = allergyID
+        self.dietID = dietID
         
     }
     
@@ -45,11 +48,19 @@ struct Preference {
         self.type = type
     }
 
-    func getTypeID() -> Int64 { //retrieve typeID
-        return typeID
+    func getAllergyID() -> Int64 { //retrieve typeID
+        return allergyID
     }
     
-    mutating func setTypeID(typeID: Int64) { //add a typeID to item
-        self.typeID = typeID
+    mutating func setAllergyID(allergyID: Int64) { //add a typeID to item
+        self.allergyID = allergyID
+    }
+    
+    func getDietID() -> Int64 { //retrieve typeID
+        return dietID
+    }
+    
+    mutating func setDietID(dietID: Int64) { //add a typeID to item
+        self.dietID = dietID
     }
 }

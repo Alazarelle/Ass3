@@ -191,13 +191,15 @@ func updatePreferences(preferencesId : Int64, updatedPreferences : Preference) {
         let preferences = Table("preferences")
         let id = Expression<Int64>("id")
         let type = Expression<String>("type")
-        let typeId = Expression<Int64>("typeId")
+        let allergyId = Expression<Int64>("allergyId")
+        let dietId = Expression<Int64>("dietId")
         
         let thisPreference = preferences.filter(id == preferencesId)
         
         try db.run(thisPreference.update(
             type <- updatedPreferences.type,
-            typeId <- updatedPreferences.typeID ))
+            allergyId <- updatedPreferences.allergyID ),
+            dietId <- updatedPreferences.dietID ))
         
     } catch {
         print (error)
