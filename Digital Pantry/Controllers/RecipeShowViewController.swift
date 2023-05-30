@@ -49,7 +49,6 @@ extension RecipeShowViewController:UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //as a table view, what cell should i display when user is at this index?
-        
         //dequed a reusable cell from the table view
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         //update the Ui for this cell

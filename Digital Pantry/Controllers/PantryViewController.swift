@@ -121,6 +121,10 @@ extension PantryViewController:UITableViewDataSource {
             cell.expiryDateLabel.textColor = .black
         } else {
             cell.contentView.backgroundColor = .clear
+            cell.ingredientNameLabel.textColor = .orange
+            cell.ingredientDescLabel.textColor = .orange
+            cell.quantityLabel.textColor = .orange
+            cell.expiryDateLabel.textColor = .orange
         }
         //return the cell to Table View
         return cell
