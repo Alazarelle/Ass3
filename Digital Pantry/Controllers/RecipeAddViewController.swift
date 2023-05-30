@@ -16,6 +16,13 @@ class RecipeAddViewController: UIViewController {
     @IBOutlet weak var instructionsTextView: UITextView!
     @IBOutlet weak var addNewRecipeButton: UIButton!
     
+    @IBOutlet weak var nameErrorLabel: UILabel!
+    @IBOutlet weak var complexityErrorLabel: UILabel!
+    @IBOutlet weak var cookingTimeErrorLabel: UILabel!
+    @IBOutlet weak var ingredientsErrorLabel: UILabel!
+    @IBOutlet weak var instructionsErrorLabel: UILabel!
+    
+    
     var selectedIngredients = [Ingredient?]()
     
     //These come from the previous screen
@@ -47,19 +54,55 @@ class RecipeAddViewController: UIViewController {
             instructionsTextView.text = instructionsUnwrapped
         }
         // Do any additional setup after loading the view.
+        nameErrorLabel.text = ""
+        complexityErrorLabel.text = ""
+        cookingTimeErrorLabel.text = ""
+        ingredientsErrorLabel.text = ""
+        instructionsErrorLabel.text = ""
     }
     
     @IBAction func AddNewRecipeButtonPressed(_ sender: UIButton) {
-        let recipe = Recipe(recipeName: (recipeNameTextField?.text)!, instructions: (instructionsTextView?.text)!, cookingTime: (cookingTimeTextField?.text)!, complexity: Int64((complexityTextField?.text)!)!)
-        insertNewRecipe(newRecipe: recipe)
-        let recipeId = readRecipes(prev:true).first?.recipeID
-        if !selectedIngredients.isEmpty{
-            for ingredient in selectedIngredients{
-                insertNewRecipe_ingredient(newRecipe_ingredient: Recipe_Ingred(recipeID: recipeId!, ingredID: (ingredient?.ingredientID)!)!)
-            }
+        
+        var errorFlag = false
+        nameErrorLabel.text = ""
+        complexityErrorLabel.text = ""
+        cookingTimeErrorLabel.text = ""
+        ingredientsErrorLabel.text = ""
+        instructionsErrorLabel.text = ""
+
+        if recipeNameTextField.text!.isEmpty{
+            nameErrorLabel.text = "Field must not be empty"
+            errorFlag = true
         }
-        let vc = storyboard?.instantiateViewController(withIdentifier: "RecipeRecentViewController") as! RecipeRecentViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+        if complexityTextField.text!.isEmpty || Int64(complexityTextField.text!) == nil{
+            complexityErrorLabel.text = "Field must not be empty"
+            errorFlag = true
+        }
+        if cookingTimeTextField.text!.isEmpty{
+            cookingTimeErrorLabel.text = "Field must not be empty"
+            errorFlag = true
+        }
+        if ingredientsTextView.text!.isEmpty{
+            ingredientsErrorLabel.text = "Field must not be empty"
+            errorFlag = true
+        }
+        if instructionsTextView.text!.isEmpty{
+            instructionsErrorLabel.text = "Field must not be empty"
+            errorFlag = true
+        }
+        
+        if !errorFlag{
+            let recipe = Recipe(recipeName: (recipeNameTextField?.text)!, instructions: (instructionsTextView?.text)!, cookingTime: (cookingTimeTextField?.text)!, complexity: Int64((complexityTextField?.text)!)!)
+            insertNewRecipe(newRecipe: recipe)
+            let recipeId = readRecipes(prev:true).first?.recipeID
+            if !selectedIngredients.isEmpty{
+                for ingredient in selectedIngredients{
+                    insertNewRecipe_ingredient(newRecipe_ingredient: Recipe_Ingred(recipeID: recipeId!, ingredID: (ingredient?.ingredientID)!)!)
+                }
+            }
+            let vc = storyboard?.instantiateViewController(withIdentifier: "RecipeRecentViewController") as! RecipeRecentViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     @IBAction func ChooseIngredientsButtonPressed(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "IngredientsViewController") as! IngredientsViewController

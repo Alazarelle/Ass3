@@ -88,7 +88,6 @@ class AddDirectItemViewController:  UIViewController, UIPickerViewDelegate, UIPi
     }
     
     @IBAction func submitButtonClick(_ sender: Any) {
-        print(storageValue)
         var errorFlag = false
         quantityErrorLabel.text = ""
         expiryDateErrorLabel.text = ""
