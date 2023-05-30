@@ -43,7 +43,7 @@ func createTables() {
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
-            t.column(Expression<Int64>("foodCategoryId"), references: Table("foodCategoryID"), Expression<Int64>("id"))
+            t.column(Expression<Int64>("foodCategoryId"), references: Table("foodCategory"), Expression<Int64>("id"))
         })
         
         //food category
