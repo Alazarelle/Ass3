@@ -345,7 +345,7 @@ func readInventoryTableForInventory(storageId: Int64) -> [AppPantryItem]{
         let name = Expression<String>("name")
         let desc = Expression<String>("desc")
         
-        let innerJoin = inventory.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[id])
+        let innerJoin = inventory.join(.inner, ingredient, on: inventory[ingredientId] == ingredient[id]).order(expiryDate)
         
         for innerJoin in try db.prepare(innerJoin.where(inventory[shoppingList] == false).where(inventory[dbstorageId] == storageId)) {
             items.append(AppPantryItem(appPantryID: innerJoin[inventory[id]], ingredientID: innerJoin[ingredient[id]], ingredientName: innerJoin[ingredient[name]], ingredientDesc: innerJoin[ingredient[desc]], quantity: innerJoin[inventory[quantity]], expiryDate: innerJoin[inventory[expiryDate]])!)
@@ -353,7 +353,7 @@ func readInventoryTableForInventory(storageId: Int64) -> [AppPantryItem]{
     } catch {
         print (error)
     }
-    return items
+    return items.reversed()
 }
 
 func buyShoppingList(){
@@ -369,7 +369,7 @@ func buyShoppingList(){
     }
 }
 
-func readRecipes() -> [Recipe]{
+func readRecipes(prev: Bool) -> [Recipe]{
     var recipes = [Recipe]()
     do {
         let db = connectDatabase()
@@ -387,7 +387,11 @@ func readRecipes() -> [Recipe]{
     } catch {
         print (error)
     }
-    return recipes
+    if (prev) {
+        return recipes.reversed()
+    }  else {
+        return recipes
+    }
 }
 
 
@@ -420,6 +424,7 @@ func readCategories() -> [String]{
         for cat in try db.prepare(categories){
             data.append(cat[name])
         }
+        data.sort()
     } catch {
         print (error)
     }
@@ -479,10 +484,12 @@ func readIngredientsByCategory(catId: Int64) -> [String]{
         for innerJoin in try db.prepare(innerJoin.where(foodCatTable[id] == catId)) {
             data.append(innerJoin[ingredientsTable[ingredName]])
         }
+        data = Array(Set(data))
+        data.sort()
     } catch {
         print (error)
     }
-    return Array(Set(data))
+    return data
 }
     
 
@@ -517,7 +524,7 @@ func readRecipe_Ingredient(recipeId: Int64) -> [Ingredient]{
     
         let recipe_ingredientTable = Table("recipe_ingredient")
         let ingredientsTable = Table("ingredients")
-        let recipeId = Expression<Int64>("recipeId")
+//        let recipeId = Expression<Int64>("recipeId")
         let ingredId = Expression<Int64>("ingredId")
         let foodCatId = Expression<Int64>("foodCategoryId")
         let id = Expression<Int64>("id")

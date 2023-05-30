@@ -111,6 +111,13 @@ extension PantryViewController:UITableViewDataSource {
         cell.ingredientDescLabel.text = item.ingredientDesc
         cell.expiryDateLabel.text = formater.string(from:item.expiryDate)
         cell.quantityLabel.text = String(item.quantity)
+        //highlight items about to go off
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        if (Calendar.current.isDate(tomorrow, equalTo: item.expiryDate, toGranularity: .day)) {
+            cell.contentView.backgroundColor = .systemRed
+        } else {
+            cell.contentView.backgroundColor = .clear
+        }
         //return the cell to Table View
         return cell
     }

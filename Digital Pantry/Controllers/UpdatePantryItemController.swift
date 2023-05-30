@@ -45,7 +45,7 @@ class UpdatePantryItemViewController:  UIViewController, UIPickerViewDelegate, U
         catID = item!.getIngredient().getFoodCategoryID()
         categoriesPickerView.selectRow(Int(catID), inComponent: 0, animated: true)
         ingredientsData = readIngredientsByCategory(catId: catID)
-        var name = item!.getIngredient().getIngredName()
+        let name = item!.getIngredient().getIngredName()
         for (index, food) in ingredientsData.enumerated() {
             if (food == name) {
                 ingredientsPickerView.selectRow(index, inComponent: 0, animated: true)

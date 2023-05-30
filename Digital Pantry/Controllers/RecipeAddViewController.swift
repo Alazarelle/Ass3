@@ -52,7 +52,7 @@ class RecipeAddViewController: UIViewController {
     @IBAction func AddNewRecipeButtonPressed(_ sender: UIButton) {
         let recipe = Recipe(recipeName: (recipeNameTextField?.text)!, instructions: (instructionsTextView?.text)!, cookingTime: (cookingTimeTextField?.text)!, complexity: Int64((complexityTextField?.text)!)!)
         insertNewRecipe(newRecipe: recipe)
-        let recipeId = readRecipes().last?.recipeID
+        let recipeId = readRecipes(prev:true).first?.recipeID
         if !selectedIngredients.isEmpty{
             for ingredient in selectedIngredients{
                 insertNewRecipe_ingredient(newRecipe_ingredient: Recipe_Ingred(recipeID: recipeId!, ingredID: (ingredient?.ingredientID)!)!)

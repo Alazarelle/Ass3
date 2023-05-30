@@ -8,7 +8,7 @@
 import UIKit
 
 class RecipeRecentViewController: UIViewController {
-    let recipes = readRecipes()
+    let recipes = readRecipes(prev:true)
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {

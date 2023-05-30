@@ -44,13 +44,14 @@ class RecipeChatGPTViewController: UIViewController {
     }
     
     @IBAction func generateRecipeButtonPressed(_ sender: UIButton) {
-        var inventory: [AppPantryItem] = readInventoryTableForInventory(storageId: 0)
+        var inventory: [AppPantryItem?] = readInventoryTableForInventory(storageId: 0)
         inventory += readInventoryTableForInventory(storageId: 1)
         inventory += readInventoryTableForInventory(storageId: 2)
         var inventoryNames :String = ""
         for item in inventory{
-            inventoryNames += item.ingredientName + ", "
+            inventoryNames += item!.ingredientName.replacingOccurrences(of: ",", with: "", options: NSString.CompareOptions.literal, range: nil) + ", "
         }
+        print(inventoryNames)
         activityIndicator.startAnimating()
         APICaller.shared.getResponse(input: inventoryNames) { [weak self] result in
             switch result{
@@ -62,6 +63,8 @@ class RecipeChatGPTViewController: UIViewController {
                     let data = output.data(using: .utf8)!
                     
                     do {
+                        print(output)
+                        print(data)
                         let aiRecipe = try JSONDecoder().decode(AIGeneratedRecipe.self, from: data)
                         recipe = Recipe.init(aiGeneratedRecipe: aiRecipe)
                         self?.saveRecipeButton.isHidden = false
