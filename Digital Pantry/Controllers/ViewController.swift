@@ -27,9 +27,10 @@ class ViewController: UIViewController {
     
     func refresh(){
         createTables()
-        insertTableData()
         importFoodDataCSV()
-//        readMajorTables()
+        insertTableData()
+        readMajorTables()
+
     }
     
 }
