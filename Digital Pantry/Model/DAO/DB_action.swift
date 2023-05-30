@@ -244,12 +244,12 @@ func insertNewRecipe_diet(newRecipe_diet : Recipe_Diet) {
         
 //        let id = Expression<Int64>("id")
         let recipeId = Expression<Int64>("recipeId")
-        let ingredId = Expression<Int64>("ingredId")
+        let dietId = Expression<Int64>("dietId")
         
         try db.run(recipe_diet.insert(
             //id <- newRecipe_diet.recipe_DietID
             recipeId <- newRecipe_diet.recipeID,
-            ingredId <- newRecipe_diet.dietID ))
+            dietId <- newRecipe_diet.dietID ))
         
     } catch {
         print (error)

@@ -18,13 +18,13 @@ func createTables() {
     //wrap
     do {
         let db = connectDatabase()
-//        try db.execute("DROP TABLE if exists recipes")
-//        try db.execute("DROP TABLE if exists ingredients")
-//        try db.execute("DROP TABLE if exists allergyCategory")
-//        try db.execute("DROP TABLE if exists dietCategory")
-//        try db.execute("DROP TABLE if exists inventory")
-//        try db.execute("DROP TABLE if exists ingredients")
-//        try db.execute("DROP TABLE if exists foodCategory")
+        try db.execute("DROP TABLE if exists recipes")
+        try db.execute("DROP TABLE if exists ingredients")
+        try db.execute("DROP TABLE if exists allergyCategory")
+        try db.execute("DROP TABLE if exists dietCategory")
+        try db.execute("DROP TABLE if exists foodCategory")
+        try db.execute("DROP TABLE if exists recipe_ingredient")
+        try db.execute("DROP TABLE if exists recipe_diet")
 
         //recipes
         let recipes = Table("recipes")
@@ -93,23 +93,15 @@ func createTables() {
         //recipe_ingredient
         try db.run(Table("recipe_ingredient").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<Int64>("recipeId"))
-            t.column(Expression<Int64>("ingredId"))
+            t.column(Expression<Int64>("recipeId"), references: Table("recipeCategory"), Expression<Int64>("id"))
+            t.column(Expression<Int64>("ingredId"),references: Table("ingredientCategory"), Expression<Int64>("id"))
         })
         
         //recipe_diet
         try db.run(Table("recipe_diet").create(ifNotExists: true) { t in
             t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<Int64>("recipeId"))
-            t.column(Expression<Int64>("dietId"))
-        })
-
-        
-        //recipeLog
-        try db.run(Table("recipeLog").create(ifNotExists: true) { t in
-            t.column(Expression<Int64>("id"),primaryKey: true)
-            t.column(Expression<Int64>("recipeID"),references: Table("recipes"), Expression<Int64>("id"))
-            t.column(Expression<Date>("createdDate"))
+            t.column(Expression<Int64>("recipeId"),references: Table("allergyCategory"), Expression<Int64>("id"))
+            t.column(Expression<Int64>("dietId"), references: Table("dietCategory"), Expression<Int64>("id"))
         })
         
         //preferences
@@ -231,7 +223,6 @@ func insertTableData() {
         }
         
         let storage = Table("storage")
-        
         count = try db.scalar(storage.count)
         if (count == 0) {
             try db.run(storage.insert(
@@ -242,6 +233,37 @@ func insertTableData() {
             
             try db.run(storage.insert(
                 desc <- "Freezer"))
+        }
+
+        let rec = Table("recipes")
+        let rec_d = Table("recipe_diet")
+        let rec_i = Table("recipe_ingredient")
+        count = try db.scalar(rec.count)
+        if (count == 0) {
+            //Classic Pizza
+            insertNewRecipe(newRecipe: Recipe(recipeID: 1, recipeName: "Classic Pizza", instructions: "1. Cover pizza base with tomato paste.\n 2. Cut up tomatoes and cover pizza base.\n 3. Grate cheese scatter basil over pizza.\n 4. Place in oven for 20 mins.", cookingTime: "25 mins", complexity: 1)!)
+            //Fish
+            insertNewRecipe(newRecipe: Recipe(recipeID: 2, recipeName: "Egg and Fish?", instructions: "1. Fry your fish for 4 minutes, 2 on each side.\n 2. Remove fish and fry egg for 5 minutes.\n 3. Place egg on top of fish.", cookingTime: "10 mins", complexity: 1)!)
+            count = try db.scalar(rec_d.count)
+            if (count == 0) {
+                //veg
+                insertNewRecipe_diet(newRecipe_diet: Recipe_Diet(recipeID: 1, dietID: 2)!)
+                insertNewRecipe_diet(newRecipe_diet: Recipe_Diet(recipeID: 1, dietID: 3)!)
+                insertNewRecipe_diet(newRecipe_diet: Recipe_Diet(recipeID: 1, dietID: 4)!)
+                insertNewRecipe_diet(newRecipe_diet: Recipe_Diet(recipeID: 1, dietID: 6)!)
+                insertNewRecipe_diet(newRecipe_diet: Recipe_Diet(recipeID: 2, dietID: 5)!)
+                insertNewRecipe_diet(newRecipe_diet: Recipe_Diet(recipeID: 2, dietID: 6)!)
+            }
+            count = try db.scalar(rec_i.count)
+            if (count == 0) {                
+                insertNewRecipe_ingredient(newRecipe_ingredient: Recipe_Ingred(recipeID: 1, ingredID: getIngredientByName(ingName: "Bread, pizza base, commercial")!.ingredientID)!)
+                insertNewRecipe_ingredient(newRecipe_ingredient: Recipe_Ingred(recipeID: 1, ingredID: getIngredientByName(ingName: "Tomato, paste, with added salt")!.ingredientID)!)
+                insertNewRecipe_ingredient(newRecipe_ingredient: Recipe_Ingred(recipeID: 1, ingredID: getIngredientByName(ingName: "Basil, green, fresh, raw")!.ingredientID)!)
+                insertNewRecipe_ingredient(newRecipe_ingredient: Recipe_Ingred(recipeID: 1, ingredID: getIngredientByName(ingName: "Tomato, common, raw")!.ingredientID)!)
+                insertNewRecipe_ingredient(newRecipe_ingredient: Recipe_Ingred(recipeID: 1, ingredID: getIngredientByName(ingName: "Cheese, mozzarella")!.ingredientID)!)
+                insertNewRecipe_ingredient(newRecipe_ingredient: Recipe_Ingred(recipeID: 2, ingredID: getIngredientByName(ingName: "Egg, chicken, whole, raw")!.ingredientID)!)
+                insertNewRecipe_ingredient(newRecipe_ingredient: Recipe_Ingred(recipeID: 2, ingredID: getIngredientByName(ingName: "Bassa, fillet, raw")!.ingredientID)!)
+            }
         }
     } catch {
         print (error)
