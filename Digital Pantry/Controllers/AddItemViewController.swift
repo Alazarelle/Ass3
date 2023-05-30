@@ -11,13 +11,9 @@ import UIKit
 class AddItemViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var quantityTextField: UITextField!
-    @IBOutlet weak var ingredientNameTextField: UITextField!
-    @IBOutlet weak var ingredientDescTextField: UITextField!
     @IBOutlet weak var expiryDatePicker: UIDatePicker!
     @IBOutlet weak var storagePickerView: UIPickerView!
     @IBOutlet weak var quantityErrorLabel: UILabel!
-    @IBOutlet weak var ingredientNameErrorLabel: UILabel!
-    @IBOutlet weak var ingredientDescErrorLabel: UILabel!
     @IBOutlet weak var expiryDateErrorLabel: UILabel!
     @IBOutlet weak var categoriesPickerView: UIPickerView!
     @IBOutlet weak var ingredientsPickerView: UIPickerView!
