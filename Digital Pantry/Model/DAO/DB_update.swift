@@ -198,7 +198,7 @@ func updatePreferences(preferencesId : Int64, updatedPreferences : Preference) {
         
         try db.run(thisPreference.update(
             type <- updatedPreferences.type,
-            allergyId <- updatedPreferences.allergyID ),
+            allergyId <- updatedPreferences.allergyID,
             dietId <- updatedPreferences.dietID ))
         
     } catch {
