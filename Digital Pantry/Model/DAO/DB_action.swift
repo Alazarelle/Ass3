@@ -176,6 +176,7 @@ func insertNewRecipeLog(newRecipeLogs : RecipeLog) {
         print (error)
     }
 }
+
 func insertNewPreferences(newPreferences : Preference) {
     do {
         let db = connectDatabase()
@@ -577,3 +578,5 @@ func deleteInventoryItem(id: Int64){
         print (error)
     }
 }
+
+
