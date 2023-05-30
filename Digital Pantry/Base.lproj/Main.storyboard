@@ -480,10 +480,10 @@
                                 <color key="backgroundColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="color" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7F-Aa-M9g" userLabel="errorLabel">
-                                <rect key="frame" x="15" y="146" width="360" height="21"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7F-Aa-M9g" userLabel="errorLabel">
+                                <rect key="frame" x="15" y="412" width="360" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bls-CW-Sn6">
@@ -576,6 +576,8 @@
                         <constraints>
                             <constraint firstItem="rdg-04-K0y" firstAttribute="trailing" secondItem="m7F-Aa-M9g" secondAttribute="trailing" constant="15" id="41H-tm-lao"/>
                             <constraint firstItem="m7F-Aa-M9g" firstAttribute="leading" secondItem="rdg-04-K0y" secondAttribute="leading" constant="15" id="7qc-v1-te7"/>
+                            <constraint firstItem="m7F-Aa-M9g" firstAttribute="centerY" secondItem="Lgs-oX-c1h" secondAttribute="centerY" id="i1V-mB-goH"/>
+                            <constraint firstItem="m7F-Aa-M9g" firstAttribute="centerX" secondItem="Lgs-oX-c1h" secondAttribute="centerX" id="uuT-KN-Wil"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aE9-KR-0vk"/>

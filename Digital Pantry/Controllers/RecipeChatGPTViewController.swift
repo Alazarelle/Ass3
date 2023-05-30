@@ -67,11 +67,14 @@ class RecipeChatGPTViewController: UIViewController {
                     let data = output.data(using: .utf8)!
                     
                     do {
+                        self?.errorLabel.isHidden = true
+                        self?.scrollView.isHidden = false
                         print(output)
                         print(data)
                         let aiRecipe = try JSONDecoder().decode(AIGeneratedRecipe.self, from: data)
                         recipe = Recipe.init(aiGeneratedRecipe: aiRecipe)
                         self?.saveRecipeButton.isHidden = false
+                        
                         self?.recipeNameLabel.text = aiRecipe.recipeName
                         numberOfIngredients = aiRecipe.ingredients.count
                         for ingredient in aiRecipe.ingredients{
@@ -94,6 +97,7 @@ class RecipeChatGPTViewController: UIViewController {
                     } catch {
                         print(error)
                         self?.activityIndicator.stopAnimating()
+                        self?.scrollView.isHidden = true
                         self?.errorLabel.isHidden = false
                         self?.errorLabel.text = "An error ocurred. The format in which the AI answered the request is incorrect. Please press the button to try making a new recipe"
                     }
