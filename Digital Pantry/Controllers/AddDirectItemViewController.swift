@@ -9,7 +9,6 @@ import UIKit
 
 class AddDirectItemViewController:  UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-
     @IBOutlet weak var quantityTextField: UITextField!
     @IBOutlet weak var expiryDatePicker: UIDatePicker!
     @IBOutlet weak var quantityErrorLabel: UILabel!

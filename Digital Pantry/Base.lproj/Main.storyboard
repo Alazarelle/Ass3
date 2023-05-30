@@ -1577,8 +1577,50 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="I7Z-cE-lWc">
                                 <rect key="frame" x="10" y="192" width="370" height="518"/>
                                 <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KsH-Cr-rMK">
+                                        <rect key="frame" x="0.0" y="0.0" width="370" height="70"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btR-1Q-EI3">
+                                                <rect key="frame" x="0.0" y="0.0" width="140" height="70"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="140" id="DcD-yc-hTS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <pickerView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="3nf-0O-Fib">
+                                                <rect key="frame" x="140" y="0.0" width="230" height="70"/>
+                                                <color key="backgroundColor" white="1" alpha="0.39891557500000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="70" id="bXe-fR-yL6"/>
+                                                </constraints>
+                                            </pickerView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQa-DB-tDW">
+                                        <rect key="frame" x="0.0" y="120.66666666666669" width="370" height="70"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredient" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gW8-dj-5h9">
+                                                <rect key="frame" x="0.0" y="0.0" width="140" height="70"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="140" id="Jaz-YQ-jHM"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <pickerView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="MQr-yU-wWI">
+                                                <rect key="frame" x="140" y="0.0" width="230" height="70"/>
+                                                <color key="backgroundColor" white="1" alpha="0.39891557500000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="70" id="htX-KJ-dwm"/>
+                                                </constraints>
+                                            </pickerView>
+                                        </subviews>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96n-08-JbD">
-                                        <rect key="frame" x="0.0" y="0.0" width="370" height="34"/>
+                                        <rect key="frame" x="0.0" y="241.33333333333331" width="370" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrj-Gi-rrG">
                                                 <rect key="frame" x="0.0" y="0.0" width="140" height="34"/>
@@ -1597,63 +1639,13 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBJ-If-fc3">
-                                        <rect key="frame" x="0.0" y="74.666666666666686" width="370" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="systemRedColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vX7-P5-Ctq">
-                                        <rect key="frame" x="0.0" y="135.66666666666669" width="370" height="34"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredient Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPA-ix-2nH">
-                                                <rect key="frame" x="0.0" y="0.0" width="140" height="34"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="140" id="wt5-Ch-TI6"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bi4-U7-gJN">
-                                                <rect key="frame" x="140" y="0.0" width="230" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9P-64-vYg">
-                                        <rect key="frame" x="0.0" y="210.33333333333331" width="370" height="20.333333333333343"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="systemRedColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xtf-nK-dQA">
-                                        <rect key="frame" x="0.0" y="271.33333333333331" width="370" height="34"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredient Desc" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IN4-Hz-u0w">
-                                                <rect key="frame" x="0.0" y="0.0" width="140" height="34"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="140" id="4px-Dp-Cl2"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Duu-xf-Bmo">
-                                                <rect key="frame" x="140" y="0.0" width="230" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pJ-wU-s3D">
-                                        <rect key="frame" x="0.0" y="346" width="370" height="20.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="326" width="370" height="20.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uIX-15-QAQ">
-                                        <rect key="frame" x="0.0" y="407" width="370" height="50"/>
+                                        <rect key="frame" x="0.0" y="397" width="370" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expiry Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNb-EU-29v">
                                                 <rect key="frame" x="0.0" y="0.0" width="140" height="50"/>
@@ -1699,12 +1691,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="BLP-KC-3eg"/>
                     <connections>
+                        <outlet property="categoriesPickerView" destination="3nf-0O-Fib" id="1vk-0m-CjS"/>
                         <outlet property="expiryDateErrorLabel" destination="48B-nP-WGP" id="37i-d9-nV3"/>
                         <outlet property="expiryDatePicker" destination="gfZ-UD-BJa" id="On2-vg-Eyn"/>
-                        <outlet property="ingredientDescErrorLabel" destination="9pJ-wU-s3D" id="kF0-K9-QsD"/>
-                        <outlet property="ingredientDescTextField" destination="Duu-xf-Bmo" id="8YS-rH-oGs"/>
-                        <outlet property="ingredientNameErrorLabel" destination="e9P-64-vYg" id="Ffq-dC-HJl"/>
-                        <outlet property="ingredientNameTextField" destination="bi4-U7-gJN" id="MX5-Il-NLT"/>
+                        <outlet property="ingredientsPickerView" destination="MQr-yU-wWI" id="IvO-d7-Uo6"/>
                         <outlet property="quantityErrorLabel" destination="UBJ-If-fc3" id="JSc-5q-bdq"/>
                         <outlet property="quantityTextField" destination="PWa-Vt-mPc" id="kxX-KI-YaI"/>
                     </connections>
