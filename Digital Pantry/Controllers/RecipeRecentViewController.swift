@@ -17,6 +17,10 @@ class RecipeRecentViewController: UIViewController {
         tableView.delegate = self
         // Do any additional setup after loading the view.
     }
+    @IBAction func backToRecipesMenuButtonPressed(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension RecipeRecentViewController:UITableViewDelegate {
@@ -28,8 +32,6 @@ extension RecipeRecentViewController:UITableViewDelegate {
         ShowController.recipe =  recipes[indexPath.row]
 
         self.navigationController?.pushViewController(ShowController, animated: true)
-        
-
     }
 }
 

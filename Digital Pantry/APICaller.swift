@@ -18,10 +18,11 @@ final class APICaller{
     //curl https://api.openai.com/v1/models -H "Authorization: Bearer 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"
     
     public func setup() {
-        self.client = OpenAISwift(authToken: "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")
+        self.client = OpenAISwift(authToken: "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")
     }
     
     public func getResponse(input: String, completion: @escaping (Result<String,Error>) -> Void){
+        print("Give me a recipe I can make with the following ingredients: \(input). Not all ingredients need to be used. All ingredients used in the recipe instructions must be in the previous list. Do not add new ingredients. Temperature should be in Celsius. Format the answer as a json similar to the following one: { \"recipeName\": \"name\", \"complexity\": \"complexity level from 1 to 5 as a string\", \"cookingTime\": \"cooking time\", \"ingredients\": [ \"ingredient1\", \"ingredient2\", …], \"instructions\": [ \"1. step\", \"2. step\", \"3. step\", …] }")
         client?.sendCompletion(with: "Give me a recipe I can make with the following ingredients: \(input). Not all ingredients need to be used. All ingredients used in the recipe instructions must be in the previous list. Do not add new ingredients. Temperature should be in Celsius. Format the answer as a json similar to the following one: { \"recipeName\": \"name\", \"complexity\": \"complexity level from 1 to 5 as a string\", \"cookingTime\": \"cooking time\", \"ingredients\": [ \"ingredient1\", \"ingredient2\", …], \"instructions\": [ \"1. step\", \"2. step\", \"3. step\", …] }",
                                model: .gpt3(.davinci),
                                maxTokens: 1024,
