@@ -18,9 +18,9 @@ class RecipePreferencesViewController: UIViewController, UIPickerViewDelegate, U
     
     
     var dietsData = [String]()
-    var dietsValue = 0
+    var dietsValue:Int64 = 0
     var allergiesData = [String]()
-    var allergiesValue = 0
+    var allergiesValue:Int64 = 0
     var allergyId = 0
     var dietId = 0
     
@@ -56,9 +56,9 @@ class RecipePreferencesViewController: UIViewController, UIPickerViewDelegate, U
     @IBAction func DietAddButton(_ sender: UIButton) {
         
         //var pref = Preference(type: "Diet", allergyID: 0, dietID: 0)//getDietIdByName(dietName: dietsData[row])
-        insertNewPreferences(newPreferences: Preference(type: "Diet", allergyID: 0, dietID: (Int64(exactly: dietsValue))!)!)
+        insertNewPreferences(newPreferences: Preference(type: "Diet", allergyID: 0, dietID: Int64(getDietIdByName(dietName: dietsData[Int(dietsValue)])))!)
                              
-        print("set diet id to \(dietsValue) which is for \(dietsData[dietsValue])")
+        print("set diet id to \(dietsValue) which is for \(dietsData[Int(dietsValue)])")
         let vc = storyboard?.instantiateViewController(withIdentifier: "RecipePreferencesViewController") as! RecipePreferencesViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -66,8 +66,8 @@ class RecipePreferencesViewController: UIViewController, UIPickerViewDelegate, U
     
     @IBAction func allergyAddButton(_ sender: UIButton) {
         //var pref = Preference(type: "Allergy", allergyID: 0, dietID: 0)//getDietIdByName(dietName: dietsData[row])
-        insertNewPreferences(newPreferences: Preference(type: "Allergy", allergyID: Int64(exactly: allergiesValue)!, dietID: 0)!)
-        print("set allergy id to \(allergiesValue) which is for \(allergiesData[allergiesValue])")
+        insertNewPreferences(newPreferences: Preference(type: "Allergy", allergyID: Int64(getAllergyIdByName(allergyName: allergiesData[Int(allergiesValue)])), dietID: 0)!)
+        print("set allergy id to \(allergiesValue) which is for \(allergiesData[Int(allergiesValue)])")
         let vc = storyboard?.instantiateViewController(withIdentifier: "RecipePreferencesViewController") as! RecipePreferencesViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -99,9 +99,9 @@ class RecipePreferencesViewController: UIViewController, UIPickerViewDelegate, U
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
         if (pickerView.tag == 1) {
-            return dietsValue = row
+            return dietsValue = Int64(row)
         } else if (pickerView.tag == 2) {
-            return allergiesValue = row
+            return allergiesValue = Int64(row)
         }
     }
 

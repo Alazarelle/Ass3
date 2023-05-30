@@ -240,8 +240,10 @@ func insertNewPreferences(newPreferences : Preference) {
         let db = connectDatabase()
         //handle preferences  data
         let preferences = Table("preferences")
-//        let id = Expression<Int64>("id")
+        let allergy = Table("allergyCategory")
+        let id = Expression<Int64>("id")
         let type = Expression<String>("type")
+        let name = Expression<String>("name")
         let allergyId = Expression<Int64>("allergyId")
         let dietId = Expression<Int64>("dietId")
         
@@ -251,6 +253,11 @@ func insertNewPreferences(newPreferences : Preference) {
             allergyId <- newPreferences.allergyID,
             dietId <- newPreferences.dietID ))
         
+        for allergy in try db.prepare(allergy.where(id == newPreferences.allergyID))
+        {
+            print("Allergy ID: \(allergy[id]), name: \(allergy[name])")
+        }
+                   
     } catch {
         print (error)
     }

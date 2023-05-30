@@ -89,14 +89,14 @@ func readPreferences() -> [String]{
         let diets = Table("dietCategory")
         //let allergies = Table("allergyCategory")
         let id = Expression<Int64>("id")
-        let dietId = Expression<Int64>("id")
-        //let allergyId = Expression<Int64>("id")
+        let dietId = Expression<Int64>("dietId")
+        //let allergyId = Expression<Int64>("allergyId")
         let dietName = Expression<String>("name")
         let type = Expression<String>("type")
         let dietname = Expression<String>("name")
         //let allergyname = Expression<String>("name")
         //let description = Expression<String>("desc")
-        let innerJoin = prefs.join(.inner, diets, on: diets[dietId] == prefs[id])
+        let innerJoin = prefs.join(.inner, diets, on: diets[id] == prefs[dietId])
         
         for innerJoin in try db.prepare(innerJoin.where(prefs[type] == "Diet")) {
             
@@ -114,14 +114,14 @@ func readPreferences() -> [String]{
         let diets = Table("dietCategory")
         let allergies = Table("allergyCategory")
         let id = Expression<Int64>("id")
-        let dietId = Expression<Int64>("id")
-        let allergyId = Expression<Int64>("id")
+        //let dietId = Expression<Int64>("id")
+        let allergyId = Expression<Int64>("allergyId")
         let dietName = Expression<String>("name")
         let type = Expression<String>("type")
         let dietname = Expression<String>("name")
         let allergyname = Expression<String>("name")
         //let description = Expression<String>("desc")
-        let innerJoin = prefs.join(.inner, allergies, on: allergies[allergyId] == prefs[id])
+        let innerJoin = prefs.join(.inner, allergies, on: allergies[id] == prefs[allergyId])
         
         for innerJoin in try db.prepare(innerJoin.where(prefs[type] == "Allergy")) {
             
