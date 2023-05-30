@@ -58,7 +58,7 @@ class AddDirectItemViewController: UIViewController{
         }
         
         if !errorFlag{
-            newInventoryItem(name: ingredientNameTextField.text!, description: ingredientDescTextField.text!, quantity: Int64(quantityTextField.text!)!, expiryDate: expiryDatePicker.date, shoppingList: false, storageId: Int64(storageValue))
+            newInventoryItem(name: ingredientNameTextField.text!, quantity: Int64(quantityTextField.text!)!, expiryDate: expiryDatePicker.date, shoppingList: false, storageId: Int64(storageValue))
             let vc = storyboard?.instantiateViewController(withIdentifier: "PantryViewController") as! PantryViewController
             self.navigationController?.pushViewController(vc, animated: true)
             vc.storageValue = self.storageValue

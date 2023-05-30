@@ -15,8 +15,7 @@ import CoreXLSX
 
 func updateAllergy(allergyID: Int64, updatedAllergy : AllergyCategory) {//query to make a change to an allergy record in DB
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle allergy  data
         let allergy = Table("allergyCategory")
         let id = Expression<Int64>("id")
@@ -35,8 +34,7 @@ func updateAllergy(allergyID: Int64, updatedAllergy : AllergyCategory) {//query 
 
 func updateDietCat(dietID: Int64, updatedDiet : DietCategory) {//query to make a change to an DietCategory record in DB
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle dietCat  data
         let dietCat = Table("dietCategory")
         let id = Expression<Int64>("id")
@@ -55,20 +53,17 @@ func updateDietCat(dietID: Int64, updatedDiet : DietCategory) {//query to make a
 
 func updateFoodCat(foodCatId : Int64, updatedFoodCat : FoodCategory) {//query to make a change to an FoodCategory record in DB
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle foodCat  data
         let foodCat = Table("foodCategory")
         
         let id = Expression<Int64>("id")
         let name = Expression<String>("name")
-        let desc = Expression<String>("desc")
         
         let thisFoodCat = foodCat.filter(id == foodCatId)
         
         try db.run(thisFoodCat.update(
-            name <- updatedFoodCat.foodCategName,
-            desc <- updatedFoodCat.foodCategdescription ))
+            name <- updatedFoodCat.foodCategName))
     } catch {
         print (error)
     }
@@ -76,21 +71,20 @@ func updateFoodCat(foodCatId : Int64, updatedFoodCat : FoodCategory) {//query to
 
 func updateIngredient(ingredientID : Int64, updatedIngredient : Ingredient) {//query to make a change to an Ingredient record in DB
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         
         //handle ingredients  data
         let ingredients = Table("ingredients")
         
         let id = Expression<Int64>("id")
-        //let foodCatId = Expression<Int64>("foodCatId")
+        let foodCatId = Expression<Int64>("foodCategoryId")
         let name = Expression<String>("name")
         let desc = Expression<String>("desc")
         
         let thisIngredient = ingredients.filter(id == ingredientID)
         
         try db.run(thisIngredient.update(
-            //foodCatId <- updatedIngredient.foodCategoryID,
+            foodCatId <- updatedIngredient.foodCategoryID,
             name <- updatedIngredient.ingredName,
             desc <- updatedIngredient.ingredDescription ))
     } catch {
@@ -100,14 +94,13 @@ func updateIngredient(ingredientID : Int64, updatedIngredient : Ingredient) {//q
 
 func updateInventory(pantryID : Int64, updatedPantryItem : AppPantryItem) {//query to make a change to an AppPantryItem record in DB
  do {
-     let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-     let db = try! Connection("\(path)/db.sqlite3")
+     let db = connectDatabase()
      //handle Inventory  data
      let inventory = Table("inventory")
      let ingredient = Table("ingredients")
 
      let id = Expression<Int64>("id")
-     let ingredientID = Expression<Int64>("ingredientID")
+//     let ingredientID = Expression<Int64>("ingredientID")
      let quantity = Expression<Int64>("quantity")
      let expiryDate = Expression<Date>("expiryDate")
      let name = Expression<String>("name")
@@ -137,8 +130,8 @@ func updateRecipes(recipeId : Int64, updatedRecipe : Recipe) {//query to make a 
     do {
         let db = connectDatabase()
         
-        let inventory = Table("inventory")
-        let ingredient = Table("ingredients")
+//        let inventory = Table("inventory")
+//        let ingredient = Table("ingredients")
 
         
         //handle recipe  data
@@ -164,8 +157,7 @@ func updateRecipes(recipeId : Int64, updatedRecipe : Recipe) {//query to make a 
 
 func updateRecipeLog(recipeLogId : Int64, updatedRecipeLogs : RecipeLog) {//query to make a change to an RecipeLog record in DB
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle recipeLog  data
         let recipeLog = Table("recipeLog")
         
@@ -185,8 +177,7 @@ func updateRecipeLog(recipeLogId : Int64, updatedRecipeLogs : RecipeLog) {//quer
     
 func updatePreferences(preferencesId : Int64, updatedPreferences : Preference) {//query to make a change to an Preference record in DB
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle preferences  data
         let preferences = Table("preferences")
         let id = Expression<Int64>("id")
@@ -206,8 +197,7 @@ func updatePreferences(preferencesId : Int64, updatedPreferences : Preference) {
 
 func updateIngredient_allergy(ingredientAllergyId : Int64, updatedIngredient_allergy : Ingred_Allergy) {//query to make a change to an Ingred_Allergy record in DB
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle ingredient_allergy  data
         let ingredient_allergy = Table("ingredient_allergy")
         
@@ -229,8 +219,7 @@ func updateIngredient_allergy(ingredientAllergyId : Int64, updatedIngredient_all
 
 func updateRecipe_ingredient(recipeIngredientId : Int64, updatedRecipe_ingredient : Recipe_Ingred) {//query to make a change to an Recipe_Ingred record in DB
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle recipe_ingredient  data
         let recipe_ingredient = Table("recipe_ingredient")
         
@@ -251,8 +240,7 @@ func updateRecipe_ingredient(recipeIngredientId : Int64, updatedRecipe_ingredien
 
 func updateRecipe_diet(recipeDietId : Int64, updatedRecipe_diet : Recipe_Diet) {//query to make a change to an Recipe_Diet record in DB
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle recipe_diet  data
         let recipe_diet = Table("recipe_diet")
         
@@ -274,8 +262,7 @@ func updateRecipe_diet(recipeDietId : Int64, updatedRecipe_diet : Recipe_Diet) {
 
 func updateSection(sectionId : Int64, updatedSection : SectionOfPantry) {//query to make a change to an SectionOfPantry record in DB
     do {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let db = try! Connection("\(path)/db.sqlite3")
+        let db = connectDatabase()
         //handle sections  data
         let sections = Table("section")
         

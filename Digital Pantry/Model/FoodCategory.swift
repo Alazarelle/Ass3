@@ -11,20 +11,17 @@ struct FoodCategory {
     //properties/members of Ingredient
     var foodCategoryID: Int64
     var foodCategName: String
-    var foodCategdescription: String
     
     //initialised where we have not obtained a UniqueIdentifier (ingredientID) as yet
-    init?(foodCategName: String, foodCategdescription: String) {
+    init?(foodCategName: String) {
         self.foodCategoryID = -1
         self.foodCategName = foodCategName
-        self.foodCategdescription = foodCategdescription
     }
     
     //use case: calling data back from DB/table
-    init?(foodCategoryID: Int64, foodCategName: String, foodCategdescription: String) {
+    init?(foodCategoryID: Int64, foodCategName: String) {
         self.foodCategoryID = foodCategoryID
         self.foodCategName = foodCategName
-        self.foodCategdescription = foodCategdescription
         
     }
     
@@ -42,13 +39,5 @@ struct FoodCategory {
     
     mutating func setFoodCategName(foodCategName: String) { //add a foodCategName to item
         self.foodCategName = foodCategName
-    }
-
-    func getFoodCategdescription() -> String { //retrieve foodCategdescription
-        return foodCategdescription
-    }
-    
-    mutating func setfoodCategdescription(foodCategdescription: String) { //add a foodCategdescription to item
-        self.foodCategdescription = foodCategdescription
     }
 }

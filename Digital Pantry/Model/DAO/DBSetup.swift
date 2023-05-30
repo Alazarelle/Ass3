@@ -18,13 +18,12 @@ func createTables() {
     //wrap
     do {
         let db = connectDatabase()
-        
-        try db.execute("DROP TABLE if exists recipes")
-        try db.execute("DROP TABLE if exists ingredients")
-        try db.execute("DROP TABLE if exists allergyCategory")
-        try db.execute("DROP TABLE if exists dietCategory")
-        try db.execute("DROP TABLE if exists inventory")
-        try db.execute("DROP TABLE if exists ingredients")
+//        try db.execute("DROP TABLE if exists recipes")
+//        try db.execute("DROP TABLE if exists ingredients")
+//        try db.execute("DROP TABLE if exists allergyCategory")
+//        try db.execute("DROP TABLE if exists dietCategory")
+//        try db.execute("DROP TABLE if exists inventory")
+//        try db.execute("DROP TABLE if exists ingredients")
         try db.execute("DROP TABLE if exists foodCategory")
 
         //recipes
@@ -44,8 +43,13 @@ func createTables() {
             t.column(Expression<Int64>("id"),primaryKey: true)
             t.column(Expression<String>("name"))
             t.column(Expression<String>("desc"))
-            //t.column(Expression<Int64?>("foodCatId"), references: Table("foodCategory"), Expression<Int64>("id"))
-            t.column(Expression<Int64?>("allergies"),references: Table("allergyCategory"), Expression<Int64>("id"))
+            t.column(Expression<Int64>("foodCategoryId"), references: Table("foodCategoryID"), Expression<Int64>("id"))
+        })
+        
+        //food category
+        try db.run(Table("foodCategory").create(ifNotExists: true) { t in
+            t.column(Expression<Int64>("id"),primaryKey: true)
+            t.column(Expression<String>("name"))
         })
         
         //inventory
@@ -247,14 +251,14 @@ func insertTableData() {
 func readMajorTables(){
     do {
         let db = connectDatabase()
-
         let allergy = Table("allergyCategory")
         let diet = Table("dietCategory")
         let foods = Table("ingredients")
-        //let categories = Table("foodCategory")
+        let categories = Table("foodCategory")
         let id = Expression<Int64>("id")
         let name = Expression<String>("name")
         let desc = Expression<String>("desc")
+//        let foodCatId = Expression<String>("foodCategoryId")
 
         print("Allergy Category:")
         for allergy in try db.prepare(allergy) {
@@ -268,13 +272,13 @@ func readMajorTables(){
         
         print("Ingredients:")
         for food in try db.prepare(foods) {
-                print("id: \(food[id]), name: \(food[name]), desc: \(food[desc])")
+          print("id: \(food[id]), name: \(food[name]), desc: \(food[desc])")
         }
         
-        //print("Food Categories:")
-        //for cat in try db.prepare(categories) {
-        //        print("id: \(cat[id]), name: \(cat[name]), desc: \(cat[desc])")
-        //}
+        print("Food Categories:")
+        for cat in try db.prepare(categories) {
+            print("id: \(cat[id]), name: \(cat[name])")
+        }
     } catch {
         print (error)
     }
@@ -284,11 +288,10 @@ func readMajorTables(){
 func importFoodDataCSV(){
     do {
         let db = connectDatabase()
-        //let foodCat = Table("foodCategory")
-        //let count = try db.scalar(foodCat.count)
-        if (/*count == 0*/ true) {
+        let foodCat = Table("foodCategory")
+        let count = try db.scalar(foodCat.count)
+        if (count == 0) {
             let path = Bundle.main.path(forResource: "IngredientsAndCategories", ofType: "xlsx") ?? "none"
-            print(path)
             
             guard let file = XLSXFile(filepath: path) else {
                 fatalError("XLSX file corrupted or does not exist")
@@ -297,8 +300,7 @@ func importFoodDataCSV(){
             let worksheet = try file.parseWorksheet(at: paths.first!)
             let sharedStrings = try file.parseSharedStrings()
             for row in worksheet.data?.rows ?? [] {
-                //Add Category unless existing one
-                //var category = ""
+                var category = ""
                 var ingredient = ""
                 var desc = ""
                 for c in row.cells {
@@ -308,44 +310,48 @@ func importFoodDataCSV(){
                         guard let ing = c.stringValue(sharedStrings!) else {return}
                         ingredient = ing
                         //              Category
-                    } //else if (ref >= 1617 && ref < 1907) {
-                        //guard let cat = c.stringValue(sharedStrings!) else {return}
-                        //category = cat
+                    } else if (ref >= 1617 && ref < 1907) {
+                        guard let cat = c.stringValue(sharedStrings!) else {return}
+                        category = cat
                         //              Description
-                    //}
+                    }
                     else if (ref >= 1907) {
                         guard let d = c.stringValue(sharedStrings!) else {return}
                         desc = d
                     }
                     var fk:Int64 = 0
-                    if (/*category != "" && */ingredient != "" && desc != "") {
-                        //let newFoodCat = FoodCategory(foodCategName: category, foodCategdescription: category)!
-                        //if (doesCategoryExist(newFoodCat: newFoodCat) == false){
-                        //    insertNewFoodCat(newFoodCat: newFoodCat)
-                        //}
-                        /*do {
+                    if (category != "" && ingredient != "" && desc != "") {
+                        let newFoodCat = FoodCategory(foodCategName: category)!
+                        if (doesCategoryExist(newFoodCat: newFoodCat) == false){
+                            if (category != "Classification Name") {
+                                insertNewFoodCat(newFoodCat: newFoodCat)
+                            }
+                        }
+                        do {
                             for cat in try db.prepare(foodCat.order( Expression<Int64>("id").desc).limit(1)){
                                 fk = cat[ Expression<Int64>("id")]
                             }
-                        }*/
+                        }
                         //check for allergies
-                        insertNewIngredient(newIngredient: Ingredient(ingredName: ingredient, /*foodCategoryID: fk,*/ ingredDescription: desc)!)
-                        if (/*category.contains("peanut") ||*/ desc.contains("peanut")){
+                        if (ingredient != "Food Name") {
+                            insertNewIngredient(newIngredient: Ingredient(ingredName: ingredient, foodCategoryID: fk, ingredDescription: desc)!)
+                        }
+                        if (category.contains("peanut") || desc.contains("peanut")){
                             insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 1)!)
                         }
-                        if (/*category.contains(" nut") ||*/ desc.contains(" nut")){
+                        if (category.contains(" nut") || desc.contains(" nut")){
                             insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 2)!)
                         }
-                        if (/*category.contains("Crustacea") ||*/ /*category.contains("Molluscs")*/false){
+                        if (category.contains("Crustacea") || category.contains("Molluscs")){
                             insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 3)!)
                         }
-                        if (ingredient.contains("fish") /*|| category.contains("fish")*/){
+                        if (ingredient.contains("fish") || category.contains("fish")){
                             insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 4)!)
                         }
                         if (desc.contains("cows milk") || desc.contains("cows skim milk")){
                             insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 5)!)
                         }
-                        if (/*category.contains("egg") ||*/ desc.contains("egg")){
+                        if (category.contains("egg") || desc.contains("egg")){
                             insertNewIngredient_allergy(newIngredient_allergy : Ingred_Allergy(ingredID: fk, allergyID: 6)!)
                         }
                         if (desc.contains("soy")){

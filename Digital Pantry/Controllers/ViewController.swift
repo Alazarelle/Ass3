@@ -16,14 +16,18 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
 
         self.navigationItem.setHidesBackButton(true, animated: true)
-//        importFoodDataCSV()
+        refresh()
     }
     
     @IBAction func tableUpdate(_ sender: Any) {
+        refresh()
+    }
+    
+    func refresh(){
         createTables()
         insertTableData()
         importFoodDataCSV()
-        readMajorTables()
+//        readMajorTables()
     }
     
 }

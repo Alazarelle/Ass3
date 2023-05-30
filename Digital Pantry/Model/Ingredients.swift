@@ -10,22 +10,22 @@ import Foundation
 struct Ingredient {
     //properties/members of Ingredient
     var ingredientID: Int64
-    //var foodCategoryID: Int64
+    var foodCategoryID: Int64
     var ingredName: String
     var ingredDescription: String
     
     //initialised where we have not obtained a UniqueIdentifier (ingredientID) as yet
-    init?(ingredName: String, /*foodCategoryID: Int64,*/ ingredDescription: String) {
+    init?(ingredName: String, foodCategoryID: Int64, ingredDescription: String) {
         self.ingredientID = -1
-        //self.foodCategoryID = foodCategoryID
+        self.foodCategoryID = foodCategoryID
         self.ingredName = ingredName
         self.ingredDescription = ingredDescription
     }
     
     //use case: calling data back from DB/table
-    init?(ingredientID: Int64, /*foodCategoryID: Int64, */ingredName: String, ingredDescription: String) { //, sectionID: Int) {
+    init?(ingredientID: Int64, foodCategoryID: Int64, ingredName: String, ingredDescription: String) { //, sectionID: Int) {
         self.ingredientID = ingredientID
-        //self.foodCategoryID = foodCategoryID
+        self.foodCategoryID = foodCategoryID
         self.ingredName = ingredName
         self.ingredDescription = ingredDescription
     }
@@ -38,13 +38,13 @@ struct Ingredient {
         return ingredientID
     }
     
-    /*mutating func setFoodCategoryID(foodCategoryID: Int64) { //set foodCategoryID
+    mutating func setFoodCategoryID(foodCategoryID: Int64) { //set foodCategoryID
         self.foodCategoryID = foodCategoryID
-    }*/
+    }
     
-    /*func getFoodCategoryID() -> Int64 { //retrieve foodCategoryID
+    func getFoodCategoryID() -> Int64 { //retrieve foodCategoryID
         return foodCategoryID
-    }*/
+    }
     
     func getIngredName() -> String { //retrieve ingredient name
         return ingredName
