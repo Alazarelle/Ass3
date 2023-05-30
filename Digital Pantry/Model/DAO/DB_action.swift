@@ -462,8 +462,8 @@ func readRecipes(prev: Bool) -> [Recipe]{
         let instructions = Expression<String>("instructions")
         let cookingTime = Expression<String>("cookingTime")
         let complexity = Expression<Int64>("complexity")
-        let myAllergies = [""]//= getAllergyPreferences() list of allergy ids in preferences
-        let myDiets = [""]//getDietPreferences()
+        let myAllergies = readMyAllergies()
+        let myDiets = readMyDiets()
 
         if (prev) {
             //order by date
